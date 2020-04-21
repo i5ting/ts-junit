@@ -9,12 +9,9 @@ use junit descrator with jest
 ## 示例
 
 ```
+import Calculator from './calculator';
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import example.util.Calculator;
-
-import org.junit.jupiter.api.Test;
+import {Test, assertEquals} from 'ts-junit'
 
 class MyFirstJUnitJupiterTests {
 
