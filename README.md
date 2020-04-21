@@ -19,9 +19,35 @@ class MyFirstJUnitJupiterTests {
 
     @Test
     void addition() {
-        assertEquals(2, calculator.add(1, 1));
+        expect(2).toEqual(calculator.add(1, 1))
     }
 
 }
 
+```
+
+结合 https://github.com/midwayjs/injection 更简单
+
+
+```
+class Test {
+  @Inject()
+  helloTest: IHelloTest;
+  @Inject()
+  helloService: IHelloService;
+
+  @Before()
+  before() {
+    mock(helloTest, 'sayhello', () => {
+      return 'mocked'
+    });
+  }
+
+  @Test()
+  async test() {
+    expect(this.helloTest.sayhello()).eq('mocked');
+    
+    expect(this.helloService.sayhello('test')).eq('hello test');
+  }
+}
 ```
