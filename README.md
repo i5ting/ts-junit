@@ -79,6 +79,7 @@ class Test {
                     operate based on their own dedicated annotations. Such methods are <em>inherited</em> unless they
                     are <em>overridden</em>.</p>
             </td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -90,7 +91,7 @@ class Test {
                     <em>inherited</em> unless they are <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">✅</td>
+            <td class="tableblock halign-left valign-top">❎</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -114,7 +115,6 @@ class Test {
             </td>
             <td class="tableblock halign-left valign-top">❎</td>
         </tr>
-        <th class="tableblock halign-left valign-top">✅</th>
         <tr>
             <td class="tableblock halign-left valign-top">
                 <p class="tableblock"><code>@TestTemplate</code></p>
@@ -158,7 +158,7 @@ class Test {
                 <p class="tableblock">Declares a custom <a href="#writing-tests-display-names">display name</a> for the
                     test class or test method. Such annotations are not <em>inherited</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
