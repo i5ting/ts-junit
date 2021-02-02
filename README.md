@@ -91,7 +91,7 @@ class Test {
                     <em>inherited</em> unless they are <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -102,7 +102,7 @@ class Test {
                         href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-repeated-tests">repeated test</a>. Such methods are <em>inherited</em>
                     unless they are <em>overridden</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -113,7 +113,7 @@ class Test {
                         href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-dynamic-tests">dynamic tests</a>. Such methods are <em>inherited</em>
                     unless they are <em>overridden</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -125,7 +125,7 @@ class Test {
                     contexts returned by the registered <a href="https://junit.org/junit5/docs/current/user-guide/#extensions-test-templates">providers</a>. Such methods
                     are <em>inherited</em> unless they are <em>overridden</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -137,7 +137,7 @@ class Test {
                     <code>@FixMethodOrder</code>. Such annotations are <em>inherited</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -148,7 +148,7 @@ class Test {
                         instance lifecycle</a> for the annotated test class. Such annotations are <em>inherited</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -168,7 +168,7 @@ class Test {
                 <p class="tableblock">Declares a custom <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-display-name-generator">display name
                         generator</a> for the test class. Such annotations are <em>inherited</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -182,7 +182,7 @@ class Test {
                     <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -196,7 +196,7 @@ class Test {
                     <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -211,7 +211,7 @@ class Test {
                     <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle">test instance lifecycle</a> is used).
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -226,7 +226,7 @@ class Test {
                     <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle">test instance lifecycle</a> is used).
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -240,7 +240,7 @@ class Test {
                     used. Such annotations are not <em>inherited</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -252,7 +252,7 @@ class Test {
                     in JUnit 4. Such annotations are <em>inherited</em> at the class level but not at the method level.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -263,7 +263,7 @@ class Test {
                     method; analogous to JUnit 4’s <code>@Ignore</code>. Such annotations are not <em>inherited</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -273,7 +273,7 @@ class Test {
                 <p class="tableblock">Used to fail a test, test factory, test template, or lifecycle method if its
                     execution exceeds a given duration. Such annotations are <em>inherited</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -283,7 +283,7 @@ class Test {
                 <p class="tableblock">Used to <a href="https://junit.org/junit5/docs/current/user-guide/#extensions-registration-declarative">register extensions
                         declaratively</a>. Such annotations are <em>inherited</em>.</p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -295,7 +295,7 @@ class Test {
                     <em>shadowed</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -308,7 +308,7 @@ class Test {
                     <code>org.junit.jupiter.api.io</code> package.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❎</td>
+            <td class="tableblock halign-left valign-top">❌</td>
         </tr>
     </tbody>
 </table>
