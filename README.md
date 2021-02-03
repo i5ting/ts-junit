@@ -263,7 +263,7 @@ class Test {
                     method; analogous to JUnit 4’s <code>@Ignore</code>. Such annotations are not <em>inherited</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
