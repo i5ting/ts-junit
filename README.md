@@ -1,10 +1,11 @@
 # ts-junit
-use junit descrator with jest
+use junit descrator with typescript
 
 
-- jest 支持 ts 需要引入babel
-- ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it
-- ts-junit 使用junit 5的装饰器进行封装
+- ~~jest 支持 ts 需要引入babel~~
+- ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
+- **ts-junit 使用junit 5的装饰器进行封装，成熟，使用于熟悉OO的开发，尤其对Java开发更友好。**
+- **ts-junit 默认使用uvu，同时提供各个常见测试框架的支持，比如jest、mocha、ava、tape、qunit、jasmine等。**
 
 ## 示例
 
