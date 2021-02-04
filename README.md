@@ -183,7 +183,7 @@ class Test {
                     <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -197,7 +197,7 @@ class Test {
                     <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -212,7 +212,7 @@ class Test {
                     <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle">test instance lifecycle</a> is used).
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
@@ -227,7 +227,7 @@ class Test {
                     <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-test-instance-lifecycle">test instance lifecycle</a> is used).
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
