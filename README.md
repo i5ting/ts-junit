@@ -56,7 +56,7 @@ class Test {
 ## 装饰器
 
 - 参考junit5的文档 https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations
-- 进度 7/20
+- 进度 `7/20`
 
 <table class="tableblock frame-all grid-all stretch">
     <colgroup>
