@@ -10,17 +10,14 @@ use junit descrator with typescript
 ## 示例
 
 ```
-import Calculator from './calculator';
+import assert from 'assert'
+import { Test } from 'ts-junit'
 
-import {Test, assertEquals} from 'ts-junit'
-
-class MyFirstJUnitJupiterTests {
-
-    private final Calculator calculator = new Calculator();
+export default class MyFirstJUnitJupiterTests {
 
     @Test
     void addition() {
-        expect(2).toEqual(calculator.add(1, 1))
+        assert.is(Math.sqrt(4),2);
     }
 
 }
