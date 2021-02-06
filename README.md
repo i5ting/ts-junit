@@ -11,15 +11,46 @@ use junit descrator with typescript
 
 ```
 import assert from 'assert'
-import { Test } from 'ts-junit'
+import { BeforeAll, BeforeEach, Disabled, Test, AfterEach, AfterAll } from 'ts-junit'
 
 export default class MyFirstJUnitJupiterTests {
-
-    @Test
-    void addition() {
-        assert.is(Math.sqrt(4),2);
+    @BeforeAll
+    static void initAll() {
     }
 
+    @BeforeEach
+    void init() {
+    }
+
+    @Test
+    void succeedingTest() {
+    
+    }
+
+    @Test
+    void failingTest() {
+        assert.fail("a failing test");
+    }
+
+    @Test
+    @Disabled("for demonstration purposes")
+    void skippedTest() {
+        // not executed
+    }
+
+    @Test
+    void abortedTest() {
+        assert.assumeTrue("abc".contains("Z"));
+        assert.fail("test should have been aborted");
+    }
+
+    @AfterEach
+    void tearDown() {
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+    }
 }
 
 ```
