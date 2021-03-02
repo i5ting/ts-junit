@@ -55,7 +55,7 @@ export default class MyFirstJUnitJupiterTests {
 
 ```
 
-结合 https://github.com/midwayjs/injection 更简单
+结合 https://github.com/midwayjs/injection 更简单(暂未实现)
 
 
 ```
