@@ -14,6 +14,12 @@ export function executeWithDefaultStrategy(dir: String) {
 
     context.runTests(dir)
 }
+export function executeFileWithDefaultStrategy(file: String) {
+    debug('executeFileWithDefaultStrategy')
+    const context = new Context(new UvuStrategy())
+
+    context.runTest(file)
+}
 
 export function execute(dir: String, strategy: IStrategy) {
     debug('execute With Strategy')

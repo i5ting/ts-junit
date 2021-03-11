@@ -1,6 +1,6 @@
 # ts-junit
-use junit descrator with typescript
 
+use junit descrator with typescript
 
 - ~~jest 支持 ts 需要引入babel~~
 - ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
@@ -79,6 +79,57 @@ class Test {
     expect(this.helloService.sayhello('test')).eq('hello test');
   }
 }
+```
+
+## Quick start
+
+安装
+
+```
+$ npm i --save ts-juint
+```
+
+开始编写 测试 代码 test/index.ts
+
+
+创建编译时的 tsconfig.json 文件
+
+```ts
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "typeRoots": [],
+    "types": [],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts", "./test/**/*.ts"]
+}
+```
+
+编辑 package.json 的启动和编译脚本
+
+```ts
+{
+  "scripts": {
+    "test": "NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts",
+    "build": "tsc"
+  }
+}
+```
+
+启动服务
+
+```
+npm test
+> NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts
+[2020-9-1 19:52:12] [debug] [init] [router] get - /
 ```
 
 ## 装饰器
@@ -342,4 +393,13 @@ class Test {
         </tr>
     </tbody>
 </table>
+
+
+## cli
+
+    .option('-b, --bail', 'Exit on first failure')
+	.option('-i, --ignore', 'Any file patterns to ignore')
+	.option('-r, --require', 'Additional module(s) to preload')
+	.option('-C, --cwd', 'The current directory to resolve from', '.')
+	.option('-c, --color', 'Print colorized output', true)
 

@@ -1,4 +1,4 @@
-import scan from './loadObject/scan';
+import {scan, load} from './loadObject/scan';
 
 import { Debug } from './Utils'
 
@@ -32,10 +32,6 @@ export default class Context {
         this.strategy = strategy;
     }
 
-    /**
-     * The Context delegates some work to the Strategy object instead of
-     * implementing multiple versions of the test framework on its own.
-     */
     public runTests(dir: String): void {
         debug(" --- runTests --- ")
         let nodeList = scan(dir)
@@ -63,4 +59,33 @@ export default class Context {
             this.strategy.test.run()
         }
     }
+
+    public runTest(file: String): void {
+        debug(" --- runTest --- ")
+        let nodeList = [load(file)]
+
+        debug("--------------- MAIN ------------------")
+        debug(nodeList)
+        
+        for (let i in nodeList) {
+            const Clazz = nodeList[i]
+            debug("Clazz---")
+            debug(Clazz)
+
+            let newClz = Clazz.newClz
+            
+            debug(newClz)
+
+            var obj = Clazz.newClz.__obj
+            delete newClz.__obj
+
+            debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
+
+            this.strategy.testcase(Clazz.clz_name)
+            this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
+
+            this.strategy.test.run()
+        }
+    }
+    
 }
