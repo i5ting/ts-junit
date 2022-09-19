@@ -33,8 +33,11 @@
     "lru-cache": "^7.14.0",
     "memfs": "^3.4.7",
     "quick-lru": "^6.1.1",
+    "require-dir": "^1.2.0",
+    "unionfs": "^4.4.0",
     "uvu": "^0.5.1",
-    "vm2": "^3.9.11"
+    "vm2": "^3.9.11",
+    "walkdir": "^0.4.1"
   },
   "devDependencies": {
     "@types/lru-cache": "^7.10.10",
