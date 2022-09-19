@@ -1,7 +1,16 @@
 import * as fs from "fs";
 import * as ts from "typescript";
+import {getDependencyImports, getAllImportsForFile, getNeedCompileFiles} from "./ast";
+ 
+import { fs as f1, vol } from 'memfs';
 
-import { cache } from "./cache";
+
+import { patchRequire } from 'fs-monkey';
+
+
+// const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
+// console.dir(a)
+// import { cache } from "./cache";
 
 
 function watch(rootFileNames: string[], options: ts.CompilerOptions) {
@@ -54,6 +63,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
       // write the changes to disk
       emitFile(fileName);
+      
     });
   });
 
@@ -68,8 +78,13 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     }
 
     output.outputFiles.forEach(o => {
-      console.log(o.name + ':= ' + o.text)
-      cache.set(o.name, o.text);
+      console.log(o.name + ':= ' )
+
+      vol.mkdirpSync('src/loadObject')
+      vol.mkdirpSync('tests')
+      vol.writeFileSync(o.name, o.text);
+      patchRequire(vol);
+      // cache.set(o.name, o.text);
       // fs.writeFileSync(o.name, o.text, "utf8");
     });
   }
@@ -103,6 +118,30 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
 export function Watch(dirs: string[]) {
   watch(dirs, { module: ts.ModuleKind.CommonJS });
+
+  // return debug
+}
+
+export function WatchFile(file: string) {
+  // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
+
+  getAllImportsForFile(file)
+  var a = getNeedCompileFiles()
+
+  console.dir(a)  
+  Watch(a)
+
+  patchRequire(vol);
+
+  // console.dir(vol.readFileSync('tests/test.js').toString())
+  // const A = require('tests/test.js')
+  console.dir(require)
+
+  // var obj = new A()
+  // console.dir(obj)
+
+  // console.dir(a)
+  // watch([file], { module: ts.ModuleKind.CommonJS });
 
   // return debug
 }

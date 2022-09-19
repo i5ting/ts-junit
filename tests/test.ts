@@ -53,6 +53,8 @@ export default class MyFirstJUnitJupiterTests {
         assert.is(Math.sqrt(4), 2);
         assert.is(Math.sqrt(4), 2);
         assert.is(Math.sqrt(4), 2);
+        assert.is(Math.sqrt(4), 2);
+        
     }
 }
 

@@ -1,6 +1,3 @@
-// import { Watch } from './src/watch'
+import { executeWithDefaultStrategy,executeFileWithDefaultStrategy } from './src'
 
-// Watch([process.cwd()+'/tests'])
-
-
-console.dir("sss")
+executeFileWithDefaultStrategy(process.cwd() + '/tests/test')

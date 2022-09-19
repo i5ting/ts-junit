@@ -1,5 +1,6 @@
 // tests/demo.js
 import * as assert from 'uvu/assert';
+import aaa from 'debug';
 
 // test('Math.sqrt()', () => {
 //   assert.is(Math.sqrt(4), 2);

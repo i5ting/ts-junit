@@ -403,3 +403,12 @@ npm test
 	.option('-C, --cwd', 'The current directory to resolve from', '.')
 	.option('-c, --color', 'Print colorized output', true)
 
+## 流程
+
+- run（dir）
+    - 获得所有文件地址
+    - 编译文件称为string code
+    - 遍历code，获得require（）
+        - 如果是相对地址，compile ts to js
+        - 如果是模块，放到模块列表
+    - 使用vm执行，先植入

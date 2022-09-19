@@ -1,3 +1,3 @@
 import QuickLRU from 'quick-lru';
 
-export const cache = new QuickLRU<string, string>({maxSize: 1000});
+export const cache = new QuickLRU<string, string>({maxSize: 10000});

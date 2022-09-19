@@ -7,13 +7,16 @@ const debug = Debug()
 
 export * from './decrator'
 export * from './IStrategy'
+export * from './Watch'
+export * from './ast'
 
-export function executeWithDefaultStrategy(dir: String) {
+export function executeWithDefaultStrategy(dir: string[]) {
     debug('executeWithDefaultStrategy')
     const context = new Context(new UvuStrategy())
 
     context.runTests(dir)
 }
+
 export function executeFileWithDefaultStrategy(file: String) {
     debug('executeFileWithDefaultStrategy')
     const context = new Context(new UvuStrategy())
@@ -21,7 +24,7 @@ export function executeFileWithDefaultStrategy(file: String) {
     context.runTest(file)
 }
 
-export function execute(dir: String, strategy: IStrategy) {
+export function execute(dir: string[], strategy: IStrategy) {
     debug('execute With Strategy')
     const context = new Context(strategy)
     context.runTests(dir)

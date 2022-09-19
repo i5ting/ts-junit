@@ -4,7 +4,6 @@
   "description": "use junit descrator with typescript",
   "main": "dist/index.js",
   "sideEffects": false,
-  "type": "module",
   "types": "./types/index.d.ts",
   "bin": {
     "junit": "test.ts"
@@ -29,9 +28,13 @@
   "dependencies": {
     "clipanion": "^3.0.0-rc.10",
     "debug": "^4.3.1",
+    "detective": "^5.2.1",
+    "fs-monkey": "^1.0.3",
     "lru-cache": "^7.14.0",
+    "memfs": "^3.4.7",
     "quick-lru": "^6.1.1",
-    "uvu": "^0.5.1"
+    "uvu": "^0.5.1",
+    "vm2": "^3.9.11"
   },
   "devDependencies": {
     "@types/lru-cache": "^7.10.10",

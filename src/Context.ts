@@ -2,7 +2,7 @@ import { scan, load } from './loadObject/scan';
 
 import { Debug } from './Utils'
 
-import { Watch } from './watch'
+import { Watch } from './Watch'
 
 const debug = Debug("ts-junit")
 
@@ -34,7 +34,7 @@ export default class Context {
         this.strategy = strategy;
     }
 
-    public runTests(dir: String[]): void {
+    public runTests(dir: string[]): void {
         debug(" --- runTests --- ")
 
         Watch(dir)
@@ -42,28 +42,28 @@ export default class Context {
 
 
 
-        debug("--------------- MAIN ------------------")
-        debug(nodeList)
+        // debug("--------------- MAIN ------------------")
+        // debug(nodeList)
 
-        for (let i in nodeList) {
-            const Clazz = nodeList[i]
-            debug("Clazz---")
-            debug(Clazz)
+        // for (let i in nodeList) {
+        //     const Clazz = nodeList[i]
+        //     debug("Clazz---")
+        //     debug(Clazz)
 
-            let newClz = Clazz.newClz
+        //     let newClz = Clazz.newClz
 
-            debug(newClz)
+        //     debug(newClz)
 
-            var obj = Clazz.newClz.__obj
-            delete newClz.__obj
+        //     var obj = Clazz.newClz.__obj
+        //     delete newClz.__obj
 
-            debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
+        //     debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
 
-            this.strategy.testcase(Clazz.clz_name)
-            this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
+        //     this.strategy.testcase(Clazz.clz_name)
+        //     this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
 
-            this.strategy.test.run()
-        }
+        //     this.strategy.test.run()
+        // }
     }
 
     public runTest(file: String): void {
