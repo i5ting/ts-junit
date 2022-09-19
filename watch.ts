@@ -1,4 +1,4 @@
-import { Watch,WatchFile } from './src'
+import { Watch, WatchFile } from './src'
 
 Watch([process.cwd() + '/tests/test.ts'])
 

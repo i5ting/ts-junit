@@ -1,9 +1,11 @@
+import * as os from "os";
 import * as fs from "fs";
+import * as path from "path";
 import * as ts from "typescript";
-import {getDependencyImports, getAllImportsForFile, getNeedCompileFiles} from "./ast";
- 
-import { fs as f1, vol } from 'memfs';
+import { getDependencyImports, getAllImportsForFile, getNeedCompileFiles, libFiles } from "./ast";
 
+import { fs as f1, vol } from 'memfs';
+const { NodeVM } = require('vm2');
 
 import { patchRequire } from 'fs-monkey';
 
@@ -63,7 +65,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
       // write the changes to disk
       emitFile(fileName);
-      
+
     });
   });
 
@@ -78,7 +80,16 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     }
 
     output.outputFiles.forEach(o => {
-      console.log(o.name + ':= ' )
+      // var dir = 'output'
+      // if (o.name.indexOf(os.homedir()) !== -1) {
+      //   dir = 'output' + o.name.replace(process.cwd(), '')
+      // } else {
+      //   dir += '/' + o.name
+      // }
+
+      // ensureDirectoryExistence(dir)
+      // fs.writeFileSync(dir, o.text);
+      console.log(o.name + ':= ' + o.text)
 
       vol.mkdirpSync('src/loadObject')
       vol.mkdirpSync('tests')
@@ -128,14 +139,15 @@ export function WatchFile(file: string) {
   getAllImportsForFile(file)
   var a = getNeedCompileFiles()
 
-  console.dir(a)  
+  console.dir(libFiles)
+
+  console.dir(a)
   Watch(a)
 
-  patchRequire(vol);
-
+  run()
   // console.dir(vol.readFileSync('tests/test.js').toString())
-  // const A = require('tests/test.js')
-  console.dir(require)
+
+  // console.dir(require)
 
   // var obj = new A()
   // console.dir(obj)
@@ -144,4 +156,23 @@ export function WatchFile(file: string) {
   // watch([file], { module: ts.ModuleKind.CommonJS });
 
   // return debug
+}
+
+
+function run() {
+  var m = require('module')
+  patchRequire(vol);
+  var src = vol.readFileSync('tests/test.js').toString()
+  var res = require('vm').runInThisContext(m.wrap(src))(exports, require, module, __filename, __dirname)
+  console.log(module.exports)
+}
+
+
+function ensureDirectoryExistence(filePath) {
+  var dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
 }
