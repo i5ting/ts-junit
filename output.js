@@ -1,5 +1,5 @@
 // const A = require('./output/tests/test').default
-
+const { NodeVM } = require('vm2');
 
 // const o = new A()
 // console.dir(o)
@@ -35,40 +35,63 @@ walk.sync('output', function (path, stat) {
 // };
 vol.fromJSON(json);
 
-patchRequire(ufs);
+// 
+// 
 
-require('uvu/assert')
-// require('uvu')
-// require('os'）
-//     require('fs')
-// require('path')
-// require('typescript')
-// require('memfs')
-// require('fs-monkey')
 
-const { NodeVM } = require('vm2');
-const vm = new NodeVM({
-    require: {
-        external: true,
-        root: './',
-        // builtin: ['fs', 'path', 'uvu']
-    }
-});
+// patchRequire(ufs)
+patchRequire(vol)
 
-vm.run(`
+const A = require('tests/test').default
 
-    var request = require('debug')("sss");
-    request('http://www.google.com');
-    var assert = require("uvu/assert");
+const o = new A()
+console.dir(o)
 
-    function main(){
-        assert.is(Math.sqrt(4), 2);
-        assert.is(Math.sqrt(4), 21);
-    }
 
-    main()
-// const A = require('output/tests/test').default
+// global.vol = vol
 
-// const o = new A()
-// console.dir(o)
-`, 'vm.js');
+
+// const vm = new NodeVM({
+//     require: {
+//         external: true,
+//         root: './',
+//         customRequire: require
+//         // builtin: ['fs', 'path', 'uvu']
+//     }
+// });
+
+
+// vm.run(`
+
+//     var request = require('debug')("sss");
+//     request('http://www.google.com');
+//     // var assert = require("uvu/assert");
+
+//     // function main(){
+//     //     assert.is(Math.sqrt(4), 2);
+//     //     assert.is(Math.sqrt(4), 21);
+//     // }
+
+//     // // main()
+//     const A = require('tests/test').default
+//     // const A = require('src/index').default
+
+//     const o = new A()
+//     console.dir(o)
+// `, 'vm.js');
+
+
+// console.dir(vol.readFileSync('tests/test.js').toString())
+
+// var m = require('module')
+// var src = `
+//     const A = require('tests/test').default;
+//     const o = new A()
+//     console.dir(o)
+// `
+
+// patchRequire(ufs);
+// patchRequire(vol);
+
+// var res = require('vm').runInThisContext(m.wrap(src))(exports, require, module, __filename, __dirname)
+// console.log(module.exports)

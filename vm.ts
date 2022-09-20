@@ -6,28 +6,28 @@ const vm = new NodeVM({
     }
 });
 
-// vm.run(`
-//     var request = require('debug')("sss");
-//     request('http://www.google.com');
-//     var assert = require("uvu/assert");
+vm.run(`
+    var request = require('debug')("sss");
+    request('http://www.google.com');
+    var assert = require("uvu/assert");
 
-//     function main(){
-//         assert.is(Math.sqrt(4), 2);
-//         assert.is(Math.sqrt(4), 21);
-//     }
+    function main(){
+        assert.is(Math.sqrt(4), 2);
+        assert.is(Math.sqrt(4), 21);
+    }
 
-//     main()
+    main()
 
-// `, 'vm.js');
+`, 'vm.js');
 
 
-// vm.run(`
-//     var request = require('debug')("sss");
+vm.run(`
+    var request = require('debug')("sss");
    
-//     const A = require('./output/tests/test').default
+    const A = require('./output/tests/test').default
 
-//     const o = new A()
-//     console.dir(o)
+    const o = new A()
+    console.dir(o)
     
-// `, 'vm.js');
+`, 'vm.js');
 
