@@ -13,6 +13,7 @@ export * from './ast'
 export * from './Utils'
 export * from './parse'
 export * from './loadObject/scan'
+export * from './loadObject/require'
 export * from './loadObject/flatten'
 
 
