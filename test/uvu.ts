@@ -33,7 +33,7 @@ test.only('getAllImportsForFile()', () => {
 
   // console.dir(needCompileFiles)
 
-  assert.is(needCompileFiles.length, 14);
+  assert.is(needCompileFiles.length, 15);
 });
 
 
