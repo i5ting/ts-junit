@@ -5,7 +5,7 @@ import Calculator from '../calculator';
 import { Test, BeforeEach, BeforeAll, AfterAll, AfterEach, DisplayName, Disabled } from '../src/index'
 
 @DisplayName("Clz test case")
-// @Disabled("Disabled all Clazz until bug #99 has been fixed")
+@Disabled("Disabled all Clazz until bug #99 has been fixed")
 export default class MyFirstJUnitJupiterTests {
     a: Number = 1
     b: String
@@ -34,6 +34,7 @@ export default class MyFirstJUnitJupiterTests {
     }
 
     @Test
+    @Disabled("Disabled succeedingTest")
     succeedingTest() {
         assert.ok(this.a === 2);
         assert.is(Math.sqrt(4), 2);

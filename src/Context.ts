@@ -1,13 +1,18 @@
+import * as fs from 'node:fs'
 import { scan, load } from './loadObject/scan';
 
 import { Debug } from './Utils'
 
-import { Watch } from './Watch'
+// import { Watch } from './Watch'
+
+import { Parse } from './parse'
 
 const debug = Debug("ts-junit")
 
 import IStrategy from './IStrategy'
+import { assert } from 'node:console';
 
+let d = debug
 /**
  * The Context defines the interface of interest to clients.
  */
@@ -37,7 +42,7 @@ export default class Context {
     public runTests(dir: string[]): void {
         debug(" --- runTests --- ")
 
-        Watch(dir)
+        // Watch(dir)
         // let nodeList = scan(dir)
 
 
@@ -66,11 +71,23 @@ export default class Context {
         // }
     }
 
-    public runTest(file: String): void {
+    /**
+     * run one test file
+     * 
+     * parse ts to get decorator meta data
+     * invoke js to run test
+     */
+    public runTest(tsFile: string, jsFile: string): void {
+        debug('runTest: ' + jsFile)
+
+        assert(fs.existsSync(jsFile))
+
+
         debug(" --- runTest --- ")
-        let nodeList = [load(file)]
+        let nodeList = [load(jsFile)]
 
         debug("--------------- MAIN ------------------")
+        debug('nodeList')
         debug(nodeList)
 
         for (let i in nodeList) {
@@ -88,6 +105,11 @@ export default class Context {
             debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
 
             this.strategy.testcase(Clazz.clz_name)
+
+            d(i)
+            d(Clazz.clz_name)
+            d(newClz)
+            d(obj)
             this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
 
             this.strategy.test.run()

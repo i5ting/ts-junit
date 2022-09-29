@@ -1,4 +1,7 @@
-const fs = require('fs')
+import * as fs from 'node:fs'
+// import * as Debugger from 'debug'
+import debugModule from 'debug';
+const debug = new debugModule('foo');
 
 // see https://github.com/i5ting/quickdebug/
 export function Debug(name?: string) {
@@ -10,7 +13,7 @@ export function Debug(name?: string) {
 // see https://github.com/i5ting/colondebug/
 export function DebugWith(key: String) {
     var operation = key.split(':').pop()
-    var debug = require('debug')(key)
+    var debug = new debugModule(key)
 
     if (Object.keys(console).includes(operation)) {
         debug = console[operation]

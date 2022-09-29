@@ -1,27 +1,48 @@
-#!/usr/bin/env ts-node-script
+#!/usr/bin/env node
+
+import fs from 'node:fs'
+import path from 'node:path'
+
+import yargs from 'yargs/yargs';
+
+import { hideBin } from 'yargs/helpers'
+
+import { executeWithDefaultStrategy, executeFileWithDefaultStrategy } from '.'
+
+const argv = yargs(hideBin(process.argv)).argv
+
+// console.dir(argv)
+
+run(argv['_'])
 
 
-const isTsNode = (Symbol.for('ts-node.register.instance') in process) || !!process.env.TS_NODE_DEV
-const isJestEnviroment = process.env.JEST_WORKER_ID !== undefined
-const hasTsJest = 'npm_package_devDependencies_ts_jest' in process.env
-const typescriptSupport = isTsNode || (isJestEnviroment && hasTsJest)
+function run(rest: any) {
+    rest.map(function (i: string) {
+        let item = path.resolve(process.cwd(), i)
 
-if (typescriptSupport) {
-    // 
+        try {
+            const stat = fs.lstatSync(item)
+
+            let fileOrDirType = stat.isDirectory() ? 'dir' : stat.isFile() ? 'file' : 'other'
+
+            switch (fileOrDirType) {
+                case 'dir':
+                    console.warn('find dir ' + item)
+                    executeWithDefaultStrategy([item])
+                    break;
+                case 'file':
+                    console.warn('find file 2' + item.replace('.ts', ''))
+
+                    executeFileWithDefaultStrategy([item.replace('.ts', '')])
+                    break;
+                default:
+                    console.warn('unknow type')
+                    break;
+            }
+        } catch (error) {
+            throw error
+        }
+
+    })
 }
 
-
-import { Cli } from 'clipanion';
-
-import { MainCommand } from './commands/MainCommand';
-
-const [node, app, ...args] = process.argv;
-
-const cli = new Cli({
-    binaryLabel: `ts-junit Application`,
-    binaryName: `${node} ${app}`,
-    binaryVersion: `1.0.0`,
-})
-
-cli.register(MainCommand);
-cli.runExit(args, Cli.defaultContext);

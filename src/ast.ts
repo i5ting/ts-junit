@@ -3,22 +3,15 @@ import { join, dirname } from 'path'
 import * as ts from 'typescript'
 import { FileReference } from 'typescript'
 
-// const fileInfo = ts.preProcessFile(readFileSync('./tests/test.ts').toString())['importedFiles']
-// console.dir(fileInfo)
-// const result = fileInfo.map(el => {return el.fileName});
-// console.dir(result)
-
 export const libFiles = new Set()
 export const localFiles = new Set<string>()
-
 export const processedFiles = new Set()
-
 export const needCompileFiles = new Array()
 
 function getImportsForFile(file: string, options?: any) {
-    console.dir(file)
+    // console.dir(file)
     const fileInfo = ts.preProcessFile(readFileSync(file).toString())
-    if (options&&options.verbose)
+    if (options && options.verbose)
         console.log('getImportsForFile ' + file + ': ' + fileInfo.importedFiles.map((el) => el.fileName).join(', '))
     return fileInfo.importedFiles
         .map((importedFile: FileReference) => importedFile.fileName)
@@ -27,7 +20,7 @@ function getImportsForFile(file: string, options?: any) {
             if (!fileName.startsWith('.')) {
                 libFiles.add(fileName)
             }
-            
+
             return fileName
             // flat map is not ideal here, because we could hit multiple valid imports, and not the first aka best one
             //return applyPathMapping(fileName, path_mapping) 
@@ -38,14 +31,14 @@ function getImportsForFile(file: string, options?: any) {
         })
         .map((fileName: string) => {
             if (existsSync(`${fileName}.ts`)) {
-                localFiles.add( `${fileName}.ts`)
+                localFiles.add(`${fileName}.ts`)
             }
             if (existsSync(`${fileName}.tsx`)) {
                 return `${fileName}.tsx`
             }
             const yo = join(fileName, 'index.ts').normalize()
             if (existsSync(yo)) {
-                
+
                 localFiles.add(yo)
             }
             const tsx_subfolder = join(fileName, 'index.tsx').normalize()
@@ -57,55 +50,44 @@ function getImportsForFile(file: string, options?: any) {
                 if (existsSync(tsFromJs)) {
                     return tsFromJs
                 }
-            }
-            // ignoredFiles.add(fileName)
-            // return undefined
-            // throw new Error(`Unresolved import ${fileName} in ${file}`);
+            };
         })
-        // .filter(isDefined)
-        // .map(convertPath)
 }
 
-export function getAllImportsForFile(file:string){
-
+export function getAllImportsForFile(file: string, options?: Object) {
     processedFiles.add(file)
     needCompileFiles.push(file)
-    getImportsForFile(file,{verbose:true})
-    let count: number = 0 
-    localFiles.forEach((i)=>{
+    getImportsForFile(file, options)
+    let count: number = 0
+    localFiles.forEach((i) => {
         count++;
         // 
-
-
-
-        if (!processedFiles.has(i) &&count> 0) {
+        if (!processedFiles.has(i) && count > 0) {
             // processedFiles.add(i)
-            getAllImportsForFile(i)
+            getAllImportsForFile(i, options)
         }
     })
+    localFiles.add(file)
 }
 
-export function getNeedCompileFiles(){
+export function getNeedCompileFiles() {
     const arr = needCompileFiles.reverse()
-    return arr.filter((item, index) => arr.indexOf(item) === index);   
+    return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
-export function getDependencyImports (files){
+export function getDependencyImports(files: any) {
     const alibFiles = new Set()
     const alocalFiles = new Set()
-    files.map((a:string) => {
+
+    files.map((a: string) => {
         getImportsForFile(a)
-    
+
         libFiles.forEach(alibFiles.add, alibFiles)
         localFiles.forEach(alibFiles.add, alocalFiles)
     })
 
     return {
-        'lib':alibFiles,
+        'lib': alibFiles,
         'local': alocalFiles
     }
 }
-
-// example
-// const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
-// console.dir(a)
