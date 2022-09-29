@@ -35,6 +35,9 @@ export default class UvuStrategy implements IStrategy {
                             this.test[a[0]][a[1]](Clazz['hook'][z].bind(obj))
                         } else {
                             debug(z + ' a2= ' + Clazz['hook'][z])
+                            // console.dir("z")
+                            // console.dir(Clazz['hook'][z])
+                            // console.dir(z)
                             this.test[z](Clazz['hook'][z].bind(obj))
                         }
                     }

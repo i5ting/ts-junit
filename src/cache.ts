@@ -1,3 +1,6 @@
-import QuickLRU from 'quick-lru';
+const TTLCache = require('@isaacs/ttlcache')
 
-export const cache = new QuickLRU<string, string>({maxSize: 10000});
+export const cache = new TTLCache({ 
+  max: 10000, 
+  ttl: 400 
+})

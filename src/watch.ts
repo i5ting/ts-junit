@@ -1,22 +1,25 @@
-import * as os from "os";
+// import * as os from "os";
 import * as fs from "fs";
 import * as path from "path";
 import * as ts from "typescript";
+
+import { EventEmitter } from 'node:events';
+
 import { getDependencyImports, getAllImportsForFile, getNeedCompileFiles, libFiles } from "./ast";
 
-import { fs as f1, vol } from 'memfs';
-const { NodeVM } = require('vm2');
+import { Debug } from './Utils'
+import Context from './Context'
+import { cache } from './cache'
+import { getTsFiles } from './index'
 
-import { patchRequire } from 'fs-monkey';
+const debug = Debug('watch')
 
-
-// const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
-// console.dir(a)
-// import { cache } from "./cache";
-
+const runTestEmitter = new EventEmitter();
+const files: ts.MapLike<{ version: number }> = {};
 
 function watch(rootFileNames: string[], options: ts.CompilerOptions) {
-  const files: ts.MapLike<{ version: number }> = {};
+  debug('rootFileNames+')
+  debug(rootFileNames)
 
   // initialize the list of files
   rootFileNames.forEach(fileName => {
@@ -52,6 +55,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   rootFileNames.forEach(fileName => {
     // First time around, emit all files
     emitFile(fileName);
+    debug('fileName = ' + fileName)
 
     // Add a watch on the file to handle next change
     fs.watchFile(fileName, { persistent: true, interval: 250 }, (curr, prev) => {
@@ -73,31 +77,24 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     let output = services.getEmitOutput(fileName);
 
     if (!output.emitSkipped) {
-      console.log(`Emitting ${fileName}`);
+      debug(`Emitting ${fileName}`);
     } else {
       console.log(`Emitting ${fileName} failed`);
       logErrors(fileName);
     }
 
     output.outputFiles.forEach(o => {
-      // var dir = 'output'
-      // if (o.name.indexOf(os.homedir()) !== -1) {
-      //   dir = 'output' + o.name.replace(process.cwd(), '')
-      // } else {
-      //   dir += '/' + o.name
-      // }
+      const destination = path.join(path.resolve(__dirname, '../'), 'output/' + o.name.replace(path.resolve(__dirname, '../'), ''))
+      debug('destination = ' + destination)
 
-      // ensureDirectoryExistence(dir)
-      // fs.writeFileSync(dir, o.text);
-      console.log(o.name + ':= ' + o.text)
+      // mkdir -p
+      ensureDirectoryExistence(destination)
 
-      vol.mkdirpSync('src/loadObject')
-      vol.mkdirpSync('tests')
-      vol.writeFileSync(o.name, o.text);
-      patchRequire(vol);
-      // cache.set(o.name, o.text);
-      // fs.writeFileSync(o.name, o.text, "utf8");
+      fs.writeFileSync(destination, o.text)
     });
+
+    // debug('done')
+    runTestEmitter.emit('runTestEvent')
   }
 
   function logErrors(fileName: string) {
@@ -124,49 +121,72 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 // const currentDirectoryFiles = fs
 //   .readdirSync(process.cwd())
 //   .filter(fileName => fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
+export function WatchDir(dirs: string[], context: Context) {
+  var allfiles = []
+  dirs.map(function (dir) {
+    // watch(dir, { module: ts.ModuleKind.CommonJS });
+    var files = getTsFiles(dir)
+    Object.keys(files).map(function (file) {
+      const testFile = dir + '/' + file.replace('.default', '').split('.').join('/')
+      allfiles.push(testFile)
+    })
+  })
 
-// Start the watcher
+  debug(allfiles)
 
-export function Watch(dirs: string[]) {
-  watch(dirs, { module: ts.ModuleKind.CommonJS });
-
-  // return debug
+  allfiles.map(function (file) {
+    WatchFile(file, context)
+  })
 }
 
-export function WatchFile(file: string) {
+export function WatchFile(testFile: string, context: Context) {
+  // make sure cli args 'file.ts'
+  testFile = testFile.replace('.ts', '')
+
+  let testTsFile = testFile
+  let testJsFile = testFile
+
   // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
+  const extension = path.extname(testFile)
+  if (!extension) {
+    testTsFile += '.ts'
+    testJsFile += '.js'
 
-  getAllImportsForFile(file)
-  var a = getNeedCompileFiles()
+    testTsFile = testTsFile.replace(process.cwd() + '/', '')
 
-  console.dir(libFiles)
+    testJsFile = path.resolve(__dirname, '../') + '/output' + testJsFile.replace(process.cwd(), '')
+  }
 
-  console.dir(a)
-  Watch(a)
+  getAllImportsForFile(testTsFile)
 
-  run()
-  // console.dir(vol.readFileSync('tests/test.js').toString())
+  const needCompileFiles = getNeedCompileFiles()
 
-  // console.dir(require)
+  debug('needCompileFiles')
+  debug(needCompileFiles)
 
-  // var obj = new A()
-  // console.dir(obj)
+  console.log("start compile file = " + testTsFile)
+  watch(needCompileFiles, { module: ts.ModuleKind.CommonJS });
 
-  // console.dir(a)
-  // watch([file], { module: ts.ModuleKind.CommonJS });
 
-  // return debug
+  debug('needCompileFiles2')
+  debug(needCompileFiles)
+
+  // when file change run after 1s
+  setTimeout(function () {
+
+    debug('testJsFile = ' + testJsFile)
+
+    // path.resolve(__dirname,'../'), 'output/'
+
+    // run test at once
+    context.runTest(testTsFile, testJsFile)
+
+    runTestEmitter.on('runTestEvent', function () {
+      debug('run tests' + testFile)
+      context.runTest(testTsFile, testJsFile)
+    })
+  }, 100)
 }
-
-
-function run() {
-  var m = require('module')
-  patchRequire(vol);
-  var src = vol.readFileSync('tests/test.js').toString()
-  var res = require('vm').runInThisContext(m.wrap(src))(exports, require, module, __filename, __dirname)
-  console.log(module.exports)
-}
-
 
 function ensureDirectoryExistence(filePath) {
   var dirname = path.dirname(filePath);

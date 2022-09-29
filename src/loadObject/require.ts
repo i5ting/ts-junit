@@ -125,8 +125,6 @@ module.exports = function requireDir(dir, opts) {
                         map[base] = map[file];
                     }
                 } else {
-                 
-
                     map[base] = opts.require ? opts.require(require(abs), abs, dir) : require(abs)
                     // console.dir(map)
                     // console.dir('abs= ' + abs)
