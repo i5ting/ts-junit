@@ -11,7 +11,7 @@ var parentFile = parent.filename;
 var parentDir = path.dirname(parentFile);
 delete require.cache[__filename];
 
-module.exports = function requireDir(dir, opts) {
+export function requireDir(dir, opts) {
     // default arguments:
     dir = dir || '.';
     opts = opts || {};
@@ -102,7 +102,7 @@ module.exports = function requireDir(dir, opts) {
             // if a file exists with this extension, we'll require() it:
             var file = base + ext;
             var abs = filesMinusDirs[file];
-            
+
             if (abs) {
                 // ignore TypeScript declaration files. They should never be
                 // `require`d
@@ -135,7 +135,7 @@ module.exports = function requireDir(dir, opts) {
                     // console.log(files)
                     // // console.log(parentDir)
                     // console.log(filesMinusDirs)
-                    
+
                     // console.log(Clazz.default)
                     break;
                 }
@@ -153,7 +153,7 @@ module.exports = function requireDir(dir, opts) {
             var newKey = opts.mapKey ? opts.mapKey(map[base], base) : base;
             var newVal = opts.mapValue ? opts.mapValue(map[base], newKey) : map[base];
             delete map[base];
-            
+
             map[newKey] = newVal;
         }
     }
