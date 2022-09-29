@@ -110,3 +110,4 @@ yarn.lock
 .DS_Store
 
 dist
+output

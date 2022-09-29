@@ -4,12 +4,13 @@ import { Debug } from '../Utils'
 
 import { getDataMapping } from '../'
 
+import { requireDir } from './require'
+
 const debug = Debug()
 
 var cache = {}
 
 export function getTsFiles(dir: string) {
-    var requireDir = require('./require')
     // 定制require-dir
     var Classes = requireDir(dir, {
         recurse: true,
