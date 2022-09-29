@@ -6,6 +6,7 @@ export * from './ast';
 export * from './Utils';
 export * from './parse';
 export * from './loadObject/scan';
+export * from './loadObject/require';
 export * from './loadObject/flatten';
 export declare function executeWithDefaultStrategy(dirs: string[]): void;
 export declare function executeFileWithDefaultStrategy(testFiles: string[]): void;
