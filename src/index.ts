@@ -41,5 +41,5 @@ export function executeFileWithDefaultStrategy(testFiles: string[]) {
 export function execute(dir: string[], strategy: IStrategy) {
     debug('execute With Strategy')
     const context = new Context(strategy)
-    context.runTests(dir)
+    // context.runTests(dir)
 }

@@ -1,5 +1,5 @@
 import * as fs from 'node:fs'
-import { scan, load } from './loadObject/scan';
+import { load } from './loadObject/scan';
 
 import { Debug } from './Utils'
 
@@ -37,38 +37,6 @@ export default class Context {
      */
     public setStrategy(strategy: IStrategy) {
         this.strategy = strategy;
-    }
-
-    public runTests(dir: string[]): void {
-        debug(" --- runTests --- ")
-
-        // Watch(dir)
-        // let nodeList = scan(dir)
-
-
-
-        // debug("--------------- MAIN ------------------")
-        // debug(nodeList)
-
-        // for (let i in nodeList) {
-        //     const Clazz = nodeList[i]
-        //     debug("Clazz---")
-        //     debug(Clazz)
-
-        //     let newClz = Clazz.newClz
-
-        //     debug(newClz)
-
-        //     var obj = Clazz.newClz.__obj
-        //     delete newClz.__obj
-
-        //     debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
-
-        //     this.strategy.testcase(Clazz.clz_name)
-        //     this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
-
-        //     this.strategy.test.run()
-        // }
     }
 
     /**
