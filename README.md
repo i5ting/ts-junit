@@ -81,13 +81,23 @@ class Test {
 }
 ```
 
-## Quick start
+## Install
 
-安装
+install as binary
 
 ```
 $ npm i --save ts-juint
 ```
+
+
+## Usages
+
+```
+$ junit tests
+$ junit tests/test.ts
+```
+
+## Quick start
 
 开始编写 测试 代码 test/index.ts
 
@@ -127,7 +137,7 @@ $ npm i --save ts-juint
 启动服务
 
 ```
-npm test
+$ npm test
 > NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts
 [2020-9-1 19:52:12] [debug] [init] [router] get - /
 ```
@@ -394,21 +404,3 @@ npm test
     </tbody>
 </table>
 
-
-## cli
-
-    .option('-b, --bail', 'Exit on first failure')
-	.option('-i, --ignore', 'Any file patterns to ignore')
-	.option('-r, --require', 'Additional module(s) to preload')
-	.option('-C, --cwd', 'The current directory to resolve from', '.')
-	.option('-c, --color', 'Print colorized output', true)
-
-## 流程
-
-- run（dir）
-    - 获得所有文件地址
-    - 编译文件称为string code
-    - 遍历code，获得require（）
-        - 如果是相对地址，compile ts to js
-        - 如果是模块，放到模块列表
-    - 使用vm执行，先植入
