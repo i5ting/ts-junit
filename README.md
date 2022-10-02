@@ -55,32 +55,6 @@ export default class MyFirstJUnitJupiterTests {
 
 ```
 
-结合 https://github.com/midwayjs/injection 更简单(暂未实现)
-
-
-```
-class Test {
-  @Inject()
-  helloTest: IHelloTest;
-  @Inject()
-  helloService: IHelloService;
-
-  @Before()
-  before() {
-    mock(helloTest, 'sayhello', () => {
-      return 'mocked'
-    });
-  }
-
-  @Test()
-  async test() {
-    expect(this.helloTest.sayhello()).eq('mocked');
-    
-    expect(this.helloService.sayhello('test')).eq('hello test');
-  }
-}
-```
-
 ## Install
 
 install as binary
@@ -92,15 +66,20 @@ $ npm i --global ts-juint
 
 ## Usages
 
+### 方式1（已实现）
+
+不依赖当前项目的ts环境，直接通过cli执行，参考源码中tests目录下的文件。
+
 ```
 $ junit tests
 $ junit tests/test.ts
 ```
 
-## Quick start
+### 方式2（待定）
+
+依赖当前项目的ts环境，不使用cli，只引入装饰
 
 开始编写 测试 代码 test/index.ts
-
 
 创建编译时的 tsconfig.json 文件
 
@@ -404,3 +383,34 @@ $ npm test
     </tbody>
 </table>
 
+## TODO
+
+1）
+结合 https://github.com/midwayjs/injection 更简单(暂未实现)
+
+
+```
+class Test {
+  @Inject()
+  helloTest: IHelloTest;
+  @Inject()
+  helloService: IHelloService;
+
+  @Before()
+  before() {
+    mock(helloTest, 'sayhello', () => {
+      return 'mocked'
+    });
+  }
+
+  @Test()
+  async test() {
+    expect(this.helloTest.sayhello()).eq('mocked');
+    
+    expect(this.helloService.sayhello('test')).eq('hello test');
+  }
+}
+```
+
+2） 
+use vm2 with require from memfs
