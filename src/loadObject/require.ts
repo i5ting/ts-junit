@@ -125,7 +125,7 @@ export function requireDir(dir, opts) {
                         map[base] = map[file];
                     }
                 } else {
-                    map[base] = opts.require ? opts.require(require(abs), abs, dir) : require(abs)
+                    map[base] = opts.require ? opts.require(abs) : require(abs)
                     // console.dir(map)
                     // console.dir('abs= ' + abs)
                     // console.dir('file= ' + file)
