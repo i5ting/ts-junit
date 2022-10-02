@@ -86,7 +86,7 @@ class Test {
 install as binary
 
 ```
-$ npm i --save ts-juint
+$ npm i --global ts-juint
 ```
 
 
