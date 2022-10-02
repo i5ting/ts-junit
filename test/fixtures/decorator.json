@@ -1,0 +1,154 @@
+[
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "BeforeAll"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "initAll"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "BeforeEach"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "init"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "AfterEach"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "tearDown"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "AfterAll"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "tearDownAll"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "Test"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "succeedingTest"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "Test"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "addition"
+    },
+    {
+        "type": 2,
+        "args": 3,
+        "a": [
+            [
+                "MemberExpression",
+                "index_1",
+                "Test"
+            ],
+            [
+                "CallExpression",
+                0,
+                "index_1",
+                "DisplayName",
+                "Custom test name containing spaces111"
+            ],
+            [
+                "CallExpression",
+                0,
+                "index_1",
+                "DisplayName",
+                "Custom test name containing spaces222"
+            ],
+            [
+                "CallExpression",
+                0,
+                "index_1",
+                "Disabled",
+                "Disabled until bug #42 has been resolved"
+            ]
+        ],
+        "b": [
+            "MyFirstJUnitJupiterTests",
+            "prototype"
+        ],
+        "c": "addition5"
+    },
+    {
+        "type": 1,
+        "args": 2,
+        "b": "MyFirstJUnitJupiterTests",
+        "a": [
+            [
+                0,
+                "index_1",
+                "DisplayName",
+                "Clz test case"
+            ],
+            [
+                0,
+                "index_1",
+                "Disabled",
+                "Disabled all Clazz until bug #99 has been fixed"
+            ]
+        ]
+    }
+]
