@@ -50,6 +50,3 @@ export function get_closest_package_json() {
 
     return config
 }
-
-// var debuglog = Debug()
-// debuglog(Object.keys(console))
