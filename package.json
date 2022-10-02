@@ -19,7 +19,20 @@
     "type": "git",
     "url": "git+https://github.com/i5ting/ts-junit.git"
   },
-  "keywords": [],
+  "keywords": [
+    "uvu",
+    "jest",
+    "test",
+    "tdd",
+    "junit",
+    "ts",
+    "node",
+    "cli",
+    "ava",
+    "mocha",
+    "tape",
+    "qunit"
+  ],
   "author": "i5ting",
   "license": "MIT",
   "bugs": {
