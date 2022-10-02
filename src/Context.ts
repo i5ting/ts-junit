@@ -1,11 +1,6 @@
 import * as fs from 'node:fs'
 import { load } from './loadObject/scan';
-
 import { Debug } from './Utils'
-
-// import { Watch } from './Watch'
-
-import { Parse } from './parse'
 
 const debug = Debug("ts-junit")
 
@@ -50,7 +45,6 @@ export default class Context {
 
         assert(fs.existsSync(jsFile))
 
-
         debug(" --- runTest --- ")
         let nodeList = [load(jsFile)]
 
@@ -83,5 +77,4 @@ export default class Context {
             this.strategy.test.run()
         }
     }
-
 }

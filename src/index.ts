@@ -1,5 +1,7 @@
+
+import fs from 'node:fs'
+import path from 'node:path'
 import Context from './Context'
-import IStrategy from './IStrategy'
 import UvuStrategy from './UvuStrategy'
 import { WatchDir, WatchFile } from './Watch'
 import { Debug } from './Utils'
@@ -15,7 +17,6 @@ export * from './parse'
 export * from './loadObject/scan'
 export * from './loadObject/require'
 export * from './loadObject/flatten'
-
 
 export function executeWithDefaultStrategy(dirs: string[]) {
     debug('executeWithDefaultStrategy')
@@ -39,8 +40,34 @@ export function executeFileWithDefaultStrategy(testFiles: string[]) {
     })
 }
 
-export function execute(dir: string[], strategy: IStrategy) {
+export function execute(rest: any) {
     debug('execute With Strategy')
-    const context = new Context(strategy)
-    // context.runTests(dir)
+    console.time('build ts')
+    rest.map(function (i: string) {
+        let item = path.resolve(process.cwd(), i)
+
+        try {
+            const stat = fs.lstatSync(item)
+
+            let fileOrDirType = stat.isDirectory() ? 'dir' : stat.isFile() ? 'file' : 'other'
+
+            switch (fileOrDirType) {
+                case 'dir':
+                    console.warn('find dir ' + item)
+                    executeWithDefaultStrategy([item])
+                    break;
+                case 'file':
+                    console.warn('find file 2' + item.replace('.ts', ''))
+
+                    executeFileWithDefaultStrategy([item.replace('.ts', '')])
+                    break;
+                default:
+                    console.warn('unknow type')
+                    break;
+            }
+        } catch (error) {
+            throw error
+        }
+    })
+    console.timeEnd('build ts')
 }

@@ -9,21 +9,18 @@ export const processedFiles = new Set()
 export const needCompileFiles = new Array()
 
 function getImportsForFile(file: string, options?: any) {
-    // console.dir(file)
     const fileInfo = ts.preProcessFile(readFileSync(file).toString())
+
     if (options && options.verbose)
         console.log('getImportsForFile ' + file + ': ' + fileInfo.importedFiles.map((el) => el.fileName).join(', '))
     return fileInfo.importedFiles
         .map((importedFile: FileReference) => importedFile.fileName)
         .flatMap((fileName: string) => {
-            // console.dir(fileName)
             if (!fileName.startsWith('.')) {
                 libFiles.add(fileName)
             }
 
             return fileName
-            // flat map is not ideal here, because we could hit multiple valid imports, and not the first aka best one
-            //return applyPathMapping(fileName, path_mapping) 
         })
         .filter((x: string) => x.startsWith('.')) // only relative paths allowed
         .flatMap((fileName: string) => {
@@ -60,8 +57,8 @@ export function getAllImportsForFile(file: string, options?: Object) {
     getImportsForFile(file, options)
     let count: number = 0
     localFiles.forEach((i) => {
-        count++;
-        // 
+        count++
+
         if (!processedFiles.has(i) && count > 0) {
             // processedFiles.add(i)
             getAllImportsForFile(i, options)
@@ -79,8 +76,8 @@ export function getDependencyImports(files: any) {
     const alibFiles = new Set()
     const alocalFiles = new Set()
 
-    files.map((a: string) => {
-        getImportsForFile(a)
+    files.map((file: string) => {
+        getImportsForFile(file)
 
         libFiles.forEach(alibFiles.add, alibFiles)
         localFiles.forEach(alibFiles.add, alocalFiles)
