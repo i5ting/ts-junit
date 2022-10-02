@@ -1,15 +1,13 @@
-// import * as os from "os";
 import * as fs from "fs";
 import * as path from "path";
 import * as ts from "typescript";
 
 import { EventEmitter } from 'node:events';
 
-import { getDependencyImports, getAllImportsForFile, getNeedCompileFiles, libFiles } from "./ast";
+import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
 
 import { Debug } from './Utils'
 import Context from './Context'
-import { cache } from './cache'
 import { getTsFiles } from './index'
 
 const debug = Debug('watch')

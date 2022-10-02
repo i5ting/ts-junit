@@ -1,5 +1,4 @@
 import * as fs from 'node:fs'
-// import * as Debugger from 'debug'
 import debugModule from 'debug';
 const debug = new debugModule('foo');
 

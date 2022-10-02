@@ -2,7 +2,7 @@ import { test } from 'uvu';
 import * as path from 'node:path'
 import * as assert from 'uvu/assert';
 
-import { getDependencyImports, getAllImportsForFile, getNeedCompileFiles, libFiles } from "../src/ast";
+import { getAllImportsForFile, getNeedCompileFiles } from "../src/ast";
 
 test('Math.sqrt()', () => {
   assert.is(Math.sqrt(4), 2);
@@ -31,9 +31,7 @@ test.only('getAllImportsForFile()', () => {
 
   var needCompileFiles = getNeedCompileFiles()
 
-  // console.dir(needCompileFiles)
-
-  assert.is(needCompileFiles.length, 15);
+  assert.is(needCompileFiles.length, 14);
 });
 
 

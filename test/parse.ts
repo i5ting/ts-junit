@@ -1,6 +1,5 @@
 import { test } from 'uvu';
 import * as path from 'node:path'
-import * as fs from 'node:fs'
 import * as assert from 'uvu/assert';
 
 import { Parse, getDataMapping, getEableRunDataMapping } from '../src'

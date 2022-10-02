@@ -10,7 +10,6 @@ const debug = Debug('parse')
 export function getEableRunDataMapping(commonjsFile: string) {
   const allTest = getDataMapping(commonjsFile)
   const clazz = allTest.find(item => item['Class']?.length > 0)
-  // console.dir(clazz)
 
   if (clazz['Disabled']?.length > 0) {
     console.log(clazz['Disabled'] + 'has  @Disabled decorator， no need to run any test!')
