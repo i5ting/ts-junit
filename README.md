@@ -1,6 +1,6 @@
 # ts-junit
-use junit descrator with typescript
 
+use junit descrator with typescript
 
 - ~~jest 支持 ts 需要引入babel~~
 - ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
@@ -55,7 +55,7 @@ export default class MyFirstJUnitJupiterTests {
 
 ```
 
-结合 https://github.com/midwayjs/injection 更简单
+结合 https://github.com/midwayjs/injection 更简单(暂未实现)
 
 
 ```
@@ -79,6 +79,67 @@ class Test {
     expect(this.helloService.sayhello('test')).eq('hello test');
   }
 }
+```
+
+## Install
+
+install as binary
+
+```
+$ npm i --save ts-juint
+```
+
+
+## Usages
+
+```
+$ junit tests
+$ junit tests/test.ts
+```
+
+## Quick start
+
+开始编写 测试 代码 test/index.ts
+
+
+创建编译时的 tsconfig.json 文件
+
+```ts
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "sourceMap": true,
+    "outDir": "./build",
+    "rootDir": "./src",
+    "typeRoots": [],
+    "types": [],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts", "./test/**/*.ts"]
+}
+```
+
+编辑 package.json 的启动和编译脚本
+
+```ts
+{
+  "scripts": {
+    "test": "NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts",
+    "build": "tsc"
+  }
+}
+```
+
+启动服务
+
+```
+$ npm test
+> NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts
+[2020-9-1 19:52:12] [debug] [init] [router] get - /
 ```
 
 ## 装饰器
