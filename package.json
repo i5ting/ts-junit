@@ -6,7 +6,7 @@
   "sideEffects": false,
   "types": "./types/index.d.ts",
   "bin": {
-    "junit": "test.ts"
+    "junit": "./dist/bin"
   },
   "scripts": {
     "start": "ts-node ./src/bin.ts",
