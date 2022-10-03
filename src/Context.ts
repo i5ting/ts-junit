@@ -1,7 +1,10 @@
 import * as fs from 'node:fs'
-import { loadFromDecorator, loadFromCache } from "./loadObject/scan";
+import {
+  loadFromDecorator,
+  loadFromCache,
+  getAllTsFiles,
+} from "./loadObject/scan";
 import { Debug } from "./Utils";
-import { data } from "./Decrator";
 
 const debug = Debug("ts-junit");
 
@@ -80,6 +83,18 @@ export default class Context {
     }
   }
 
+  public runTsTests(dir: string): void {
+    var that = this;
+    var allfiles = getAllTsFiles([dir]);
+
+    console.dir(allfiles);
+
+    allfiles.forEach(function (file) {
+      console.dir(file + ".ts");
+      that.runTsTestFile(file + ".ts");
+    });
+  }
+
   public runTsTestFile(file: string): void {
     debug(" --- runTests --- ");
     let that = this;
@@ -87,7 +102,7 @@ export default class Context {
     debug(" --- runTest --- ");
     loadFromCache(file).then(function (result) {
       let nodeList = [result];
-      //   console.dir(result);
+      console.dir(result);
       for (let i in nodeList) {
         const Clazz = nodeList[i];
         debug("Clazz---");

@@ -1,6 +1,7 @@
 import * as path from "node:path";
-import { runTestFileWithDefaultStrategy } from "./src";
+import { runTestFile, runTests } from "./src";
 
-const f = path.resolve(process.cwd(), "./tests/test.ts");
+const f = path.resolve(process.cwd(), "./tests");
+// const f = path.resolve(process.cwd(), "./tests/test.ts");
 
-runTestFileWithDefaultStrategy([f]);
+runTests([f]);

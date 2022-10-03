@@ -9,7 +9,7 @@ use junit descrator with typescript
 
 ## 示例
 
-```
+```ts
 import assert from 'assert'
 import { BeforeAll, BeforeEach, Disabled, Test, AfterEach, AfterAll } from 'ts-junit'
 
@@ -80,6 +80,16 @@ $ junit tests/test.ts
 依赖当前项目的ts环境，不使用cli，只引入装饰
 
 开始编写 测试 代码 test/index.ts
+
+```ts
+import * as path from "node:path";
+import { runTestFile, runTests } from "ts-junit";
+
+// const f = path.resolve(process.cwd(), "./tests");
+const f = path.resolve(process.cwd(), "./tests/test.ts");
+
+runTests([f]);
+```
 
 创建编译时的 tsconfig.json 文件
 
