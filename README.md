@@ -90,7 +90,7 @@ export default class MyFirstJUnitJupiterTests  {
 ### 方式2: 依赖当前项目的ts环境进行编译
 
 ```shell
-$ npm i --save ts-juint
+$ npm i --save-dev ts-juint
 ```
 
 编写测试入口文件ts-junit.ts，文件内指定测试文件或测试目录即可。
