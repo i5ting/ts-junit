@@ -68,12 +68,13 @@ export default class Context {
 
       this.strategy.testcase(Clazz.clz_name);
 
-      let d = console.dir;
-      d(i);
-      d(Clazz.clz_name);
-      d(newClz);
-      d(obj);
-        this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
+      //   let d = console.dir;
+      //   d(i);
+      //   d(Clazz.clz_name);
+      //   d(newClz);
+      //   d(obj);
+
+      this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
 
       this.strategy.test.run();
     }
@@ -86,7 +87,7 @@ export default class Context {
     debug(" --- runTest --- ");
     loadFromCache(file).then(function (result) {
       let nodeList = [result];
-      console.dir(result);
+      //   console.dir(result);
       for (let i in nodeList) {
         const Clazz = nodeList[i];
         debug("Clazz---");
@@ -105,11 +106,11 @@ export default class Context {
 
         that.strategy.testcase(Clazz.clz_name);
 
-        let d = console.dir;
-        d(i);
-        d(Clazz.clz_name);
-        d(newClz);
-        d(obj);
+        // let d = console.dir;
+        // d(i);
+        // d(Clazz.clz_name);
+        // d(newClz);
+        // d(obj);
         that.strategy.parseData(i, Clazz.clz_name, newClz, obj);
 
         that.strategy.test.run();
