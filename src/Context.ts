@@ -88,29 +88,31 @@ export default class Context {
     var that = this;
     var allfiles = getAllTsFiles([dir]);
 
-    // console.dir(allfiles);
-    var i = 0;
-    var arr = [];
-    allfiles = allfiles.map(function (file) {
-      console.dir(file + ".ts");
-      return file + ".ts";
-    });
-
-    const iterator = async (element) => that.runTsTestFile(element);
+    // const iterator = async (element) => that.runTsTestFile(element);
 
     // pEachSeries(allfiles, iterator);
-    Promise2.each(allfiles, iterator);
+    // Promise2.each(allfiles, iterator);
     // require("./decrator").emptydata();
+  }
+
+  public runTsTestFiles(files: string[]): any {
+    files = files.map(function (file) {
+      return file.replace(".ts", "");
+    });
+    var that = this;
+    const iterator = async (element) => that.runTsTestFile(element);
+    return Promise2.each(files, iterator);
   }
 
   public runTsTestFile(file: string): any {
     debug(" --- runTests --- ");
+    console.dir("fs=" + file);
     let that = this;
 
     debug(" --- runTest --- ");
     return loadFromCache(file).then(function (result) {
       let nodeList = [result];
-      // console.dir(result);
+      console.dir(result);
       for (let i in nodeList) {
         const Clazz = nodeList[i];
         debug("Clazz---");
@@ -126,6 +128,7 @@ export default class Context {
         debug(
           "Context: Run tests using the strategy (not sure how it'll do it)"
         );
+        console.dir(that);
 
         that.strategy.testcase(Clazz.clz_name);
 

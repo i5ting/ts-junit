@@ -1,9 +1,10 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
+import * as Promise2 from "bluebird";
 import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
 import { WatchDir, WatchFile } from "./Watch";
-import { Debug } from "./Utils";
+import { Debug, getFiles } from "./Utils";
 
 const debug = Debug();
 
@@ -75,26 +76,20 @@ export function execute(rest: any) {
   console.timeEnd("build ts");
 }
 
-export function runTestFile(testFiles: string[]) {
-  debug("runTestFileWithDefaultStrategy");
+/**
+ * run([path.resolve(process.cwd(), "./tests/")])
+ * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
+ */
+export function run(rest: any) {
+  debug("run With UvuStrategy");
+  console.dir(arguments[0]);
 
   // set context use default strategy
   const context = new Context(new UvuStrategy());
 
-  // compile and watch, then run test
-  testFiles.map(function (file) {
-    context.runTsTestFile(file);
-  });
-}
+  // get all file from rest(file or folder)
+  const files = getFiles(rest);
 
-export function runTests(dirs: string[]) {
-  debug("runTestFileWithDefaultStrategy");
-
-  // set context use default strategy
-  const context = new Context(new UvuStrategy());
-
-  // compile and watch, then run test
-  dirs.map(function (dir) {
-    context.runTsTests(dir);
-  });
+  // run tests
+  context.runTsTestFiles(files);
 }
