@@ -131,18 +131,6 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   }
 }
 
-// Initialize files constituting the program as all .ts files in the current directory
-// const currentDirectoryFiles = fs
-//   .readdirSync(process.cwd())
-//   .filter(fileName => fileName.length >= 3 && fileName.substr(fileName.length - 3, 3) === ".ts");
-export function WatchDir(dirs: string[], context: Context) {
-  var allfiles = getAllTsFiles(dirs);
-
-  allfiles.map(function (file) {
-    WatchFile(file, context);
-  });
-}
-
 export function WatchFile(testFile: string, context: Context) {
   // make sure cli args 'file.ts'
   testFile = testFile.replace('.ts', '')

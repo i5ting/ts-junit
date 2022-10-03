@@ -3,8 +3,9 @@ import * as path from "node:path";
 import * as Promise2 from "bluebird";
 import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
-import { WatchDir, WatchFile } from "./Watch";
+import { WatchFile } from "./Watch";
 import { Debug, getFiles } from "./Utils";
+import { dir } from "node:console";
 
 const debug = Debug();
 
@@ -24,8 +25,13 @@ export function executeWithDefaultStrategy(dirs: string[]) {
   // set context use default strategy
   const context = new Context(new UvuStrategy());
 
+  // get all file from rest(file or folder)
+  const files = getFiles(dirs);
+
   // compile and watch, then run test
-  WatchDir(dirs, context);
+  files.map(function (file) {
+    WatchFile(file, context);
+  });
 }
 
 export function executeFileWithDefaultStrategy(testFiles: string[]) {
@@ -43,37 +49,17 @@ export function executeFileWithDefaultStrategy(testFiles: string[]) {
 export function execute(rest: any) {
   debug("execute With Strategy");
   console.time("build ts");
-  rest.map(function (i: string) {
-    let item = path.resolve(process.cwd(), i);
 
-    try {
-      const stat = fs.lstatSync(item);
+  // set context use default strategy
+  const context = new Context(new UvuStrategy());
 
-      let fileOrDirType = stat.isDirectory()
-        ? "dir"
-        : stat.isFile()
-        ? "file"
-        : "other";
+  // get all file from rest(file or folder)
+  const files = getFiles(rest);
 
-      switch (fileOrDirType) {
-        case "dir":
-          console.warn("find dir " + item);
-          executeWithDefaultStrategy([item]);
-          break;
-        case "file":
-          console.warn("find file 2" + item.replace(".ts", ""));
-
-          executeFileWithDefaultStrategy([item.replace(".ts", "")]);
-          break;
-        default:
-          console.warn("unknow type");
-          break;
-      }
-    } catch (error) {
-      throw error;
-    }
+  // compile and watch, then run test
+  files.map(function (file) {
+    WatchFile(file, context);
   });
-  console.timeEnd("build ts");
 }
 
 /**
@@ -82,7 +68,6 @@ export function execute(rest: any) {
  */
 export function run(rest: any) {
   debug("run With UvuStrategy");
-  console.dir(arguments[0]);
 
   // set context use default strategy
   const context = new Context(new UvuStrategy());
