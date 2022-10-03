@@ -83,12 +83,12 @@ $ junit tests/test.ts
 
 ```ts
 import * as path from "node:path";
-import { runTestFile, runTests } from "ts-junit";
+import { run } from "ts-junit";
 
-// const f = path.resolve(process.cwd(), "./tests");
-const f = path.resolve(process.cwd(), "./tests/test.ts");
+const foler = path.resolve(process.cwd(), "./tests");
+const file = path.resolve(process.cwd(), "./tests/test.ts");
 
-runTests([f]);
+run([foler, file]);
 ```
 
 创建编译时的 tsconfig.json 文件
