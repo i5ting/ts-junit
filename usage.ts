@@ -1,9 +1,12 @@
 import * as path from "node:path";
-import { runTestFile, runTests } from "./src";
+import { run } from "./src";
 
-let f = path.resolve(process.cwd(), "./tests/");
-runTests([f]);
+let b = path.resolve(process.cwd(), "./tests/");
+// runTests([f]);
 
-
-// let f = path.resolve(process.cwd(), "./tests/test.ts");
+let a = path.resolve(process.cwd(), "./tests/test-class-disable.ts");
+let f = path.resolve(process.cwd(), "./tests/test.ts");
 // runTestFile([f]);
+// run([a, f]);
+
+run([a, b, f]);
