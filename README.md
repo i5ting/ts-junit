@@ -79,7 +79,7 @@ $ junit tests/test.ts
 
 依赖当前项目的ts环境，不使用cli，只引入装饰
 
-开始编写 测试 代码 test/index.ts
+开始编写ts-junit.ts
 
 ```ts
 import * as path from "node:path";
@@ -127,7 +127,7 @@ runTests([f]);
 
 ```
 $ npm test
-> NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts
+> NODE_ENV=dev ts-node --project tsconfig.json --files ts-junit.ts
 [2020-9-1 19:52:12] [debug] [init] [router] get - /
 ```
 
