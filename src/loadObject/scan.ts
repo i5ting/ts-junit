@@ -1,4 +1,5 @@
 import { flattenObj, getDataMapping, requireDir } from "../";
+import { data } from "../";
 
 import { Debug } from "../Utils";
 
@@ -18,7 +19,7 @@ export function getTsFiles(dir: string) {
   return flattenObj(Classes);
 }
 
-export function load(file: string) {
+export function loadFromDecorator(file: string) {
   var Clazz = require(`${file}`);
   var obj = new Clazz.default();
   var clz_name = obj.constructor.name;
@@ -35,6 +36,25 @@ export function load(file: string) {
   if (newClz) newClz.__obj = obj;
 
   return { clz_name, newClz };
+}
+
+export function loadFromCache(file: string) {
+  return import(file).then(function (Clazz) {
+    var obj = new Clazz.default();
+    var clz_name = obj.constructor.name;
+    const _data = data();
+    if (!_data) return;
+
+    // Clazz.default.data = data
+    require("../decrator").emptydata();
+
+    obj.__data = _data;
+
+    var newClz = _data[clz_name]; //|| {}
+    if (newClz) newClz.__obj = obj;
+
+    return Promise.resolve({ clz_name, newClz });
+  });
 }
 
 function getDataFromDecoratorJson(file: string, obj: object) {

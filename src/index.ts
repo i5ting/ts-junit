@@ -75,11 +75,17 @@ export function execute(rest: any) {
   console.timeEnd("build ts");
 }
 
-// export function runFileWithDefaultStrategy(testFiles: string[]) {
-//   const context = new Context(new UvuStrategy(), {});
+export function runTestFileWithDefaultStrategy(testFiles: string[]) {
+  debug("runTestFileWithDefaultStrategy");
 
-//   context.runTests(dir);
-// }
+  // set context use default strategy
+  const context = new Context(new UvuStrategy());
+
+  // compile and watch, then run test
+  testFiles.map(function (file) {
+    context.runTsTestFile(file);
+  });
+}
 
 // export function runWithDefaultStrategy(dirs: string[]) {
 //   debug("executeWithDefaultStrategy");

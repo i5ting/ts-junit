@@ -35,12 +35,14 @@ export default class MyFirstJUnitJupiterTests {
 
     @Test
     succeedingTest() {
+        console.dir("succeedingTest");
         assert.ok(this.a === 2);
         assert.is(Math.sqrt(4), 2);
     }
 
     @Test
     addition() {
+        console.dir("addition");
         assert.is(Math.sqrt(4), 2);
         assert.is(Math.sqrt(4), 2);
     }
