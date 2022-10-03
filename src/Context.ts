@@ -1,10 +1,6 @@
 import * as fs from 'node:fs'
 import * as Promise2 from "bluebird";
-import {
-  loadFromDecorator,
-  loadFromCache,
-  getAllTsFiles,
-} from "./loadObject/scan";
+import { loadFromDecorator, loadFromCache } from "./loadObject/scan";
 import { Debug } from "./Utils";
 
 const debug = Debug("ts-junit");
