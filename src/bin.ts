@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import yargs from 'yargs/yargs';
+import yargs from "yargs/yargs";
 import { hideBin } from 'yargs/helpers'
 
 import { execute } from '.'

@@ -4,4 +4,5 @@ export default class Context {
     constructor(strategy: IStrategy);
     setStrategy(strategy: IStrategy): void;
     runTest(tsFile: string, jsFile: string): void;
+    runTests(dir: String): void;
 }
