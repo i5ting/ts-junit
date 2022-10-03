@@ -1,5 +1,5 @@
 import exp = require("node:constants");
-import { flattenObj, getDataMapping, requireDir } from "../";
+import { flattenObj, getDataMapping, requireDir, emptydata } from "../";
 import { data } from "../";
 
 import { Debug } from "../Utils";
@@ -7,6 +7,10 @@ import { Debug } from "../Utils";
 const debug = Debug();
 
 var cache = {};
+
+export function clearCache() {
+  cache = {};
+}
 
 export function getAllTsFiles(dirs: string[]) {
   var allfiles = [];
@@ -43,7 +47,7 @@ export function loadFromDecorator(file: string) {
 
   // Clazz.default.data = data
   // require('../decrator').emptydata()
-  cache = {};
+  clearCache();
 
   // obj.__data = data
 
@@ -61,8 +65,7 @@ export function loadFromCache(file: string) {
     if (!_data) return;
 
     // Clazz.default.data = data
-    require("../decrator").emptydata();
-
+    emptydata();
     // obj.__data = _data;
 
     var newClz = _data[clz_name]; //|| {}
