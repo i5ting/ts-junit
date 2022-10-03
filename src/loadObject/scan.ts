@@ -30,7 +30,7 @@ export function loadFromDecorator(file: string) {
   // require('../decrator').emptydata()
   cache = {};
 
-  obj.__data = data;
+  // obj.__data = data
 
   var newClz = data[clz_name]; //|| {}
   if (newClz) newClz.__obj = obj;
@@ -48,7 +48,7 @@ export function loadFromCache(file: string) {
     // Clazz.default.data = data
     require("../decrator").emptydata();
 
-    obj.__data = _data;
+    // obj.__data = _data;
 
     var newClz = _data[clz_name]; //|| {}
     if (newClz) newClz.__obj = obj;
@@ -128,6 +128,35 @@ function getDataFromDecoratorJson(file: string, obj: object) {
       }
     }
   });
+
+  // remove empty object, like init\initAll\tearDown\tearDownAll
+  //
+  // {
+  //   hook: {
+  //     before: [Function (anonymous)],
+  //     'before.each': [Function (anonymous)],
+  //     'after.each': [Function (anonymous)],
+  //     after: [Function (anonymous)]
+  //   },
+  //   initAll: {},
+  //   init: {},
+  //   tearDown: {},
+  //   tearDownAll: {},
+  //   succeedingTest: { desc: 'no display name', fn: [Function (anonymous)] },
+  //   addition: { desc: 'no display name', fn: [Function (anonymous)] },
+  //   addition5: {
+  //     desc: 'Custom test name containing spaces222',
+  //     skip: true,
+  //     skipReason: 'Disabled until bug #42 has been resolved',
+  //     fn: [Function (anonymous)]
+  //   }
+  // }
+  for (var i in cache) {
+    for (var j in cache[i]) {
+      var method = cache[i][j];
+      if (Object.keys(method).length === 0) delete cache[i][j];
+    }
+  }
 
   return cache;
 }
