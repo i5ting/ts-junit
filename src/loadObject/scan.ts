@@ -1,3 +1,4 @@
+import exp = require("node:constants");
 import { flattenObj, getDataMapping, requireDir } from "../";
 import { data } from "../";
 
@@ -6,6 +7,20 @@ import { Debug } from "../Utils";
 const debug = Debug();
 
 var cache = {};
+
+export function getAllTsFiles(dirs: string[]) {
+  var allfiles = [];
+  dirs.map(function (dir) {
+    // watch(dir, { module: ts.ModuleKind.CommonJS });
+    var files = getTsFiles(dir);
+    Object.keys(files).map(function (file) {
+      const testFile =
+        dir + "/" + file.replace(".default", "").split(".").join("/");
+      allfiles.push(testFile);
+    });
+  });
+  return allfiles;
+}
 
 export function getTsFiles(dir: string) {
   // 定制require-dir
