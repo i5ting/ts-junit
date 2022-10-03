@@ -14,6 +14,8 @@ import assert from 'assert'
 import { BeforeAll, BeforeEach, Disabled, Test, AfterEach, AfterAll } from 'ts-junit'
 
 export default class MyFirstJUnitJupiterTests {
+    calculator = new Calculator()
+
     @BeforeAll
     static void initAll() {
     }
@@ -66,7 +68,7 @@ $ npm i --global ts-juint
 
 ## Usages
 
-### 方式1（已实现）
+### 方式1: 使用独立cli进行编译
 
 不依赖当前项目的ts环境，直接通过cli执行，参考源码中tests目录下的文件。
 
@@ -75,11 +77,28 @@ $ junit tests
 $ junit tests/test.ts
 ```
 
-### 方式2（已实现）
+编写
+```ts
+import assert from 'assert'
+import { Test } from 'ts-junit'
 
-依赖当前项目的ts环境，不使用cli，只引入装饰
+export default class MyFirstJUnitJupiterTests  {
 
-开始编写ts-junit.ts
+    calculator = new Calculator();
+
+    @Test
+    void addition() {
+        assertEquals(2, calculator.add(1, 1));
+    }
+
+}
+```
+
+
+
+### 方式2: 依赖当前项目的ts环境进行编译
+
+编写测试入口文件ts-junit.ts，文件内指定测试文件或测试目录即可。
 
 ```ts
 import * as path from "node:path";
