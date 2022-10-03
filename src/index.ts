@@ -24,8 +24,8 @@ export * from "./loadObject/flatten";
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
-export function execute(rest: any) {
-  debug("execute With Strategy");
+export function runCli(rest: any) {
+  debug("runCli With UvuStrategy");
   console.time("build ts");
 
   // set context use default strategy

@@ -3,6 +3,6 @@
 import yargs from "yargs/yargs";
 import { hideBin } from 'yargs/helpers'
 
-import { execute } from '.'
+import { runCli } from ".";
 
-execute(yargs(hideBin(process.argv)).argv['_'])
+runCli(yargs(hideBin(process.argv)).argv["_"]);
