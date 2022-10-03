@@ -5,7 +5,6 @@ import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
 import { WatchFile } from "./Watch";
 import { Debug, getFiles } from "./Utils";
-import { dir } from "node:console";
 
 const debug = Debug();
 
