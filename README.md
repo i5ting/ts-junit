@@ -117,7 +117,7 @@ run([foler, file]);
 ```ts
 {
   "scripts": {
-    "test": "NODE_ENV=dev ts-node --project tsconfig.json --files src/index.ts",
+    "test": "NODE_ENV=dev ts-node --project tsconfig.json --files ts-junit.ts",
     "build": "tsc"
   }
 }
