@@ -75,7 +75,7 @@ $ junit tests
 $ junit tests/test.ts
 ```
 
-### 方式2（待定）
+### 方式2（已实现）
 
 依赖当前项目的ts环境，不使用cli，只引入装饰
 
