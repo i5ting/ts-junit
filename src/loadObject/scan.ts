@@ -1,4 +1,6 @@
-import { flattenObj, Debug, getDataMapping, requireDir } from "../";
+import { flattenObj, getDataMapping, requireDir } from "../";
+
+import { Debug } from "../Utils";
 
 const debug = Debug();
 

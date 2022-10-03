@@ -77,4 +77,33 @@ export default class Context {
             this.strategy.test.run()
         }
     }
+
+
+    public runTests(dir: String): void {
+        debug(" --- runTests --- ")
+        let nodeList = {}//scan(dir)
+
+        debug("--------------- MAIN ------------------")
+        debug(nodeList)
+        
+        for (let i in nodeList) {
+            const Clazz = nodeList[i]
+            debug("Clazz---")
+            debug(Clazz)
+
+            let newClz = Clazz.newClz
+            
+            debug(newClz)
+
+            var obj = Clazz.newClz.__obj
+            delete newClz.__obj
+
+            debug('Context: Run tests using the strategy (not sure how it\'ll do it)');
+
+            this.strategy.testcase(Clazz.clz_name)
+            this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
+
+            this.strategy.test.run()
+        }
+    }
 }

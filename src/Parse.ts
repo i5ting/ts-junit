@@ -1,45 +1,44 @@
 // use https://astexplorer.net/
 
-const fs = require('fs')
-const { parse, visit } = require("recast")
+import * as fs from "node:fs";
+import { parse, visit } from "recast";
+import { Debug } from "./Utils";
 
-import { Debug } from './Utils'
-
-const debug = Debug('parse')
+const debug = Debug("parse");
 
 export function getEableRunDataMapping(commonjsFile: string) {
-  const allTest = getDataMapping(commonjsFile)
-  const clazz = allTest.find(item => item['Class']?.length > 0)
+  const allTest = getDataMapping(commonjsFile);
+  const clazz = allTest.find((item) => item["Class"]?.length > 0);
 
-  if (clazz['Disabled']?.length > 0) {
-    console.log(clazz['Disabled'] + 'has  @Disabled decorator， no need to run any test!')
-    return []
+  if (clazz["Disabled"]?.length > 0) {
+    console.log(
+      clazz["Disabled"] + "has  @Disabled decorator， no need to run any test!"
+    );
+    return [];
   }
 
-  return allTest
-    .filter(item => item['Disabled'] === undefined)
+  return allTest.filter((item) => item["Disabled"] === undefined);
 }
 
 export function getDataMapping(commonjsFile: string) {
-  const decoratorJson = Parse(commonjsFile)
-  debug(commonjsFile)
-  debug(decoratorJson)
+  const decoratorJson = Parse(commonjsFile);
+  debug(commonjsFile);
+  debug(decoratorJson);
 
-  var arr = []
+  var arr = [];
 
   decoratorJson.forEach(function (item) {
-
     if (item.type === 1) {
-      var classInfo = type1(item)
+      var classInfo = type1(item);
       // console.dir(i)
-      if (Object.keys(classInfo).length > 0) arr.push(classInfo)
+      if (Object.keys(classInfo).length > 0) arr.push(classInfo);
     }
     if (item.type === 2) {
-      var testOrHookInfo = type2(item)
+      var testOrHookInfo = type2(item);
       // console.dir(i)
-      if (Object.keys(testOrHookInfo).length > 0) arr.push(testOrHookInfo)
+      if (Object.keys(testOrHookInfo).length > 0) arr.push(testOrHookInfo);
     }
-  })
+  });
 
   function type2(item: object) {
     // 类型1
@@ -61,7 +60,7 @@ export function getDataMapping(commonjsFile: string) {
     // },
     //  期望结果
     //    {BeforeAll,"initAll"}
-    // 
+    //
     // 类型2
     //   {
     //     "type": 2,
@@ -106,30 +105,33 @@ export function getDataMapping(commonjsFile: string) {
     //    DisplayName: "Custom test name containing spaces222"
     //    Disabled: "Disabled until bug #42 has been resolved"
     // }
-    // 
+    //
 
-    let result = { 'method': item['c'] }, key, value = item['c'], disable;
+    let result = { method: item["c"] },
+      key,
+      value = item["c"],
+      disable;
 
-    item['a'].forEach(function (i) {
+    item["a"].forEach(function (i) {
       // test or hook
       // example： BeforeAll、Test
-      if (i[0] === 'MemberExpression') {
-        if (i[2] === 'Test') {
-          result['test'] = i[2]
+      if (i[0] === "MemberExpression") {
+        if (i[2] === "Test") {
+          result["test"] = i[2];
         } else {
-          result['hook'] = i[2]
+          result["hook"] = i[2];
         }
       }
 
       // DisplayName or Disabled
-      if (i[0] === 'CallExpression') {
-        result[i[3]] = i[4]
+      if (i[0] === "CallExpression") {
+        result[i[3]] = i[4];
       }
-    })
+    });
 
-    debug(result)
+    debug(result);
 
-    return result//(result['Disabled']) ? {} : result
+    return result; //(result['Disabled']) ? {} : result
   }
 
   function type1(item: object) {
@@ -159,30 +161,33 @@ export function getDataMapping(commonjsFile: string) {
     //    Disabled: "Disabled all Clazz until bug #99 has been fixed"
     // }
 
-    let result = { 'Class': item['b'] }, key, value = item['b'], disable;
+    let result = { Class: item["b"] },
+      key,
+      value = item["b"],
+      disable;
 
-    item['a'].forEach(function (i) {
-      result[i[2]] = i[3]
-    })
+    item["a"].forEach(function (i) {
+      result[i[2]] = i[3];
+    });
 
-    debug('class result')
-    debug(result)
+    debug("class result");
+    debug(result);
 
-    return result//(result['Disabled']) ? {} : result
+    return result; //(result['Disabled']) ? {} : result
   }
 
-  debug(arr)
+  debug(arr);
 
-  return arr
+  return arr;
 }
 
 export function Parse(commonjsFile: string) {
   // const source = fs.readFileSync('/Users/i5ting/workspace/ali/ts-junit/output/tests/test.js').toString()
-  const source = fs.readFileSync(commonjsFile).toString()
+  const source = fs.readFileSync(commonjsFile).toString();
 
-  const ast = parse(source)
+  const ast = parse(source);
 
-  const result = []
+  const result = [];
 
   // console.dir(ast.program.body);
 
@@ -215,18 +220,18 @@ export function Parse(commonjsFile: string) {
       //     // @Disabled("Disabled all Clazz until bug #99 has been fixed")
       // ], MyFirstJUnitJupiterTests);
 
-      var _obj = {}
+      var _obj = {};
 
-      if (node.callee.name === '__decorate') {
-        const type = node.arguments.length
+      if (node["callee"] && node["callee"]["name"] === "__decorate") {
+        const type = node.arguments.length;
         // d(type)
 
         switch (type) {
           case 2:
-            _obj = type1(node)
+            _obj = type1(node);
             break;
           case 3:
-            _obj = type2(node)
+            _obj = type2(node);
             break;
 
           default:
@@ -236,13 +241,13 @@ export function Parse(commonjsFile: string) {
 
       // filer non decorator object
       if (Object.keys(_obj).length > 0) {
-        result.push(_obj)
+        result.push(_obj);
       }
 
       this.traverse(path);
     },
   });
-  return result
+  return result;
 }
 
 /**

@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
 import debugModule from 'debug';
-const debug = new debugModule('foo');
+// const debug = new debugModule('foo');
 
 // see https://github.com/i5ting/quickdebug/
 export function Debug(name?: string) {
