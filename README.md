@@ -57,27 +57,20 @@ export default class MyFirstJUnitJupiterTests {
 
 ```
 
-## Install
-
-install as binary
-
-```
-$ npm i --global ts-juint
-```
-
-
 ## Usages
 
 ### 方式1: 使用独立cli进行编译
 
 不依赖当前项目的ts环境，直接通过cli执行，参考源码中tests目录下的文件。
 
-```
+```shell
+$ npm i --global ts-juint
 $ junit tests
 $ junit tests/test.ts
 ```
 
-编写
+编写第一个测试用例
+
 ```ts
 import assert from 'assert'
 import { Test } from 'ts-junit'
@@ -88,15 +81,17 @@ export default class MyFirstJUnitJupiterTests  {
 
     @Test
     void addition() {
-        assertEquals(2, calculator.add(1, 1));
+        assert.is(2, calculator.add(1, 1));
     }
 
 }
 ```
 
-
-
 ### 方式2: 依赖当前项目的ts环境进行编译
+
+```shell
+$ npm i --save ts-juint
+```
 
 编写测试入口文件ts-junit.ts，文件内指定测试文件或测试目录即可。
 
