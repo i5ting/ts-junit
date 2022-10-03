@@ -84,27 +84,16 @@ export default class Context {
     }
   }
 
-  public runTsTests(dir: string): void {
-    var that = this;
-    var allfiles = getAllTsFiles([dir]);
-
-    // const iterator = async (element) => that.runTsTestFile(element);
-
-    // pEachSeries(allfiles, iterator);
-    // Promise2.each(allfiles, iterator);
-    // require("./decrator").emptydata();
-  }
-
   public runTsTestFiles(files: string[]): any {
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
     var that = this;
-    const iterator = async (element) => that.runTsTestFile(element);
+    const iterator = async (element) => that._runTsTestFile(element);
     return Promise2.each(files, iterator);
   }
 
-  public runTsTestFile(file: string): any {
+  private _runTsTestFile(file: string): any {
     debug(" --- runTests --- ");
     console.dir("fs=" + file);
     let that = this;
