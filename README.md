@@ -85,10 +85,10 @@ $ junit tests/test.ts
 import * as path from "node:path";
 import { run } from "ts-junit";
 
-const foler = path.resolve(process.cwd(), "./tests");
+const folder = path.resolve(process.cwd(), "./tests");
 const file = path.resolve(process.cwd(), "./tests/test.ts");
 
-run([foler, file]);
+run([folder, file]);
 ```
 
 创建编译时的 tsconfig.json 文件
