@@ -18,33 +18,6 @@ export * from "./loadObject/scan";
 export * from "./loadObject/require";
 export * from "./loadObject/flatten";
 
-export function executeWithDefaultStrategy(dirs: string[]) {
-  debug("executeWithDefaultStrategy");
-
-  // set context use default strategy
-  const context = new Context(new UvuStrategy());
-
-  // get all file from rest(file or folder)
-  const files = getFiles(dirs);
-
-  // compile and watch, then run test
-  files.map(function (file) {
-    WatchFile(file, context);
-  });
-}
-
-export function executeFileWithDefaultStrategy(testFiles: string[]) {
-  debug("executeFileWithDefaultStrategy");
-
-  // set context use default strategy
-  const context = new Context(new UvuStrategy());
-
-  // compile and watch, then run test
-  testFiles.map(function (file) {
-    WatchFile(file, context);
-  });
-}
-
 export function execute(rest: any) {
   debug("execute With Strategy");
   console.time("build ts");

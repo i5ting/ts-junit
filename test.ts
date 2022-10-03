@@ -1,8 +1,7 @@
-import { executeWithDefaultStrategy, executeFileWithDefaultStrategy } from './src'
+import { execute } from "./src";
 
-console.time()
-// executeFileWithDefaultStrategy([process.cwd() + '/tests/test.ts'])
+console.time();
 
-executeWithDefaultStrategy([process.cwd() + "/tests"]);
+execute([process.cwd() + "/tests"]);
 
-console.timeEnd()
+console.timeEnd();
