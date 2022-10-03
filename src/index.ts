@@ -18,6 +18,12 @@ export * from "./loadObject/scan";
 export * from "./loadObject/require";
 export * from "./loadObject/flatten";
 
+/**
+ * for cli invoke (need compile ts to js)
+ * 
+ * run([path.resolve(process.cwd(), "./tests/")])
+ * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
+ */
 export function execute(rest: any) {
   debug("execute With Strategy");
   console.time("build ts");
@@ -35,6 +41,8 @@ export function execute(rest: any) {
 }
 
 /**
+ * for api invoke (use ts-node)
+ * 
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
