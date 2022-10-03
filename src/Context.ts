@@ -1,4 +1,5 @@
 import * as fs from 'node:fs'
+import * as Promise2 from "bluebird";
 import {
   loadFromDecorator,
   loadFromCache,
@@ -87,22 +88,29 @@ export default class Context {
     var that = this;
     var allfiles = getAllTsFiles([dir]);
 
-    console.dir(allfiles);
-
-    allfiles.forEach(function (file) {
+    // console.dir(allfiles);
+    var i = 0;
+    var arr = [];
+    allfiles = allfiles.map(function (file) {
       console.dir(file + ".ts");
-      that.runTsTestFile(file + ".ts");
+      return file + ".ts";
     });
+
+    const iterator = async (element) => that.runTsTestFile(element);
+
+    // pEachSeries(allfiles, iterator);
+    Promise2.each(allfiles, iterator);
+    // require("./decrator").emptydata();
   }
 
-  public runTsTestFile(file: string): void {
+  public runTsTestFile(file: string): any {
     debug(" --- runTests --- ");
     let that = this;
 
     debug(" --- runTest --- ");
-    loadFromCache(file).then(function (result) {
+    return loadFromCache(file).then(function (result) {
       let nodeList = [result];
-      console.dir(result);
+      // console.dir(result);
       for (let i in nodeList) {
         const Clazz = nodeList[i];
         debug("Clazz---");
