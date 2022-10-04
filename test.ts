@@ -1,7 +1,7 @@
-import { execute } from "./src";
+import { runCli } from "./src";
 
 console.time();
 
-execute([process.cwd() + "/tests"]);
+runCli([process.cwd() + "/tests"]);
 
 console.timeEnd();
