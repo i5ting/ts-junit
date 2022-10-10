@@ -1,8 +1,5 @@
 # ts-junit
 
-![version](https://img.shields.io/npm/v/ts-junit)
-![license](https://img.shields.io/npm/l/ts-junit)
-![downloads](https://img.shields.io/npm/dw/ts-junit)
 [![TypeScript](https://img.shields.io/badge/lang-typescript-informational)](https://www.typescriptlang.org)
 ![npm total downloads](https://img.shields.io/npm/dt/ts-junit.svg)
 ![npm month downloads](https://img.shields.io/npm/dm/ts-junit.svg)
