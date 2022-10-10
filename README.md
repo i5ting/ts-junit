@@ -79,12 +79,13 @@ describe('User', function(){
 对比一下Java和JavaScript测试多个写法之后，你会发现，面向对象在JavaScript（TypeScript）里根本不是一等公民。于是我就蒙发了一个想法，想用TypeScript实现一下JUnit。
 
 
-特性
+## 特性
 
 - ~~jest 支持 ts 需要引入babel~~
 - ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
-- **ts-junit 使用junit 5的装饰器进行封装，成熟，使用于熟悉OO的开发，尤其对Java开发更友好。**
-- **ts-junit 默认使用uvu，同时提供各个常见测试框架的支持，比如jest、mocha、ava、tape、qunit、jasmine等。**
+- ts-junit 支持2种用法，其中cli方式采用增量ts编译，效率很高的。
+- ts-junit 使用junit 5的装饰器进行封装，成熟，使用于熟悉OO的开发，尤其对了解Java的开发者更友好。
+- ts-junit 使用uvu作为默认策略，同时也可以实现各个常见测试框架的支持，比如jest、mocha、ava、tape、qunit、jasmine等（暂时未实现）。
 
 ## 示例
 
