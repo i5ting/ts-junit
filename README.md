@@ -1,4 +1,7 @@
 # ts-junit
+![version](https://img.shields.io/npm/v/ts-junit)
+![license](https://img.shields.io/npm/l/ts-junit)
+![downloads](https://img.shields.io/npm/dw/ts-junit)
 
 > use JUnit 5 Decrator with TypeScript
 
