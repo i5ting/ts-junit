@@ -13,7 +13,7 @@
     "build": "npm test && rm -rf ./dist && tsc && np",
     "test": "uvu -r ts-node/register test -i fixtures",
     "dev": "ts-node test.ts",
-    "cli": "ts-node src/bin.ts  tests/test.ts",
+    "cli": "ts-node src/bin.ts  examples/test.ts",
     "api": "ts-node api.ts"
   },
   "repository": {
