@@ -1,6 +1,6 @@
 {
   "name": "ts-junit",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "use junit descrator with typescript",
   "main": "dist/index.js",
   "sideEffects": false,
