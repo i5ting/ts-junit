@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "ts-node ./src/bin.ts",
-    "build": "rm -rf ./dist && tsc",
+    "build": "rm -rf ./dist && tsc && np",
     "test": "uvu -r ts-node/register test -i fixtures",
     "dev": "ts-node test.ts",
     "cli": "ts-node src/bin.ts  tests/test.ts",
@@ -53,6 +53,7 @@
     "@types/yargs": "^17.0.13",
     "concurrently": "^5.3.0",
     "git-cz": "^4.9.0",
+    "np": "^7.6.2",
     "ts-node": "^10.9.1"
   },
   "files": [

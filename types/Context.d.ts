@@ -1,8 +1,9 @@
-import IStrategy from './IStrategy';
+import IStrategy from "./IStrategy";
 export default class Context {
     private strategy;
     constructor(strategy: IStrategy);
     setStrategy(strategy: IStrategy): void;
     runTest(tsFile: string, jsFile: string): void;
-    runTests(dir: String): void;
+    runTsTestFiles(files: string[]): any;
+    private _runTsTestFile;
 }
