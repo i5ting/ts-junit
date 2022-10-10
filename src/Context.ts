@@ -33,10 +33,12 @@ export default class Context {
   }
 
   public runTsTestFiles(files: string[]): any {
+    let that = this;
+
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
-    var that = this;
+
     const iterator = async (element) => that._runTsTestFile(element);
     return Promise2.each(files, iterator);
   }
@@ -49,7 +51,7 @@ export default class Context {
       let nodeList = [result];
       // console.dir(result);
       for (let i in nodeList) {
-        const Clazz = nodeList[i];
+        let Clazz = nodeList[i];
         debug("Clazz---");
         debug(Clazz);
 
@@ -57,13 +59,12 @@ export default class Context {
 
         debug(newClz);
 
-        var obj = Clazz.newClz.__obj;
+        let obj = Clazz.newClz.__obj;
         delete newClz.__obj;
 
         debug(
           "Context: Run tests using the strategy (not sure how it'll do it)"
         );
-        // console.dir(that);
 
         that.strategy.testcase(Clazz.clz_name);
 
