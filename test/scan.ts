@@ -5,14 +5,14 @@ import * as assert from 'uvu/assert';
 import { getTsFiles, requireDir } from "../src/";
 
 test('getTsFiles(dir)', () => {
-  const dir = path.resolve(process.cwd(), './tests/')
+  const dir = path.resolve(process.cwd(), './examples/')
 
   const files = getTsFiles(dir)
   assert.is(Object.keys(files).length, 4)
 })
 
 test.only('requireDir(dir)', () => {
-  const dir = path.resolve(process.cwd(), './tests/')
+  const dir = path.resolve(process.cwd(), './examples/')
 
   const files = requireDir(dir, {
     recurse: true,
