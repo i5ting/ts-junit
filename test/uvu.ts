@@ -11,7 +11,7 @@ test('Math.sqrt()', () => {
 });
 
 test.only('getAllImportsForFile()', () => {
-  const testFile = process.cwd() + '/tests/test'
+  const testFile = process.cwd() + '/examples/test'
 
   let testTsFile = testFile
   let testJsFile = testFile

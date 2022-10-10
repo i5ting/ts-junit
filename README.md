@@ -1,5 +1,8 @@
 # ts-junit
 
+![version](https://img.shields.io/npm/v/ts-junit)
+![license](https://img.shields.io/npm/l/ts-junit)
+![downloads](https://img.shields.io/npm/dw/ts-junit)
 [![TypeScript](https://img.shields.io/badge/lang-typescript-informational)](https://www.typescriptlang.org)
 [![npm package version](https://img.shields.io/npm/v/ts-junit.svg)](https://www.npmjs.com/package/ts-junit)
 ![npm total downloads](https://img.shields.io/npm/dt/ts-junit.svg)
@@ -7,7 +10,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/i5ting/ts-junit/pulls)
 ![GitHub license](https://img.shields.io/npm/l/ts-junit)
 
-> use JUnit 5 Decrator with TypeScript
+> use JUnit 5 Decrator in TypeScript
 
 在我看来，在TypeScript里使用面向对象是很大概率变成最常用的方式的。目前所有的JavaScript测试都是面向过程的，比如qunit、jest、mocha、ava、tape等测试框架实现，还是围绕在面向过程阶段。我以为这不是TypeScript在现实中该有的样式。
 
@@ -190,6 +193,9 @@ const folder = path.resolve(process.cwd(), "./tests");
 const file = path.resolve(process.cwd(), "./tests/test.ts");
 
 run([folder, file]);
+// or custom Strategy
+// import SomeStrategy from "./SomeStrategy";
+// run([folder, file], new SomeStrategy());
 ```
 
 创建编译时的 tsconfig.json 文件
@@ -525,3 +531,25 @@ class Test {
 
 2） 
 use vm2 with require from memfs
+
+3） 
+目前ts编译成js之后，是通过ast去解析的js提取装饰器信息的，
+
+提取方式是
+
+```
+    __decorate([
+        index_1.BeforeAll
+    ], MyFirstJUnitJupiterTests.prototype, "initAll");
+```
+
+这里面可以试试能否直接反射出来，用一个类似探针的方式，运行时去提取装饰器，应该也是可行的。
+
+```
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+```
