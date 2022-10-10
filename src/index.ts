@@ -38,7 +38,7 @@ export function runCli(rest: any) {
   WatchFiles(files, context);
 
   // time statistics
-  console.timeEnd();
+  console.timeEnd("build ts");
 }
 
 /**
@@ -61,5 +61,5 @@ export function run(rest: any) {
   context.runTsTestFiles(files);
 
   // time statistics
-  console.timeEnd();
+  console.timeEnd("run ts");
 }
