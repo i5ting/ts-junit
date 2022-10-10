@@ -523,3 +523,25 @@ class Test {
 
 2） 
 use vm2 with require from memfs
+
+3)
+目前ts编译成js之后，是通过ast去解析的js提取装饰器信息的，
+
+提取方式是
+
+```
+    __decorate([
+        index_1.BeforeAll
+    ], MyFirstJUnitJupiterTests.prototype, "initAll");
+```
+
+这里面可以试试能否直接反射出来
+
+```
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+```
