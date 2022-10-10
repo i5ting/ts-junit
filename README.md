@@ -524,7 +524,7 @@ class Test {
 2） 
 use vm2 with require from memfs
 
-3)
+3） 
 目前ts编译成js之后，是通过ast去解析的js提取装饰器信息的，
 
 提取方式是
