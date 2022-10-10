@@ -20,7 +20,9 @@ export default class UvuStrategy implements IStrategy {
     public parseData(i: string, clz_name: IStrategy, Clazz: any, obj: Object): void {
 
         if (Clazz['skipClaas']) {
-            console.warn(`skip Class ${clz_name} reason: ${Clazz.skipClaasReason}`)
+            console.warn(
+              `Class skip ${clz_name} reason: ${Clazz.skipClaasReason}`
+            );
         } else {
             for (var j in Clazz) {
                 if (j === 'hook') {
@@ -42,14 +44,16 @@ export default class UvuStrategy implements IStrategy {
                         }
                     }
                 } else {
-                    if (!Clazz[j]['skip']) {
-                        debug(`define testcase ${j}`)
-                        debug(' test.handler = ' + obj[j])
+                    if (!Clazz[j]["skip"]) {
+                      debug(`define testcase ${j}`);
+                      debug(" test.handler = " + obj[j]);
 
-                        this.test(j, obj[j].bind(obj))
+                      this.test(j, obj[j].bind(obj));
                     } else {
-                        debug(`skipReason ${j}`)
-                        console.warn(`skip ${Clazz[i]}#${j}() reason: ${Clazz[j]['skipReason']}`)
+                      debug(`skipReason ${j}`);
+                      console.log(
+                        `method skip ${Clazz[i]}#${j}() reason: ${Clazz[j]["skipReason"]}`
+                      );
                     }
                 }
             }

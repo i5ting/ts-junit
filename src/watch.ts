@@ -6,8 +6,8 @@ import { EventEmitter } from 'node:events';
 
 import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
 
-import { Debug } from './Utils'
-import Context from './Context'
+import { Debug, getCompileFiles } from "./Utils";
+import Context from "./Context";
 import { getAllTsFiles } from "./index";
 
 const debug = Debug("watch");
@@ -131,53 +131,23 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   }
 }
 
-export function WatchFile(testFile: string, context: Context) {
-  // make sure cli args 'file.ts'
-  testFile = testFile.replace('.ts', '')
+export function WatchFiles(testFiles: string[], context: Context) {
+  const arr = getCompileFiles(testFiles);
 
-  let testTsFile = testFile
-  let testJsFile = testFile
-
-  // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
-  const extension = path.extname(testFile)
-  if (!extension) {
-    testTsFile += '.ts'
-    testJsFile += '.js'
-
-    testTsFile = testTsFile.replace(process.cwd() + '/', '')
-
-    testJsFile = path.resolve(__dirname, '../') + '/output' + testJsFile.replace(process.cwd(), '')
-  }
-
-  getAllImportsForFile(testTsFile)
-
-  const needCompileFiles = getNeedCompileFiles()
-
-  debug('needCompileFiles')
-  debug(needCompileFiles)
-
-  console.log("start compile file = " + testTsFile)
-  watch(needCompileFiles, { module: ts.ModuleKind.CommonJS });
-
-
-  debug('needCompileFiles2')
-  debug(needCompileFiles)
+  // console.log("start compile file = " + arr);
+  // console.dir(arr);
+  watch(arr, { module: ts.ModuleKind.CommonJS });
 
   // when file change run after 1s
   setTimeout(function () {
-
-    debug('testJsFile = ' + testJsFile)
-
-    // path.resolve(__dirname,'../'), 'output/'
-
     // run test at once
-    context.runTest(testTsFile, testJsFile)
+    context.runTsTestFiles(testFiles);
 
-    runTestEmitter.on('runTestEvent', function () {
-      debug('run tests' + testFile)
-      context.runTest(testTsFile, testJsFile)
-    })
-  }, 100)
+    runTestEmitter.on("runTestEvent", function () {
+      // debug("run tests" + testFile);
+      context.runTsTestFiles(testFiles);
+    });
+  }, 100 * testFiles.length);
 }
 
 function ensureDirectoryExistence(filePath) {

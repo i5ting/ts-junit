@@ -3,7 +3,7 @@ import * as path from "node:path";
 import * as Promise2 from "bluebird";
 import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
-import { WatchFile } from "./Watch";
+import { WatchFiles } from "./Watch";
 import { Debug, getFiles } from "./Utils";
 
 const debug = Debug();
@@ -20,7 +20,7 @@ export * from "./loadObject/flatten";
 
 /**
  * for cli invoke (need compile ts to js)
- * 
+ *
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
@@ -35,9 +35,7 @@ export function runCli(rest: any) {
   const files = getFiles(rest);
 
   // compile and watch, then run test
-  files.map(function (file) {
-    WatchFile(file, context);
-  });
+  WatchFiles(files, context);
 }
 
 /**

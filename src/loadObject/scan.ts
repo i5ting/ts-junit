@@ -75,6 +75,10 @@ export function loadFromCache(file: string) {
   });
 }
 
+/**
+ * not log in this method
+ * if need, go to uvustrategy
+ */
 function getDataFromDecoratorJson(file: string, obj: object) {
   // getEableRunDataMapping
   // [
@@ -108,6 +112,7 @@ function getDataFromDecoratorJson(file: string, obj: object) {
 
   var className = clazz["Class"];
   var classDisplayName = clazz["DisplayName"];
+  var classDisabledDesc = clazz["Disabled"];
 
   if (!cache[className]) cache[className] = {};
   if (!cache[className]["hook"]) cache[className]["hook"] = {};
@@ -174,6 +179,13 @@ function getDataFromDecoratorJson(file: string, obj: object) {
       var method = cache[i][j];
       if (Object.keys(method).length === 0) delete cache[i][j];
     }
+  }
+
+  // if { Class: 'MyFirstJUnitJupiterTests', DisplayName: 'Clz test case', Disabled: 'Disabled until bug #42 has been resolved'}
+  // remove all method
+  if (classDisabledDesc) {
+    cache[className]["skipClaas"] = true;
+    cache[className]["skipClaasReason"] = classDisabledDesc;
   }
 
   return cache;

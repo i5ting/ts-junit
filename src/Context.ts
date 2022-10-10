@@ -3,7 +3,8 @@ import * as Promise2 from "bluebird";
 import { loadFromDecorator, loadFromCache } from "./loadObject/scan";
 import { Debug } from "./Utils";
 
-const debug = Debug("ts-junit");
+let debug = Debug("ts-junit");
+// debug = console.dir;
 
 import IStrategy from "./IStrategy";
 import { assert } from "node:console";
