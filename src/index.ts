@@ -36,16 +36,20 @@ export function runCli(rest: any) {
 
   // compile and watch, then run test
   WatchFiles(files, context);
+
+  // time statistics
+  console.timeEnd();
 }
 
 /**
  * for api invoke (use ts-node)
- * 
+ *
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
 export function run(rest: any) {
   debug("run With UvuStrategy");
+  console.time("run ts");
 
   // set context use default strategy
   const context = new Context(new UvuStrategy());
@@ -55,4 +59,7 @@ export function run(rest: any) {
 
   // run tests
   context.runTsTestFiles(files);
+
+  // time statistics
+  console.timeEnd();
 }
