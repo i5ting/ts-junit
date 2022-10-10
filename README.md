@@ -1,7 +1,4 @@
 # ts-junit
-![version](https://img.shields.io/npm/v/ts-junit)
-![license](https://img.shields.io/npm/l/ts-junit)
-![downloads](https://img.shields.io/npm/dw/ts-junit)
 
 > use JUnit 5 Decrator with TypeScript
 
@@ -79,7 +76,7 @@ describe('User', function(){
 })
 ```
 
-对比一下Java和JavaScript测试多个写法之后，你会发现，面向对象在JavaScript（TypeScript）里根本不是一等公民。于是我就蒙发了一个想法，想用TypeScript实现一下JUnit。
+对比一下Java和JavaScript测试多个写法之后，你会发现，面向对象在JavaScript（TypeScript）里根本不是一等公民。于是我就萌发了一个想法，想用TypeScript实现一下JUnit。
 
 
 ## 特性
