@@ -185,6 +185,9 @@ const folder = path.resolve(process.cwd(), "./tests");
 const file = path.resolve(process.cwd(), "./tests/test.ts");
 
 run([folder, file]);
+// or custom Strategy
+// import SomeStrategy from "./SomeStrategy";
+// run([folder, file], new SomeStrategy());
 ```
 
 创建编译时的 tsconfig.json 文件
