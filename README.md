@@ -1,5 +1,7 @@
 # ts-junit
-
+![version](https://img.shields.io/npm/v/ts-junit)
+![license](https://img.shields.io/npm/l/ts-junit)
+![downloads](https://img.shields.io/npm/dw/ts-junit)
 > use JUnit 5 Decrator with TypeScript
 
 在我看来，在TypeScript里使用面向对象是很大概率变成最常用的方式的。目前所有的JavaScript测试都是面向过程的，比如qunit、jest、mocha、ava、tape等测试框架实现，还是围绕在面向过程阶段。我以为这不是TypeScript在现实中该有的样式。
