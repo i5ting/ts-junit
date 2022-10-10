@@ -493,7 +493,7 @@ $ npm test
 结合 https://github.com/midwayjs/injection 更简单(暂未实现)
 
 
-```
+```ts
 class Test {
   @Inject()
   helloTest: IHelloTest;
