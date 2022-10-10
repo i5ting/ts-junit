@@ -3,7 +3,6 @@ export default class Context {
     private strategy;
     constructor(strategy: IStrategy);
     setStrategy(strategy: IStrategy): void;
-    runTest(tsFile: string, jsFile: string): void;
     runTsTestFiles(files: string[]): any;
     private _runTsTestFile;
 }
