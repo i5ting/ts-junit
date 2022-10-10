@@ -1,6 +1,85 @@
 # ts-junit
 
-use junit descrator with typescript
+> use JUnit 5 Decrator with TypeScript
+
+在我看来，在TypeScript里使用面向对象是很大概率变成最常用的方式的。目前所有的JavaScript测试都是面向过程的，比如qunit、jest、mocha、ava、tape等测试框架实现，还是围绕在面向过程阶段。我以为这不是TypeScript在现实中该有的样式。
+
+我对Java还算熟悉，比如使用JUnit 5的测试代码就是采用面向对象写法的，代码如下。
+
+```Java
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import example.util.Calculator;
+
+import org.junit.jupiter.api.Test;
+
+class MyFirstJUnitJupiterTests {
+
+    private final Calculator calculator = new Calculator();
+
+    @Test
+    void addition() {
+        assertEquals(2, calculator.add(1, 1));
+    }
+
+}
+```
+
+这种写法是非常简单的，这就是Java面向的好处。如果换成TypeScript，几乎可以保持写法一模一样，代码如下。
+
+```ts
+
+import assert from 'assert'
+import { Test } from 'ts-junit'
+
+export default class MyFirstJUnitJupiterTests  {
+
+  calculator = new Calculator();
+
+  @Test
+  void addition() {
+    assert.is(2, calculator.add(1, 1));
+  }
+
+}
+```
+
+反观前端的测试代码基本上2种风格。前端的测试代码风格1，它是最常用的测试方式，代码实例如下。
+
+```js
+test('JSON', () => {
+  const input = {
+    foo: 'hello',
+    bar: 'world'
+  };
+
+  const output = JSON.stringify(input);
+
+  assert.snapshot(output, `{"foo":"hello","bar":"world"}`);
+  assert.equal(JSON.parse(output), input, 'matches original');
+})
+```
+
+前端的测试代码风格2，bdd风格，它更强调行为对测试用例的影响，代码实例如下。
+
+```js
+describe('User', function(){
+  describe('#save()', function(){
+    it('should save without error', function(done){
+      var user = new User('Luna');
+      user.save(function(err){
+        if (err) throw err;
+        done();
+      });
+    })
+  })
+})
+```
+
+对比一下Java和JavaScript测试多个写法之后，你会发现，面向对象在JavaScript（TypeScript）里根本不是一等公民。于是我就蒙发了一个想法，想用TypeScript实现一下JUnit。
+
+
+特性
 
 - ~~jest 支持 ts 需要引入babel~~
 - ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
