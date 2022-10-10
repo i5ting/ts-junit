@@ -2,9 +2,10 @@ import * as fs from 'node:fs'
 import * as path from "node:path";
 import debugModule from 'debug';
 
+import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
 import { getAllTsFiles } from "./loadObject/scan";
 
-// const debug = new debugModule('foo');
+const debug = Debug();
 
 // see https://github.com/i5ting/quickdebug/
 export function Debug(name?: string) {
@@ -78,7 +79,7 @@ export function getFiles(rest: any) {
 
           break;
         case "file":
-          console.warn("find file 2" + item.replace(".ts", ""));
+          console.warn("find file " + item.replace(".ts", ""));
 
           // runTestFile([item.replace(".ts", "")]);
           allfiles.push(item.replace(".ts", ""));
@@ -92,11 +93,47 @@ export function getFiles(rest: any) {
     }
   });
 
-  function unique(arr: string[]): string[] {
-    return Array.from(new Set(arr));
-  }
-
   return unique(allfiles);
 }
-  
+
+export function getCompileFiles(testFiles: string[]) {
+  let allfiles = [];
+  for (let testFile of testFiles) {
+    // make sure cli args 'file.ts'
+    testFile = testFile.replace(".ts", "");
+
+    let testTsFile = testFile;
+    let testJsFile = testFile;
+
+    // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
+    const extension = path.extname(testFile);
+    if (!extension) {
+      testTsFile += ".ts";
+      testJsFile += ".js";
+
+      testTsFile = testTsFile.replace(process.cwd() + "/", "");
+
+      testJsFile =
+        path.resolve(__dirname, "../") +
+        "/output" +
+        testJsFile.replace(process.cwd(), "");
+    }
+
+    getAllImportsForFile(testTsFile);
+
+    const needCompileFiles = getNeedCompileFiles();
+
+    allfiles.push(...needCompileFiles);
+    debug("needCompileFiles");
+    debug(needCompileFiles);
+  }
+
+  // console.dir(allfiles);
+  return unique(allfiles.reverse());
+}
+
+export function unique(arr: string[]): string[] {
+  return Array.from(new Set(arr));
+}
+
   
