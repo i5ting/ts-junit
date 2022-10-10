@@ -535,7 +535,7 @@ use vm2 with require from memfs
     ], MyFirstJUnitJupiterTests.prototype, "initAll");
 ```
 
-这里面可以试试能否直接反射出来
+这里面可以试试能否直接反射出来，用一个类似探针的方式，运行时去提取装饰器，应该也是可行的。
 
 ```
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
