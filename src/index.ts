@@ -2,6 +2,7 @@ import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
 import { WatchFiles } from "./Watch";
 import { Debug, getFiles } from "./Utils";
+import IStrategy from "./IStrategy";
 
 const debug = Debug();
 
@@ -21,12 +22,12 @@ export * from "./loadObject/flatten";
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
-export function runCli(rest: any) {
+export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
   debug("runCli With UvuStrategy");
   console.time("build ts");
 
   // set context use default strategy
-  const context = new Context(new UvuStrategy());
+  const context = new Context(strategy);
 
   // get all file from rest(file or folder)
   const files = getFiles(rest);
@@ -44,12 +45,12 @@ export function runCli(rest: any) {
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
-export function run(rest: any) {
+export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
   debug("run With UvuStrategy");
   console.time("run ts");
 
   // set context use default strategy
-  const context = new Context(new UvuStrategy());
+  const context = new Context(strategy);
 
   // get all file from rest(file or folder)
   const files = getFiles(rest);
