@@ -2,13 +2,9 @@ import * as fs from "fs";
 import * as path from "path";
 import * as ts from "typescript";
 
-import { EventEmitter } from 'node:events';
-
-import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
-
+import { EventEmitter } from "node:events";
 import { Debug, getCompileFiles } from "./Utils";
 import Context from "./Context";
-import { getAllTsFiles } from "./index";
 
 const debug = Debug("watch");
 
@@ -132,13 +128,12 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 }
 
 export function WatchFiles(testFiles: string[], context: Context) {
-  const arr = getCompileFiles(testFiles);
+  const compileFiles = getCompileFiles(testFiles);
 
-  // console.log("start compile file = " + arr);
-  // console.dir(arr);
-  watch(arr, { module: ts.ModuleKind.CommonJS });
+  // start compile and watch files
+  watch(compileFiles, { module: ts.ModuleKind.CommonJS });
 
-  // when file change run after 1s
+  // when file change run after 100ms * testFiles.length
   setTimeout(function () {
     // run test at once
     context.runTsTestFiles(testFiles);

@@ -1,6 +1,3 @@
-import * as fs from "node:fs";
-import * as path from "node:path";
-import * as Promise2 from "bluebird";
 import Context from "./Context";
 import UvuStrategy from "./UvuStrategy";
 import { WatchFiles } from "./Watch";
