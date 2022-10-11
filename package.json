@@ -1,7 +1,7 @@
 {
   "name": "ts-junit",
   "version": "1.0.18",
-  "description": "use junit descrator with typescript",
+  "description": "use junit decorator with typescript",
   "main": "dist/index.js",
   "sideEffects": false,
   "types": "./types/index.d.ts",
