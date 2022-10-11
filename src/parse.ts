@@ -1,24 +1,24 @@
 // use https://astexplorer.net/
 
-import * as fs from 'node:fs';
-import { parse, visit } from 'recast';
-import { Debug } from './utils';
+import * as fs from "node:fs";
+import { parse, visit } from "recast";
+import { Debug } from "./utils";
 
-const debug = Debug('parse');
+const debug = Debug("parse");
 
 /** @internal */
 export function getEableRunDataMapping(commonjsFile: string) {
   const allTest = getDataMapping(commonjsFile);
-  const clazz = allTest.find((item) => item['Class']?.length > 0);
+  const clazz = allTest.find((item) => item["Class"]?.length > 0);
 
-  if (clazz['Disabled']?.length > 0) {
+  if (clazz["Disabled"]?.length > 0) {
     console.log(
-      clazz['Disabled'] + 'has @Disabled decorator, no need to run any test!',
+      clazz["Disabled"] + "has @Disabled decorator, no need to run any test!",
     );
     return [];
   }
 
-  return allTest.filter((item) => item['Disabled'] === undefined);
+  return allTest.filter((item) => item["Disabled"] === undefined);
 }
 
 /** @internal */
@@ -109,24 +109,24 @@ export function getDataMapping(commonjsFile: string) {
     // }
     //
 
-    let result = { method: item['c'] },
+    let result = { method: item["c"] },
       key,
-      value = item['c'],
+      value = item["c"],
       disable;
 
-    item['a'].forEach(function (i) {
+    item["a"].forEach(function (i) {
       // test or hook
       // example： BeforeAll、Test
-      if (i[0] === 'MemberExpression') {
-        if (i[2] === 'Test') {
-          result['test'] = i[2];
+      if (i[0] === "MemberExpression") {
+        if (i[2] === "Test") {
+          result["test"] = i[2];
         } else {
-          result['hook'] = i[2];
+          result["hook"] = i[2];
         }
       }
 
       // DisplayName or Disabled
-      if (i[0] === 'CallExpression') {
+      if (i[0] === "CallExpression") {
         result[i[3]] = i[4];
       }
     });
@@ -163,16 +163,16 @@ export function getDataMapping(commonjsFile: string) {
     //    Disabled: "Disabled all Clazz until bug #99 has been fixed"
     // }
 
-    let result = { Class: item['b'] },
+    let result = { Class: item["b"] },
       key,
-      value = item['b'],
+      value = item["b"],
       disable;
 
-    item['a'].forEach(function (i) {
+    item["a"].forEach(function (i) {
       result[i[2]] = i[3];
     });
 
-    debug('class result');
+    debug("class result");
     debug(result);
 
     return result; //(result['Disabled']) ? {} : result
@@ -225,7 +225,7 @@ export function Parse(commonjsFile: string) {
 
       var _obj = {};
 
-      if (node['callee'] && node['callee']['name'] === '__decorate') {
+      if (node["callee"] && node["callee"]["name"] === "__decorate") {
         const type = node.arguments.length;
         // d(type)
 
@@ -274,13 +274,13 @@ export function type1(node) {
 
   var o = [];
   a.elements.forEach(function (i) {
-    if (i.type === 'MemberExpression') {
+    if (i.type === "MemberExpression") {
       // d(i.object.name + ' - ' + i.property.name)
     }
 
-    if (i.type === 'CallExpression') {
+    if (i.type === "CallExpression") {
       let a1, a2, a3, a4;
-      if (i.callee.type === 'SequenceExpression') {
+      if (i.callee.type === "SequenceExpression") {
         // d(i.callee.expressions[0].value)
         // d(i.callee.expressions[1].object.name)
         // d(i.callee.expressions[1].property.name)
@@ -296,11 +296,11 @@ export function type1(node) {
     }
 
     if (node.arguments.length > 1) {
-      result['b'] = b.name;
+      result["b"] = b.name;
     }
   });
 
-  result['a'] = o;
+  result["a"] = o;
 
   debug(o);
 
@@ -340,8 +340,8 @@ export function type2(node) {
     // [
     //    index_1.Test
     // ]
-    if (i.type === 'MemberExpression') {
-      o.push(['MemberExpression', i.object.name, i.property.name]);
+    if (i.type === "MemberExpression") {
+      o.push(["MemberExpression", i.object.name, i.property.name]);
     }
 
     // [
@@ -350,9 +350,9 @@ export function type2(node) {
     //     (0, index_1.DisplayName)("Custom test name containing spaces222"),
     //     (0, index_1.Disabled)("Disabled until bug #42 has been resolved")
     // ]
-    if (i.type === 'CallExpression') {
+    if (i.type === "CallExpression") {
       let a1, a2, a3;
-      if (i.callee.type === 'SequenceExpression') {
+      if (i.callee.type === "SequenceExpression") {
         // d(i.callee.expressions[0].value)
         // d(i.callee.expressions[1].object.name)
         // d(i.callee.expressions[1].property.name)
@@ -365,17 +365,17 @@ export function type2(node) {
 
       let a4 = i.arguments[0].value;
 
-      o.push(['CallExpression', a1, a2, a3, a4]);
+      o.push(["CallExpression", a1, a2, a3, a4]);
     }
   });
 
-  result['a'] = o;
+  result["a"] = o;
 
-  if (b.type === 'MemberExpression') {
-    result['b'] = [b.object.name, b.property.name];
+  if (b.type === "MemberExpression") {
+    result["b"] = [b.object.name, b.property.name];
   }
 
-  if (c.type === 'Literal') result['c'] = c.value;
+  if (c.type === "Literal") result["c"] = c.value;
 
   return result;
 }

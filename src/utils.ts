@@ -1,9 +1,9 @@
-import * as fs from 'node:fs';
-import * as path from 'node:path';
-import debugModule from 'debug';
+import * as fs from "node:fs";
+import * as path from "node:path";
+import debugModule from "debug";
 
-import { getAllImportsForFile, getNeedCompileFiles } from './ast';
-import { getAllTsFiles } from './loadObject/scan';
+import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
+import { getAllTsFiles } from "./loadObject/scan";
 
 const debug = Debug();
 
@@ -24,7 +24,7 @@ export function Debug(name?: string) {
  * @see https://github.com/i5ting/colondebug/
  */
 export function DebugWith(key: string) {
-  var operation = key.split(':').pop();
+  var operation = key.split(":").pop();
   var debug = debugModule(key);
 
   if (Object.keys(console).includes(operation)) {
@@ -36,13 +36,13 @@ export function DebugWith(key: string) {
 
 /** @internal */
 export function get_closest_package_json() {
-  const debug = DebugWith('ts-junit:utils');
+  const debug = DebugWith("ts-junit:utils");
 
   var config;
   var isNext = true;
 
   module.paths.forEach(function (i) {
-    var file = i.replace('node_modules', 'package.json');
+    var file = i.replace("node_modules", "package.json");
 
     if (isNext && fs.existsSync(file) === true) {
       try {
@@ -50,15 +50,15 @@ export function get_closest_package_json() {
         isNext = false;
 
         // log
-        debug('exist file = ' + file);
+        debug("exist file = " + file);
 
         // get package.json content
         config = require(file);
       } catch (e) {
-        console.error('get_closest_package_json' + e);
+        console.error("get_closest_package_json" + e);
       }
     } else {
-      debug('not exist file = ' + file);
+      debug("not exist file = " + file);
     }
   });
 
@@ -75,27 +75,27 @@ export function getFiles(rest: any) {
       const stat = fs.lstatSync(item);
 
       let fileOrDirType = stat.isDirectory()
-        ? 'dir'
+        ? "dir"
         : stat.isFile()
-          ? 'file'
-          : 'other';
+        ? "file"
+        : "other";
 
       switch (fileOrDirType) {
-        case 'dir':
-          console.warn('find dir ' + item);
+        case "dir":
+          console.warn("find dir " + item);
           getAllTsFiles([item]).map(function (i) {
             allfiles.push(i);
           });
 
           break;
-        case 'file':
-          console.warn('find file ' + item.replace('.ts', ''));
+        case "file":
+          console.warn("find file " + item.replace(".ts", ""));
 
           // runTestFile([item.replace(".ts", "")]);
-          allfiles.push(item.replace('.ts', ''));
+          allfiles.push(item.replace(".ts", ""));
           break;
         default:
-          console.warn('unknow type');
+          console.warn("unknow type");
           break;
       }
     } catch (error) {
@@ -111,7 +111,7 @@ export function getCompileFiles(testFiles: string[]) {
   let allfiles = [];
   for (let testFile of testFiles) {
     // make sure cli args 'file.ts'
-    testFile = testFile.replace('.ts', '');
+    testFile = testFile.replace(".ts", "");
 
     let testTsFile = testFile;
     let testJsFile = testFile;
@@ -119,15 +119,15 @@ export function getCompileFiles(testFiles: string[]) {
     // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
     const extension = path.extname(testFile);
     if (!extension) {
-      testTsFile += '.ts';
-      testJsFile += '.js';
+      testTsFile += ".ts";
+      testJsFile += ".js";
 
-      testTsFile = testTsFile.replace(process.cwd() + '/', '');
+      testTsFile = testTsFile.replace(process.cwd() + "/", "");
 
       testJsFile =
-        path.resolve(__dirname, '../') +
-        '/output' +
-        testJsFile.replace(process.cwd(), '');
+        path.resolve(__dirname, "../") +
+        "/output" +
+        testJsFile.replace(process.cwd(), "");
     }
 
     getAllImportsForFile(testTsFile);
@@ -135,7 +135,7 @@ export function getCompileFiles(testFiles: string[]) {
     const needCompileFiles = getNeedCompileFiles();
 
     allfiles.push(...needCompileFiles);
-    debug('needCompileFiles');
+    debug("needCompileFiles");
     debug(needCompileFiles);
   }
 
