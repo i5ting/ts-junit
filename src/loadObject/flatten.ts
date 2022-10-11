@@ -1,4 +1,4 @@
-import { Debug } from "../Utils";
+import { Debug } from "../utils";
 
 const debug = Debug();
 

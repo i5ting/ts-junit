@@ -31,7 +31,7 @@ test.only('getAllImportsForFile()', () => {
 
   var needCompileFiles = getNeedCompileFiles()
 
-  assert.is(needCompileFiles.length, 15);
+  assert.is(needCompileFiles.length, 14);
 });
 
 
