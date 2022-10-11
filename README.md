@@ -8,7 +8,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/i5ting/ts-junit/pulls)
 [![Github action](https://github.com/i5ting/ts-junit/actions/workflows/ci.yml/badge.svg)](https://github.com/i5ting/ts-junit/actions/workflows/ci.yml)
 
-> use JUnit 5 Decrator in TypeScript
+> use JUnit 5 Decorator in TypeScript
 
 在我看来，在 TypeScript 里使用面向对象是很大概率变成最常用的方式的。目前所有的 JavaScript 测试都是面向过程的，比如 qunit、jest、mocha、ava、tape 等测试框架实现，还是围绕在面向过程阶段。我以为这不是 TypeScript 在现实中该有的样式。
 
