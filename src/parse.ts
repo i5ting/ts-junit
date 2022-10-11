@@ -12,7 +12,7 @@ export function getEableRunDataMapping(commonjsFile: string) {
 
   if (clazz["Disabled"]?.length > 0) {
     console.log(
-      clazz["Disabled"] + "has  @Disabled decorator， no need to run any test!"
+      clazz["Disabled"] + "has @Disabled decorator, no need to run any test!"
     );
     return [];
   }
