@@ -1,18 +1,18 @@
-import * as fs from "fs";
-import * as path from "path";
-import ts from "typescript";
+import * as fs from 'fs';
+import * as path from 'path';
+import ts from 'typescript';
 
-import { EventEmitter } from "node:events";
-import { Debug, getCompileFiles } from "./utils";
-import Context from "./context";
+import { EventEmitter } from 'node:events';
+import { Debug, getCompileFiles } from './utils';
+import Context from './context';
 
-const debug = Debug("watch");
+const debug = Debug('watch');
 
 const runTestEmitter = new EventEmitter();
 const files: ts.MapLike<{ version: number }> = {};
 
 function watch(rootFileNames: string[], options: ts.CompilerOptions) {
-  debug("rootFileNames+");
+  debug('rootFileNames+');
   debug(rootFileNames);
 
   // initialize the list of files
@@ -45,14 +45,14 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   // Create the language service files
   const services = ts.createLanguageService(
     servicesHost,
-    ts.createDocumentRegistry()
+    ts.createDocumentRegistry(),
   );
 
   // Now let's watch the files
   rootFileNames.forEach((fileName) => {
     // First time around, emit all files
     emitFile(fileName);
-    debug("fileName = " + fileName);
+    debug('fileName = ' + fileName);
 
     // Add a watch on the file to handle next change
     fs.watchFile(
@@ -69,7 +69,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
         // write the changes to disk
         emitFile(fileName);
-      }
+      },
     );
   });
 
@@ -85,10 +85,10 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 
     output.outputFiles.forEach((o) => {
       const destination = path.join(
-        path.resolve(__dirname, "../"),
-        "output/" + o.name.replace(path.resolve(__dirname, "../"), "")
+        path.resolve(__dirname, '../'),
+        'output/' + o.name.replace(path.resolve(__dirname, '../'), ''),
       );
-      debug("destination = " + destination);
+      debug('destination = ' + destination);
 
       // mkdir -p
       ensureDirectoryExistence(destination);
@@ -97,7 +97,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     });
 
     // debug('done')
-    runTestEmitter.emit("runTestEvent");
+    runTestEmitter.emit('runTestEvent');
   }
 
   function logErrors(fileName: string) {
@@ -109,15 +109,16 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     allDiagnostics.forEach((diagnostic) => {
       let message = ts.flattenDiagnosticMessageText(
         diagnostic.messageText,
-        "\n"
+        '\n',
       );
       if (diagnostic.file) {
         let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
-          diagnostic.start!
+          diagnostic.start!,
         );
         console.log(
-          `  Error ${diagnostic.file.fileName} (${line + 1},${character + 1
-          }): ${message}`
+          `  Error ${diagnostic.file.fileName} (${line + 1},${
+            character + 1
+          }): ${message}`,
         );
       } else {
         console.log(`  Error: ${message}`);
@@ -137,7 +138,7 @@ export function WatchFiles(testFiles: string[], context: Context) {
     // run test at once
     context.runTsTestFiles(testFiles);
 
-    runTestEmitter.on("runTestEvent", function () {
+    runTestEmitter.on('runTestEvent', function () {
       // debug("run tests" + testFile);
       context.runTsTestFiles(testFiles);
     });

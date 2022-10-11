@@ -1,13 +1,13 @@
 import { test } from 'uvu';
-import * as path from 'node:path'
+import * as path from 'node:path';
 import * as assert from 'uvu/assert';
 
-import { Parse, getDataMapping, getEableRunDataMapping } from '../src'
+import { Parse, getDataMapping, getEableRunDataMapping } from '../src';
 
 test('Parse(commonjsFile)', () => {
-  const file = true ? './fixtures/test-class-disable.js' : './fixtures/test.js'
-  const source = path.resolve(__dirname, file)
-  const json = Parse(source)
+  const file = true ? './fixtures/test-class-disable.js' : './fixtures/test.js';
+  const source = path.resolve(__dirname, file);
+  const json = Parse(source);
   // console.dir(json)
   // fs.writeFileSync(path.resolve(__dirname, './fixtures/decorator.json'), JSON.stringify(json, null, 4));
 
@@ -31,10 +31,9 @@ test('Parse(commonjsFile)', () => {
   assert.is(json[0]['c'], 'initAll');
 });
 
-
 test('getData()', () => {
-  const source = path.resolve(__dirname, './fixtures/test.js')
-  const arr = getDataMapping(source)
+  const source = path.resolve(__dirname, './fixtures/test.js');
+  const arr = getDataMapping(source);
 
   // console.log(arr)
 
@@ -44,8 +43,8 @@ test('getData()', () => {
 });
 
 test('getData() with class disabled', () => {
-  const source = path.resolve(__dirname, './fixtures/test-class-disable.js')
-  const arr = getDataMapping(source)
+  const source = path.resolve(__dirname, './fixtures/test-class-disable.js');
+  const arr = getDataMapping(source);
 
   // console.log(arr)
 
@@ -53,8 +52,8 @@ test('getData() with class disabled', () => {
 });
 
 test('getEableRunDataMapping() with class disabled', () => {
-  const source = path.resolve(__dirname, './fixtures/test-class-disable.js')
-  const arr = getEableRunDataMapping(source)
+  const source = path.resolve(__dirname, './fixtures/test-class-disable.js');
+  const arr = getEableRunDataMapping(source);
 
   // console.log(arr)
 
@@ -62,8 +61,8 @@ test('getEableRunDataMapping() with class disabled', () => {
 });
 
 test('getEableRunDataMapping() ', () => {
-  const source1 = path.resolve(__dirname, './fixtures/test.js')
-  const arr1 = getEableRunDataMapping(source1)
+  const source1 = path.resolve(__dirname, './fixtures/test.js');
+  const arr1 = getEableRunDataMapping(source1);
 
   // console.log(arr1)
 

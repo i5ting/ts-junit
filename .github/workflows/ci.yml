@@ -3,20 +3,20 @@ name: ci
 on:
   push:
     branches:
-      - "**"
+      - '**'
     paths:
-      - ".github/workflows/*.yml"
-      - "**.json"
-      - "**.js"
-      - "**.ts"
+      - '.github/workflows/*.yml'
+      - '**.json'
+      - '**.js'
+      - '**.ts'
   pull_request:
     branches:
-      - "**"
+      - '**'
     paths:
-      - ".github/workflows/*.yml"
-      - "**.json"
-      - "**.js"
-      - "**.ts"
+      - '.github/workflows/*.yml'
+      - '**.json'
+      - '**.js'
+      - '**.ts'
 
 jobs:
   test:
@@ -27,7 +27,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install and Test 🔧
-        run: |
-          yarn install
-          yarn run test
+      - name: Install
+        run: yarn
+
+      - name: format
+        run: yarn prettier . --list-different
+
+      - name: test
+        run: yarn test
