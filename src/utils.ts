@@ -15,9 +15,9 @@ export function Debug(name?: string) {
 }
 
 // see https://github.com/i5ting/colondebug/
-export function DebugWith(key: String) {
+export function DebugWith(key: string) {
   var operation = key.split(":").pop();
-  var debug = new debugModule(key);
+  var debug = debugModule(key);
 
   if (Object.keys(console).includes(operation)) {
     debug = console[operation];
@@ -67,8 +67,8 @@ export function getFiles(rest: any) {
       let fileOrDirType = stat.isDirectory()
         ? "dir"
         : stat.isFile()
-        ? "file"
-        : "other";
+          ? "file"
+          : "other";
 
       switch (fileOrDirType) {
         case "dir":
