@@ -51,26 +51,26 @@ export default class MyFirstJUnitJupiterTests  {
 反观前端的测试代码基本上 2 种风格。前端的测试代码风格 1，它是最常用的测试方式，代码实例如下。
 
 ```js
-test('JSON', () => {
+test("JSON", () => {
   const input = {
-    foo: 'hello',
-    bar: 'world',
+    foo: "hello",
+    bar: "world",
   };
 
   const output = JSON.stringify(input);
 
   assert.snapshot(output, `{"foo":"hello","bar":"world"}`);
-  assert.equal(JSON.parse(output), input, 'matches original');
+  assert.equal(JSON.parse(output), input, "matches original");
 });
 ```
 
 前端的测试代码风格 2，bdd 风格，它更强调行为对测试用例的影响，代码实例如下。
 
 ```js
-describe('User', function () {
-  describe('#save()', function () {
-    it('should save without error', function (done) {
-      var user = new User('Luna');
+describe("User", function () {
+  describe("#save()", function () {
+    it("should save without error", function (done) {
+      var user = new User("Luna");
       user.save(function (err) {
         if (err) throw err;
         done();
@@ -177,11 +177,11 @@ $ npm i --save-dev ts-juint
 编写测试入口文件 ts-junit.ts，文件内指定测试文件或测试目录即可。
 
 ```ts
-import * as path from 'node:path';
-import { run } from 'ts-junit';
+import * as path from "node:path";
+import { run } from "ts-junit";
 
-const folder = path.resolve(process.cwd(), './tests');
-const file = path.resolve(process.cwd(), './tests/test.ts');
+const folder = path.resolve(process.cwd(), "./tests");
+const file = path.resolve(process.cwd(), "./tests/test.ts");
 
 run([folder, file]);
 // or custom Strategy
@@ -504,16 +504,16 @@ $ npm test
 
      @Before()
      before() {
-       mock(helloTest, 'sayhello', () => {
-         return 'mocked';
+       mock(helloTest, "sayhello", () => {
+         return "mocked";
        });
      }
 
      @Test()
      async test() {
-       expect(this.helloTest.sayhello()).eq('mocked');
+       expect(this.helloTest.sayhello()).eq("mocked");
 
-       expect(this.helloService.sayhello('test')).eq('hello test');
+       expect(this.helloService.sayhello("test")).eq("hello test");
      }
    }
    ```

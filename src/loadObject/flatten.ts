@@ -1,24 +1,24 @@
-import { Debug } from '../utils';
+import { Debug } from "../utils";
 
 const debug = Debug();
 
-export function flatten(node: any, path = '', nodeList = []) {
+export function flatten(node: any, path = "", nodeList = []) {
   if (node != null) {
-    debug('node i');
+    debug("node i");
 
     // let children = node.children
     for (let i in node) {
       debug(i);
       debug(node[i]);
 
-      if (node[i]['newClz']) {
-        debug('找到了具体的object了 ' + path);
+      if (node[i]["newClz"]) {
+        debug("找到了具体的object了 " + path);
 
-        node[i]['path'] = path + '/' + i;
+        node[i]["path"] = path + "/" + i;
         nodeList.push(node[i]);
       } else {
-        debug('没找到，继续深度优先' + i);
-        flatten(node[i], path + '/' + i, nodeList);
+        debug("没找到，继续深度优先" + i);
+        flatten(node[i], path + "/" + i, nodeList);
       }
     }
   }
@@ -39,11 +39,11 @@ export function flattenObj(ob: any) {
     // We check the type of the i using
     // typeof() function and recursively
     // call the function again
-    if (typeof ob[i] === 'object' && !Array.isArray(ob[i])) {
+    if (typeof ob[i] === "object" && !Array.isArray(ob[i])) {
       const temp = flattenObj(ob[i]);
       for (const j in temp) {
         // Store temp in result
-        result[i + '.' + j] = temp[j];
+        result[i + "." + j] = temp[j];
       }
     }
 

@@ -1,8 +1,8 @@
 // requireDir.js
 // @ts-nocheck
 
-var fs = require('fs');
-var path = require('path');
+var fs = require("fs");
+var path = require("path");
 // make a note of the calling file's path, so that we can resolve relative
 // paths. this only works if a fresh version of this module is run on every
 // require(), so important: we clear the require() cache each time!
@@ -13,7 +13,7 @@ delete require.cache[__filename];
 
 export function requireDir(dir, opts) {
   // default arguments:
-  dir = dir || '.';
+  dir = dir || ".";
   opts = opts || {};
 
   // resolve the path to an absolute one:
@@ -75,7 +75,7 @@ export function requireDir(dir, opts) {
 
       if (fs.statSync(abs).isDirectory()) {
         if (opts.recurse) {
-          if (base === 'node_modules') {
+          if (base === "node_modules") {
             continue;
           }
 
