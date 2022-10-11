@@ -1,6 +1,6 @@
 // tests/demo.js
-import * as assert from 'uvu/assert';
-import Calculator from '../calculator';
+import * as assert from "uvu/assert";
+import Calculator from "../calculator";
 
 import {
   Test,
@@ -10,10 +10,10 @@ import {
   AfterEach,
   DisplayName,
   Disabled,
-} from '../src/index';
+} from "../src/index";
 
-@DisplayName('Clz test case')
-@Disabled('Disabled all Clazz until bug #99 has been fixed')
+@DisplayName("Clz test case")
+@Disabled("Disabled all Clazz until bug #99 has been fixed")
 export default class ClassDisableTests {
   a: Number = 1;
   b: String;
@@ -22,27 +22,27 @@ export default class ClassDisableTests {
   @BeforeAll
   initAll() {
     // assert.is(Math.sqrt(4), 12);
-    console.log('BeforeAll initAll');
+    console.log("BeforeAll initAll");
     this.a = 2;
   }
 
   @BeforeEach
   init() {
-    console.log('BeforeEach');
+    console.log("BeforeEach");
   }
 
   @AfterEach
   tearDown() {
-    console.log('---AfterEach');
+    console.log("---AfterEach");
   }
 
   @AfterAll
   tearDownAll() {
-    console.log('AfterAll---');
+    console.log("AfterAll---");
   }
 
   @Test
-  @Disabled('Disabled succeedingTest')
+  @Disabled("Disabled succeedingTest")
   succeedingTest() {
     assert.ok(this.a === 2);
     assert.is(Math.sqrt(4), 2);
@@ -55,9 +55,9 @@ export default class ClassDisableTests {
   }
 
   @Test
-  @DisplayName('Custom test name containing spaces111')
-  @DisplayName('Custom test name containing spaces222')
-  @Disabled('Disabled until bug #42 has been resolved')
+  @DisplayName("Custom test name containing spaces111")
+  @DisplayName("Custom test name containing spaces222")
+  @Disabled("Disabled until bug #42 has been resolved")
   addition5() {
     assert.is(Math.sqrt(4), 2);
     assert.is(Math.sqrt(4), 2);

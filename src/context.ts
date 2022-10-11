@@ -1,10 +1,10 @@
-import Promise2 from 'bluebird';
-import { loadFromCache } from './loadObject/scan';
-import { Debug } from './utils';
+import Promise2 from "bluebird";
+import { loadFromCache } from "./loadObject/scan";
+import { Debug } from "./utils";
 
-const debug = Debug('ts-junit');
+const debug = Debug("ts-junit");
 
-import IStrategy from './iStrategy';
+import IStrategy from "./iStrategy";
 
 /**
  * The Context defines the interface of interest to clients.
@@ -36,7 +36,7 @@ export default class Context {
     let that = this;
 
     files = files.map(function (file) {
-      return file.replace('.ts', '');
+      return file.replace(".ts", "");
     });
 
     const iterator = async (element) => that._runTsTestFile(element);
@@ -46,13 +46,13 @@ export default class Context {
   private _runTsTestFile(file: string): any {
     let that = this;
 
-    debug(' --- runTest --- ');
+    debug(" --- runTest --- ");
     return loadFromCache(file).then(function (result) {
       let nodeList = [result];
       // console.dir(result);
       for (let i in nodeList) {
         let Clazz = nodeList[i];
-        debug('Clazz---');
+        debug("Clazz---");
         debug(Clazz);
 
         let newClz = Clazz.newClz;
