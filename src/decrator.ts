@@ -1,12 +1,12 @@
-import { Debug } from './utils';
+import { Debug } from "./utils";
 
-const debug = Debug('ts-junit');
+const debug = Debug("ts-junit");
 
 var cache = {};
 
 /** @alpha */
 export function emptydata() {
-  debug('emptydata := {}');
+  debug("emptydata := {}");
   debug(cache);
   cache = {};
   return cache;
@@ -14,7 +14,7 @@ export function emptydata() {
 
 /** @alpha */
 export function data() {
-  debug('Data Dump:');
+  debug("Data Dump:");
   debug(cache);
   return cache;
 }
@@ -32,9 +32,9 @@ export function BeforeAll(
   // test.run()
   const className = target.constructor.name;
   if (!cache[className]) cache[className] = {};
-  if (!cache[className]['hook']) cache[className]['hook'] = {};
+  if (!cache[className]["hook"]) cache[className]["hook"] = {};
 
-  cache[className]['hook']['before'] = target[propertyName];
+  cache[className]["hook"]["before"] = target[propertyName];
   debug(`exist hook: ${className}.hook.before`);
 }
 
@@ -49,9 +49,9 @@ export function BeforeEach(
   // console.dir(descriptor)
   const className = target.constructor.name;
   if (!cache[className]) cache[className] = {};
-  if (!cache[className]['hook']) cache[className]['hook'] = {};
+  if (!cache[className]["hook"]) cache[className]["hook"] = {};
 
-  cache[className]['hook']['before.each'] = target[propertyName];
+  cache[className]["hook"]["before.each"] = target[propertyName];
   debug(`exist hook: ${className}.hook.before.each`);
 }
 
@@ -66,9 +66,9 @@ export function AfterEach(
   // console.dir(descriptor)
   const className = target.constructor.name;
   if (!cache[className]) cache[className] = {};
-  if (!cache[className]['hook']) cache[className]['hook'] = {};
+  if (!cache[className]["hook"]) cache[className]["hook"] = {};
 
-  cache[className]['hook']['after.each'] = target[propertyName];
+  cache[className]["hook"]["after.each"] = target[propertyName];
   debug(`exist hook: ${className}.hook.after.each`);
 }
 
@@ -83,9 +83,9 @@ export function AfterAll(
   // console.dir(descriptor)
   const className = target.constructor.name;
   if (!cache[className]) cache[className] = {};
-  if (!cache[className]['hook']) cache[className]['hook'] = {};
+  if (!cache[className]["hook"]) cache[className]["hook"] = {};
 
-  cache[className]['hook']['after'] = target[propertyName];
+  cache[className]["hook"]["after"] = target[propertyName];
   debug(`exist hook: ${className}.hook.after`);
 }
 
@@ -109,8 +109,8 @@ export function Test(
 
   // console.dir(Object.keys(target).join('-'))
 
-  cache[className][propertyName]['desc'] = 'no display name';
-  cache[className][propertyName]['fn'] = target[propertyName];
+  cache[className][propertyName]["desc"] = "no display name";
+  cache[className][propertyName]["fn"] = target[propertyName];
 }
 
 /**
@@ -202,15 +202,15 @@ export function Disabled(message: string): ClassDecorator & PropertyDecorator {
         debug(cache[className][propertyName]);
       }
 
-      cache[className][propertyName]['skip'] = true;
-      cache[className][propertyName]['skipReason'] = message;
+      cache[className][propertyName]["skip"] = true;
+      cache[className][propertyName]["skipReason"] = message;
     } else {
       // when @DisplayName with class
       // const testSuite = suite(message);
       debug(`when @DisplayName with class: ${message}`);
 
-      cache[className]['skipClaas'] = true;
-      cache[className]['skipClaasReason'] = message;
+      cache[className]["skipClaas"] = true;
+      cache[className]["skipClaasReason"] = message;
     }
   };
 }

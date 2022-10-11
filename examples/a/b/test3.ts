@@ -1,5 +1,5 @@
 // tests/demo.js
-import * as assert from 'uvu/assert';
+import * as assert from "uvu/assert";
 
 // test('Math.sqrt()', () => {
 //   assert.is(Math.sqrt(4), 2);
@@ -19,7 +19,7 @@ import * as assert from 'uvu/assert';
 //   assert.equal(JSON.parse(output), input, 'matches original');
 // });
 
-import Calculator from '../../../calculator';
+import Calculator from "../../../calculator";
 
 import {
   Test,
@@ -29,9 +29,9 @@ import {
   AfterEach,
   DisplayName,
   Disabled,
-} from '../../../src';
+} from "../../../src";
 
-@DisplayName('Clz3 test case')
+@DisplayName("Clz3 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")
 export default class BTests {
   a: Number = 1;
@@ -75,9 +75,9 @@ export default class BTests {
   }
 
   @Test
-  @DisplayName('Custom test name containing spaces111')
-  @DisplayName('Custom test name containing spaces222')
-  @Disabled('Disabled until bug #42 has been resolved')
+  @DisplayName("Custom test name containing spaces111")
+  @DisplayName("Custom test name containing spaces222")
+  @Disabled("Disabled until bug #42 has been resolved")
   addition5() {
     assert.is(Math.sqrt(4), 2);
     assert.is(Math.sqrt(4), 2);
