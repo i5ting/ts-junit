@@ -25,16 +25,12 @@
   "html.validate.styles": false,
 
   // format 配置
-  "editor.tabSize": 2,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": false,
     "source.fixAll.tslint": false,
     "source.fixAll.stylelint": false
   },
-  "prettier.semi": true,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.insertFinalNewline": true
