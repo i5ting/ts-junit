@@ -117,7 +117,7 @@ export function Test(
  * Creates a test case DisplayName.
  * Can be used on entity property or on entity.
  * Can create suite name when used on entity.
- * 
+ *
  * @alpha
  */
 
@@ -168,7 +168,7 @@ export function DisplayName(
  * Creates a test case DisplayName.
  * Can be used on entity property or on entity.
  * Can create suite name when used on entity.
- * 
+ *
  * @alpha
  */
 

@@ -8,7 +8,7 @@ import { getAllTsFiles } from "./loadObject/scan";
 const debug = Debug();
 
 /**
- * 
+ *
  * @internal
  * @see https://github.com/i5ting/quickdebug/
  */
@@ -19,7 +19,7 @@ export function Debug(name?: string) {
 }
 
 /**
- * 
+ *
  * @internal
  * @see https://github.com/i5ting/colondebug/
  */

@@ -21,7 +21,7 @@ export * from "./loadObject/flatten";
  *
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
- * 
+ *
  * @public
  */
 export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
@@ -46,7 +46,7 @@ export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
  *
  * run([path.resolve(process.cwd(), "./tests/")])
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
- * 
+ *
  * @public
  */
 export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
