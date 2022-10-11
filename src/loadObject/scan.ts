@@ -1,8 +1,8 @@
-import exp = require("node:constants");
-import { flattenObj, getDataMapping, requireDir, emptydata } from "../";
-import { data } from "../";
+import exp = require('node:constants');
+import { flattenObj, getDataMapping, requireDir, emptydata } from '../';
+import { data } from '../';
 
-import { Debug } from "../utils";
+import { Debug } from '../utils';
 
 const debug = Debug();
 
@@ -19,7 +19,7 @@ export function getAllTsFiles(dirs: string[]) {
     var files = getTsFiles(dir);
     Object.keys(files).map(function (file) {
       const testFile =
-        dir + "/" + file.replace(".default", "").split(".").join("/");
+        dir + '/' + file.replace('.default', '').split('.').join('/');
       allfiles.push(testFile);
     });
   });
@@ -30,7 +30,7 @@ export function getTsFiles(dir: string) {
   // 定制require-dir
   var Classes = requireDir(dir, {
     recurse: true,
-    extensions: [".ts"],
+    extensions: ['.ts'],
     require: function () {},
   });
   debug(Classes);
@@ -108,46 +108,46 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   //     { Class: 'MyFirstJUnitJupiterTests', DisplayName: 'Clz test case' }
   //   ]
   const data = getDataMapping(file);
-  const clazz = data.find((item) => item["Class"]?.length > 0);
+  const clazz = data.find((item) => item['Class']?.length > 0);
 
-  var className = clazz["Class"];
-  var classDisplayName = clazz["DisplayName"];
-  var classDisabledDesc = clazz["Disabled"];
+  var className = clazz['Class'];
+  var classDisplayName = clazz['DisplayName'];
+  var classDisabledDesc = clazz['Disabled'];
 
   if (!cache[className]) cache[className] = {};
-  if (!cache[className]["hook"]) cache[className]["hook"] = {};
+  if (!cache[className]['hook']) cache[className]['hook'] = {};
 
   data.forEach(function (item) {
-    if (item["method"]) {
-      const propertyName = item["method"];
+    if (item['method']) {
+      const propertyName = item['method'];
 
       if (!cache[className][propertyName]) cache[className][propertyName] = {};
 
-      if (item["hook"] === "BeforeAll") {
-        cache[className]["hook"]["before"] = obj[item["method"]];
+      if (item['hook'] === 'BeforeAll') {
+        cache[className]['hook']['before'] = obj[item['method']];
       }
-      if (item["hook"] === "BeforeEach") {
-        cache[className]["hook"]["before.each"] = obj[item["method"]];
+      if (item['hook'] === 'BeforeEach') {
+        cache[className]['hook']['before.each'] = obj[item['method']];
       }
-      if (item["hook"] === "AfterEach") {
-        cache[className]["hook"]["after.each"] = obj[item["method"]];
+      if (item['hook'] === 'AfterEach') {
+        cache[className]['hook']['after.each'] = obj[item['method']];
       }
-      if (item["hook"] === "AfterAll") {
-        cache[className]["hook"]["after"] = obj[item["method"]];
+      if (item['hook'] === 'AfterAll') {
+        cache[className]['hook']['after'] = obj[item['method']];
       }
 
-      if (item["test"]) {
-        if (item["DisplayName"]) {
-          cache[className][propertyName]["desc"] = item["DisplayName"];
+      if (item['test']) {
+        if (item['DisplayName']) {
+          cache[className][propertyName]['desc'] = item['DisplayName'];
         } else {
-          cache[className][propertyName]["desc"] = "no display name";
+          cache[className][propertyName]['desc'] = 'no display name';
         }
 
-        if (item["Disabled"]) {
-          cache[className][propertyName]["skip"] = true;
-          cache[className][propertyName]["skipReason"] = item["Disabled"];
+        if (item['Disabled']) {
+          cache[className][propertyName]['skip'] = true;
+          cache[className][propertyName]['skipReason'] = item['Disabled'];
         }
-        cache[className][propertyName]["fn"] = obj[item["method"]];
+        cache[className][propertyName]['fn'] = obj[item['method']];
       }
     }
   });
@@ -184,8 +184,8 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   // if { Class: 'MyFirstJUnitJupiterTests', DisplayName: 'Clz test case', Disabled: 'Disabled until bug #42 has been resolved'}
   // remove all method
   if (classDisabledDesc) {
-    cache[className]["skipClaas"] = true;
-    cache[className]["skipClaasReason"] = classDisabledDesc;
+    cache[className]['skipClaas'] = true;
+    cache[className]['skipClaasReason'] = classDisabledDesc;
   }
 
   return cache;

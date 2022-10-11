@@ -14,7 +14,8 @@
     "test": "uvu -r ts-node/register test -i fixtures",
     "dev": "ts-node test.ts",
     "cli": "ts-node src/bin.ts  examples/test.ts",
-    "api": "ts-node api.ts"
+    "api": "ts-node api.ts",
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -54,6 +55,7 @@
     "@types/node": "^18.7.18",
     "@types/yargs": "^17.0.13",
     "np": "^7.6.2",
+    "prettier": "^2.7.1",
     "ts-node": "^10.9.1"
   },
   "files": [
