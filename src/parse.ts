@@ -6,6 +6,7 @@ import { Debug } from "./utils";
 
 const debug = Debug("parse");
 
+/** @internal */
 export function getEableRunDataMapping(commonjsFile: string) {
   const allTest = getDataMapping(commonjsFile);
   const clazz = allTest.find((item) => item["Class"]?.length > 0);
@@ -20,6 +21,7 @@ export function getEableRunDataMapping(commonjsFile: string) {
   return allTest.filter((item) => item["Disabled"] === undefined);
 }
 
+/** @internal */
 export function getDataMapping(commonjsFile: string) {
   const decoratorJson = Parse(commonjsFile);
   debug(commonjsFile);
@@ -181,6 +183,7 @@ export function getDataMapping(commonjsFile: string) {
   return arr;
 }
 
+/** @internal */
 export function Parse(commonjsFile: string) {
   // const source = fs.readFileSync('/Users/i5ting/workspace/ali/ts-junit/output/tests/test.js').toString()
   const source = fs.readFileSync(commonjsFile).toString();
@@ -252,12 +255,13 @@ export function Parse(commonjsFile: string) {
 
 /**
  * for class decorator
- * @param {*} node 
  * parse
     MyFirstJUnitJupiterTests = __decorate([
       (0, index_1.DisplayName)("Clz test case")
-      // @Disabled("Disabled all Clazz until bug #99 has been fixed")
+      // \@Disabled("Disabled all Clazz until bug #99 has been fixed")
     ], MyFirstJUnitJupiterTests);
+
+ * @internal
  */
 export function type1(node) {
   const result = {
@@ -305,7 +309,6 @@ export function type1(node) {
 
 /**
  * for test method & hooks decorator
- * @param {*} node 
  * parse
    __decorate([
         index_1.Test
@@ -316,6 +319,8 @@ export function type1(node) {
         (0, index_1.DisplayName)("Custom test name containing spaces222"),
         (0, index_1.Disabled)("Disabled until bug #42 has been resolved")
     ], MyFirstJUnitJupiterTests.prototype, "addition5");
+
+ * @internal
  */
 export function type2(node) {
   const result = {

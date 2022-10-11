@@ -8,18 +8,24 @@ import IStrategy from "./iStrategy";
 
 /**
  * The Context defines the interface of interest to clients.
+ *
+ * @public
  */
 export default class Context {
   /**
-   * @type {IStrategy} The Context maintains a reference to one of the Strategy
+   * The Context maintains a reference to one of the Strategy
    * objects. The Context does not know the concrete class of a strategy. It
    * should work with all strategies via the Strategy interface.
+   *
+   * @remarks
    */
   private strategy: IStrategy;
 
   /**
    * Usually, the Context accepts a strategy through the constructor, but also
    * provides a setter to change it at runtime.
+
+   * @remarks
    */
   constructor(strategy: IStrategy) {
     this.strategy = strategy;
@@ -27,6 +33,8 @@ export default class Context {
 
   /**
    * Usually, the Context allows replacing a Strategy object at runtime.
+   *
+   * @remarks
    */
   public setStrategy(strategy: IStrategy) {
     this.strategy = strategy;

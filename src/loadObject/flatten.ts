@@ -2,6 +2,7 @@ import { Debug } from "../utils";
 
 const debug = Debug();
 
+/** @internal */
 export function flatten(node: any, path = "", nodeList = []) {
   if (node != null) {
     debug("node i");
@@ -26,9 +27,13 @@ export function flatten(node: any, path = "", nodeList = []) {
   return nodeList;
 }
 
-// Declare a flatten function that takes
-// object as parameter and returns the
-// flatten object
+/**
+ * Declare a flatten function that takes
+ * object as parameter and returns the
+ * flatten object
+ *
+ * @internal
+ * */
 export function flattenObj(ob: any) {
   // The object which contains the
   // final result
