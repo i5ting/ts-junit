@@ -1,20 +1,20 @@
-import Context from './context';
-import UvuStrategy from './uvuStrategy';
-import { WatchFiles } from './watch';
-import { Debug, getFiles } from './utils';
-import IStrategy from './iStrategy';
+import Context from "./context";
+import UvuStrategy from "./uvuStrategy";
+import { WatchFiles } from "./watch";
+import { Debug, getFiles } from "./utils";
+import IStrategy from "./iStrategy";
 
 const debug = Debug();
 
-export * from './decrator';
-export * from './iStrategy';
-export * from './watch';
-export * from './ast';
-export * from './utils';
-export * from './parse';
-export * from './loadObject/scan';
-export * from './loadObject/require';
-export * from './loadObject/flatten';
+export * from "./decrator";
+export * from "./iStrategy";
+export * from "./watch";
+export * from "./ast";
+export * from "./utils";
+export * from "./parse";
+export * from "./loadObject/scan";
+export * from "./loadObject/require";
+export * from "./loadObject/flatten";
 
 /**
  * for cli invoke (need compile ts to js)
@@ -23,8 +23,8 @@ export * from './loadObject/flatten';
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
 export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
-  debug('runCli With UvuStrategy');
-  console.time('build ts');
+  debug("runCli With UvuStrategy");
+  console.time("build ts");
 
   // set context use default strategy
   const context = new Context(strategy);
@@ -36,7 +36,7 @@ export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
   WatchFiles(files, context);
 
   // time statistics
-  console.timeEnd('build ts');
+  console.timeEnd("build ts");
 }
 
 /**
@@ -46,8 +46,8 @@ export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
  * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
  */
 export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
-  debug('run With UvuStrategy');
-  console.time('run ts');
+  debug("run With UvuStrategy");
+  console.time("run ts");
 
   // set context use default strategy
   const context = new Context(strategy);
@@ -59,5 +59,5 @@ export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
   context.runTsTestFiles(files);
 
   // time statistics
-  console.timeEnd('run ts');
+  console.timeEnd("run ts");
 }

@@ -1,7 +1,7 @@
-import { readFileSync, existsSync } from 'fs';
-import { join, dirname } from 'path';
-import ts from 'typescript';
-import { FileReference } from 'typescript';
+import { readFileSync, existsSync } from "fs";
+import { join, dirname } from "path";
+import ts from "typescript";
+import { FileReference } from "typescript";
 
 export const libFiles = new Set();
 export const localFiles = new Set<string>();
@@ -13,21 +13,21 @@ function getImportsForFile(file: string, options?: any) {
 
   if (options && options.verbose)
     console.log(
-      'getImportsForFile ' +
+      "getImportsForFile " +
         file +
-        ': ' +
-        fileInfo.importedFiles.map((el) => el.fileName).join(', '),
+        ": " +
+        fileInfo.importedFiles.map((el) => el.fileName).join(", "),
     );
   return fileInfo.importedFiles
     .map((importedFile: FileReference) => importedFile.fileName)
     .flatMap((fileName: string) => {
-      if (!fileName.startsWith('.')) {
+      if (!fileName.startsWith(".")) {
         libFiles.add(fileName);
       }
 
       return fileName;
     })
-    .filter((x: string) => x.startsWith('.')) // only relative paths allowed
+    .filter((x: string) => x.startsWith(".")) // only relative paths allowed
     .flatMap((fileName: string) => {
       return [fileName, join(dirname(file), fileName)];
     })
@@ -38,16 +38,16 @@ function getImportsForFile(file: string, options?: any) {
       if (existsSync(`${fileName}.tsx`)) {
         return `${fileName}.tsx`;
       }
-      const yo = join(fileName, 'index.ts').normalize();
+      const yo = join(fileName, "index.ts").normalize();
       if (existsSync(yo)) {
         localFiles.add(yo);
       }
-      const tsx_subfolder = join(fileName, 'index.tsx').normalize();
+      const tsx_subfolder = join(fileName, "index.tsx").normalize();
       if (existsSync(tsx_subfolder)) {
         return tsx_subfolder;
       }
-      if (fileName.endsWith('.js')) {
-        const tsFromJs = fileName.replace(/[.]js$/, '.ts');
+      if (fileName.endsWith(".js")) {
+        const tsFromJs = fileName.replace(/[.]js$/, ".ts");
         if (existsSync(tsFromJs)) {
           return tsFromJs;
         }
