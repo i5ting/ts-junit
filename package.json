@@ -15,8 +15,8 @@
     "dev": "ts-node test.ts",
     "cli": "ts-node src/bin.ts  examples/test.ts",
     "api": "ts-node api.ts",
-    "format": "prettier --write "{src,test,examples}/**/*.{ts,js,json}" "*.ts" tsconfig.json package.json README.md",
-    "format:check": "prettier --check "{src,test,examples}/**/*.{ts,js,json}" "*.ts" tsconfig.json package.json README.md",
+    "format": "prettier --write \"{src,test,examples}/**/*.{ts,js,json}\" \"*.ts\" tsconfig.json package.json README.md",
+    "format:check": "prettier --check \"{src,test,examples}/**/*.{ts,js,json}\" \"*.ts\" tsconfig.json package.json README.md",
     "prepare": "husky install"
   },
   "repository": {
