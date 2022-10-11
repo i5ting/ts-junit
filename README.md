@@ -41,7 +41,7 @@ export default class MyFirstJUnitJupiterTests  {
   calculator = new Calculator();
 
   @Test
-  void addition() {
+  addition() {
     assert.is(2, calculator.add(1, 1));
   }
 
