@@ -3,9 +3,13 @@ import { join, dirname } from "path";
 import ts from "typescript";
 import { FileReference } from "typescript";
 
+/** @internal */
 export const libFiles = new Set();
+/** @internal */
 export const localFiles = new Set<string>();
+/** @internal */
 export const processedFiles = new Set();
+/** @internal */
 export const needCompileFiles = new Array();
 
 function getImportsForFile(file: string, options?: any) {
@@ -55,6 +59,7 @@ function getImportsForFile(file: string, options?: any) {
     });
 }
 
+/** @internal */
 export function getAllImportsForFile(file: string, options?: Object) {
   processedFiles.add(file);
   needCompileFiles.push(file);
@@ -71,11 +76,13 @@ export function getAllImportsForFile(file: string, options?: Object) {
   localFiles.add(file);
 }
 
+/** @internal */
 export function getNeedCompileFiles() {
   const arr = needCompileFiles.reverse();
   return arr.filter((item, index) => arr.indexOf(item) === index);
 }
 
+/** @internal */
 export function getDependencyImports(files: any) {
   const alibFiles = new Set();
   const alocalFiles = new Set();

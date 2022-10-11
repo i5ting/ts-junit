@@ -11,6 +11,7 @@ var parentFile = parent.filename;
 var parentDir = path.dirname(parentFile);
 delete require.cache[__filename];
 
+/** @internal */
 export function requireDir(dir, opts) {
   // default arguments:
   dir = dir || ".";

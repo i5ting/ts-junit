@@ -127,6 +127,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   }
 }
 
+/** @internal */
 export function WatchFiles(testFiles: string[], context: Context) {
   const compileFiles = getCompileFiles(testFiles);
 

@@ -7,14 +7,22 @@ import { getAllTsFiles } from "./loadObject/scan";
 
 const debug = Debug();
 
-// see https://github.com/i5ting/quickdebug/
+/**
+ *
+ * @internal
+ * @see https://github.com/i5ting/quickdebug/
+ */
 export function Debug(name?: string) {
   var key = name ? name : get_closest_package_json().name;
 
   return DebugWith(key);
 }
 
-// see https://github.com/i5ting/colondebug/
+/**
+ *
+ * @internal
+ * @see https://github.com/i5ting/colondebug/
+ */
 export function DebugWith(key: string) {
   var operation = key.split(":").pop();
   var debug = debugModule(key);
@@ -26,6 +34,7 @@ export function DebugWith(key: string) {
   return debug;
 }
 
+/** @internal */
 export function get_closest_package_json() {
   const debug = DebugWith("ts-junit:utils");
 
@@ -56,6 +65,7 @@ export function get_closest_package_json() {
   return config;
 }
 
+/** @internal */
 export function getFiles(rest: any) {
   var allfiles = [];
   rest.map(function (i: string) {
@@ -96,6 +106,7 @@ export function getFiles(rest: any) {
   return unique(allfiles);
 }
 
+/** @internal */
 export function getCompileFiles(testFiles: string[]) {
   let allfiles = [];
   for (let testFile of testFiles) {
@@ -132,6 +143,7 @@ export function getCompileFiles(testFiles: string[]) {
   return unique(allfiles.reverse());
 }
 
+/** @internal */
 export function unique(arr: string[]): string[] {
   return Array.from(new Set(arr));
 }
