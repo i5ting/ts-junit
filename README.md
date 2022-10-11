@@ -10,15 +10,13 @@
 
 > use JUnit 5 Decrator in TypeScript
 
-在我看来，在TypeScript里使用面向对象是很大概率变成最常用的方式的。目前所有的JavaScript测试都是面向过程的，比如qunit、jest、mocha、ava、tape等测试框架实现，还是围绕在面向过程阶段。我以为这不是TypeScript在现实中该有的样式。
+在我看来，在 TypeScript 里使用面向对象是很大概率变成最常用的方式的。目前所有的 JavaScript 测试都是面向过程的，比如 qunit、jest、mocha、ava、tape 等测试框架实现，还是围绕在面向过程阶段。我以为这不是 TypeScript 在现实中该有的样式。
 
-我对Java还算熟悉，比如使用JUnit 5的测试代码就是采用面向对象写法的，代码如下。
+我对 Java 还算熟悉，比如使用 JUnit 5 的测试代码就是采用面向对象写法的，代码如下。
 
 ```Java
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import example.util.Calculator;
-
 import org.junit.jupiter.api.Test;
 
 class MyFirstJUnitJupiterTests {
@@ -29,14 +27,12 @@ class MyFirstJUnitJupiterTests {
     void addition() {
         assertEquals(2, calculator.add(1, 1));
     }
-
 }
 ```
 
-这种写法是非常简单的，这就是Java面向的好处。如果换成TypeScript，几乎可以保持写法一模一样，代码如下。
+这种写法是非常简单的，这就是 Java 面向的好处。如果换成 TypeScript，几乎可以保持写法一模一样，代码如下。
 
 ```ts
-
 import assert from 'assert'
 import { Test } from 'ts-junit'
 
@@ -52,48 +48,47 @@ export default class MyFirstJUnitJupiterTests  {
 }
 ```
 
-反观前端的测试代码基本上2种风格。前端的测试代码风格1，它是最常用的测试方式，代码实例如下。
+反观前端的测试代码基本上 2 种风格。前端的测试代码风格 1，它是最常用的测试方式，代码实例如下。
 
 ```js
 test('JSON', () => {
   const input = {
     foo: 'hello',
-    bar: 'world'
+    bar: 'world',
   };
 
   const output = JSON.stringify(input);
 
   assert.snapshot(output, `{"foo":"hello","bar":"world"}`);
   assert.equal(JSON.parse(output), input, 'matches original');
-})
+});
 ```
 
-前端的测试代码风格2，bdd风格，它更强调行为对测试用例的影响，代码实例如下。
+前端的测试代码风格 2，bdd 风格，它更强调行为对测试用例的影响，代码实例如下。
 
 ```js
-describe('User', function(){
-  describe('#save()', function(){
-    it('should save without error', function(done){
+describe('User', function () {
+  describe('#save()', function () {
+    it('should save without error', function (done) {
       var user = new User('Luna');
-      user.save(function(err){
+      user.save(function (err) {
         if (err) throw err;
         done();
       });
-    })
-  })
-})
+    });
+  });
+});
 ```
 
-对比一下Java和JavaScript测试多个写法之后，你会发现，面向对象在JavaScript（TypeScript）里根本不是一等公民。于是我就萌发了一个想法，想用TypeScript实现一下JUnit。
-
+对比一下 Java 和 JavaScript 测试多个写法之后，你会发现，面向对象在 JavaScript（TypeScript）里根本不是一等公民。于是我就萌发了一个想法，想用 TypeScript 实现一下 JUnit。
 
 ## 特性
 
-- ~~jest 支持 ts 需要引入babel~~
-- ~~ts-jest 直接支持ts，测试语法上是jest语法，suite/test或describe/it~~
-- ts-junit 支持2种用法，其中cli方式采用增量ts编译，效率很高的。
-- ts-junit 使用junit 5的装饰器进行封装，成熟，使用于熟悉OO的开发，尤其对了解Java的开发者更友好。
-- ts-junit 使用uvu作为默认策略，同时也可以实现各个常见测试框架的支持，比如jest、mocha、ava、tape、qunit、jasmine等（暂时未实现）。
+- ~~jest 支持 ts 需要引入 babel~~
+- ~~ts-jest 直接支持 ts，测试语法上是 jest 语法，suite/test 或 describe/it~~
+- ts-junit 支持 2 种用法，其中 cli 方式采用增量 ts 编译，效率很高的。
+- ts-junit 使用 junit 5 的装饰器进行封装，成熟，使用于熟悉 OO 的开发，尤其对了解 Java 的开发者更友好。
+- ts-junit 使用 uvu 作为默认策略，同时也可以实现各个常见测试框架的支持，比如 jest、mocha、ava、tape、qunit、jasmine 等（暂时未实现）。
 
 ## 示例
 
@@ -114,7 +109,7 @@ export default class MyFirstJUnitJupiterTests {
 
     @Test
     void succeedingTest() {
-    
+
     }
 
     @Test
@@ -142,14 +137,13 @@ export default class MyFirstJUnitJupiterTests {
     static void tearDownAll() {
     }
 }
-
 ```
 
 ## Usages
 
-### 方式1: 使用独立cli进行编译
+### 方式 1: 使用独立 cli 进行编译
 
-不依赖当前项目的ts环境，直接通过cli执行，参考源码中tests目录下的文件。
+不依赖当前项目的 ts 环境，直接通过 cli 执行，参考源码中 tests 目录下的文件。
 
 ```shell
 $ npm i --global ts-juint
@@ -171,24 +165,23 @@ export default class MyFirstJUnitJupiterTests  {
     void addition() {
         assert.is(2, calculator.add(1, 1));
     }
-
 }
 ```
 
-### 方式2: 依赖当前项目的ts环境进行编译
+### 方式 2: 依赖当前项目的 ts 环境进行编译
 
 ```shell
 $ npm i --save-dev ts-juint
 ```
 
-编写测试入口文件ts-junit.ts，文件内指定测试文件或测试目录即可。
+编写测试入口文件 ts-junit.ts，文件内指定测试文件或测试目录即可。
 
 ```ts
-import * as path from "node:path";
-import { run } from "ts-junit";
+import * as path from 'node:path';
+import { run } from 'ts-junit';
 
-const folder = path.resolve(process.cwd(), "./tests");
-const file = path.resolve(process.cwd(), "./tests/test.ts");
+const folder = path.resolve(process.cwd(), './tests');
+const file = path.resolve(process.cwd(), './tests/test.ts');
 
 run([folder, file]);
 // or custom Strategy
@@ -238,7 +231,7 @@ $ npm test
 
 ## 装饰器
 
-- 参考junit5的文档 https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations
+- 参考 junit5 的文档 https://junit.org/junit5/docs/current/user-guide/#writing-tests-annotations
 - 进度 `7/20`
 
 <table class="tableblock frame-all grid-all stretch">
@@ -500,9 +493,7 @@ $ npm test
 
 ## TODO
 
-1）
-结合 https://github.com/midwayjs/injection 更简单(暂未实现)
-
+1. 结合 https://github.com/midwayjs/injection 更简单(暂未实现)
 
 ```ts
 class Test {
@@ -514,36 +505,34 @@ class Test {
   @Before()
   before() {
     mock(helloTest, 'sayhello', () => {
-      return 'mocked'
+      return 'mocked';
     });
   }
 
   @Test()
   async test() {
     expect(this.helloTest.sayhello()).eq('mocked');
-    
+
     expect(this.helloService.sayhello('test')).eq('hello test');
   }
 }
 ```
 
-2） 
-use vm2 with require from memfs
+2. use vm2 with require from memfs
 
-3） 
-目前ts编译成js之后，是通过ast去解析的js提取装饰器信息的，
+3. 目前 ts 编译成 js 之后，是通过 ast 去解析的 js 提取装饰器信息的，
 
 提取方式是
 
-```
-    __decorate([
-        index_1.BeforeAll
-    ], MyFirstJUnitJupiterTests.prototype, "initAll");
+<!-- prettier-ignore -->
+```js
+__decorate([index_1.BeforeAll], MyFirstJUnitJupiterTests.prototype, 'initAll');
 ```
 
 这里面可以试试能否直接反射出来，用一个类似探针的方式，运行时去提取装饰器，应该也是可行的。
 
-```
+<!-- prettier-ignore -->
+```js
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
