@@ -1,17 +1,17 @@
-import { test } from 'uvu';
-import * as path from 'node:path';
-import * as assert from 'uvu/assert';
+import { test } from "uvu";
+import * as path from "node:path";
+import * as assert from "uvu/assert";
 
-import { getAllImportsForFile, getNeedCompileFiles } from '../src/ast';
+import { getAllImportsForFile, getNeedCompileFiles } from "../src/ast";
 
-test('Math.sqrt()', () => {
+test("Math.sqrt()", () => {
   assert.is(Math.sqrt(4), 2);
   assert.is(Math.sqrt(144), 12);
   assert.is(Math.sqrt(2), Math.SQRT2);
 });
 
-test.only('getAllImportsForFile()', () => {
-  const testFile = process.cwd() + '/examples/test';
+test.only("getAllImportsForFile()", () => {
+  const testFile = process.cwd() + "/examples/test";
 
   let testTsFile = testFile;
   let testJsFile = testFile;
@@ -19,15 +19,15 @@ test.only('getAllImportsForFile()', () => {
   // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
   const extension = path.extname(testFile);
   if (!extension) {
-    testTsFile += '.ts';
-    testJsFile += '.js';
+    testTsFile += ".ts";
+    testJsFile += ".js";
 
-    testTsFile = testTsFile.replace(process.cwd() + '/', '');
+    testTsFile = testTsFile.replace(process.cwd() + "/", "");
 
     testJsFile =
-      path.resolve(process.cwd(), './') +
-      '/output' +
-      testJsFile.replace(process.cwd(), '');
+      path.resolve(process.cwd(), "./") +
+      "/output" +
+      testJsFile.replace(process.cwd(), "");
   }
 
   getAllImportsForFile(testTsFile, { verbose: false });
@@ -37,16 +37,16 @@ test.only('getAllImportsForFile()', () => {
   assert.is(needCompileFiles.length, 14);
 });
 
-test('JSON', () => {
+test("JSON", () => {
   const input = {
-    foo: 'hello',
-    bar: 'world',
+    foo: "hello",
+    bar: "world",
   };
 
   const output = JSON.stringify(input);
 
   assert.snapshot(output, `{"foo":"hello","bar":"world"}`);
-  assert.equal(JSON.parse(output), input, 'matches original');
+  assert.equal(JSON.parse(output), input, "matches original");
 });
 
 test.run();
