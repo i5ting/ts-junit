@@ -4,6 +4,7 @@ const debug = Debug('ts-junit');
 
 var cache = {};
 
+/** @alpha */
 export function emptydata() {
   debug('emptydata := {}');
   debug(cache);
@@ -11,12 +12,14 @@ export function emptydata() {
   return cache;
 }
 
+/** @alpha */
 export function data() {
   debug('Data Dump:');
   debug(cache);
   return cache;
 }
 
+/** @alpha */
 export function BeforeAll(
   target: any,
   propertyName: string,
@@ -35,6 +38,7 @@ export function BeforeAll(
   debug(`exist hook: ${className}.hook.before`);
 }
 
+/** @alpha */
 export function BeforeEach(
   target: any,
   propertyName: string,
@@ -51,6 +55,7 @@ export function BeforeEach(
   debug(`exist hook: ${className}.hook.before.each`);
 }
 
+/** @alpha */
 export function AfterEach(
   target: any,
   propertyName: string,
@@ -67,6 +72,7 @@ export function AfterEach(
   debug(`exist hook: ${className}.hook.after.each`);
 }
 
+/** @alpha */
 export function AfterAll(
   target: any,
   propertyName: string,
@@ -83,6 +89,7 @@ export function AfterAll(
   debug(`exist hook: ${className}.hook.after`);
 }
 
+/** @alpha */
 export function Test(
   target: Object,
   propertyName: string,
@@ -110,6 +117,8 @@ export function Test(
  * Creates a test case DisplayName.
  * Can be used on entity property or on entity.
  * Can create suite name when used on entity.
+ * 
+ * @alpha
  */
 
 export function DisplayName(
@@ -159,6 +168,8 @@ export function DisplayName(
  * Creates a test case DisplayName.
  * Can be used on entity property or on entity.
  * Can create suite name when used on entity.
+ * 
+ * @alpha
  */
 
 export function Disabled(message: string): ClassDecorator & PropertyDecorator {
