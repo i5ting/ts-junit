@@ -1,4 +1,4 @@
-import IStrategy from "./IStrategy";
+import IStrategy from "./iStrategy";
 export default class Context {
     private strategy;
     constructor(strategy: IStrategy);
