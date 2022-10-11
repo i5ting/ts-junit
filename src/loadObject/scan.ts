@@ -34,7 +34,7 @@ export function getTsFiles(dir: string) {
   var Classes = requireDir(dir, {
     recurse: true,
     extensions: [".ts"],
-    require: function () { },
+    require: function () {},
   });
   debug(Classes);
 

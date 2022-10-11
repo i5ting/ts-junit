@@ -27,13 +27,12 @@ export function flatten(node: any, path = "", nodeList = []) {
   return nodeList;
 }
 
-
-/** 
+/**
  * Declare a flatten function that takes
  * object as parameter and returns the
  * flatten object
- * 
- * @internal 
+ *
+ * @internal
  * */
 export function flattenObj(ob: any) {
   // The object which contains the
