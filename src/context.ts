@@ -1,4 +1,4 @@
-import * as Promise2 from "bluebird";
+import Promise2 from "bluebird";
 import { loadFromCache } from "./loadObject/scan";
 import { Debug } from "./utils";
 

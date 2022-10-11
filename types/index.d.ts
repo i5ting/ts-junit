@@ -1,3 +1,4 @@
+import IStrategy from "./iStrategy";
 export * from "./decrator";
 export * from "./iStrategy";
 export * from "./watch";
@@ -7,5 +8,5 @@ export * from "./parse";
 export * from "./loadObject/scan";
 export * from "./loadObject/require";
 export * from "./loadObject/flatten";
-export declare function runCli(rest: any): void;
-export declare function run(rest: any): void;
+export declare function runCli(rest: any, strategy?: IStrategy): void;
+export declare function run(rest: any, strategy?: IStrategy): void;
