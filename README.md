@@ -6,6 +6,7 @@
 ![npm total downloads](https://img.shields.io/npm/dt/ts-junit.svg)
 ![npm month downloads](https://img.shields.io/npm/dm/ts-junit.svg)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/i5ting/ts-junit/pulls)
+[![Github action](https://github.com/i5ting/ts-junit/actions/workflows/ci.yml/badge.svg)](https://github.com/i5ting/ts-junit/actions/workflows/ci.yml)
 
 > use JUnit 5 Decrator in TypeScript
 
