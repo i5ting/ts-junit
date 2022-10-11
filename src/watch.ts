@@ -116,8 +116,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
           diagnostic.start!,
         );
         console.log(
-          `  Error ${diagnostic.file.fileName} (${line + 1},${
-            character + 1
+          `  Error ${diagnostic.file.fileName} (${line + 1},${character + 1
           }): ${message}`,
         );
       } else {
@@ -127,6 +126,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   }
 }
 
+/** @internal */
 export function WatchFiles(testFiles: string[], context: Context) {
   const compileFiles = getCompileFiles(testFiles);
 

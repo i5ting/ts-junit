@@ -107,3 +107,6 @@ package-lock.json
 yarn.lock
 .DS_Store
 output
+
+# api-extractor temp files
+temp

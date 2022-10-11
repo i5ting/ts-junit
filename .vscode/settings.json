@@ -27,6 +27,7 @@
   // format 配置
   "editor.formatOnSave": true,
   "prettier.requireConfig": true,
+  "files.associations": { "*.json": "jsonc" },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": false,
     "source.fixAll.tslint": false,

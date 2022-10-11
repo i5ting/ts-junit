@@ -8,10 +8,12 @@ const debug = Debug();
 
 var cache = {};
 
+/** @internal */
 export function clearCache() {
   cache = {};
 }
 
+/** @internal */
 export function getAllTsFiles(dirs: string[]) {
   var allfiles = [];
   dirs.map(function (dir) {
@@ -26,18 +28,20 @@ export function getAllTsFiles(dirs: string[]) {
   return allfiles;
 }
 
+/** @internal */
 export function getTsFiles(dir: string) {
   // 定制require-dir
   var Classes = requireDir(dir, {
     recurse: true,
     extensions: [".ts"],
-    require: function () {},
+    require: function () { },
   });
   debug(Classes);
 
   return flattenObj(Classes);
 }
 
+/** @internal */
 export function loadFromDecorator(file: string) {
   var Clazz = require(`${file}`);
   var obj = new Clazz.default();
@@ -57,6 +61,7 @@ export function loadFromDecorator(file: string) {
   return { clz_name, newClz };
 }
 
+/** @internal */
 export function loadFromCache(file: string) {
   return import(file).then(function (Clazz) {
     var obj = new Clazz.default();

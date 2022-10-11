@@ -1,0 +1,2 @@
+*.json  linguist-language=JSON-with-Comments
+*.js    linguist-language=generated
