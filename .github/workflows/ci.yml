@@ -3,20 +3,20 @@ name: ci
 on:
   push:
     branches:
-      - '**'
+      - "**"
     paths:
-      - '.github/workflows/*.yml'
-      - '**.json'
-      - '**.js'
-      - '**.ts'
+      - ".github/workflows/*.yml"
+      - "**.json"
+      - "**.js"
+      - "**.ts"
   pull_request:
     branches:
-      - '**'
+      - "**"
     paths:
-      - '.github/workflows/*.yml'
-      - '**.json'
-      - '**.js'
-      - '**.ts'
+      - ".github/workflows/*.yml"
+      - "**.json"
+      - "**.js"
+      - "**.ts"
 
 jobs:
   test:
@@ -31,7 +31,7 @@ jobs:
         run: yarn
 
       - name: format
-        run: yarn prettier . --list-different
+        run: yarn format:check
 
       - name: test
         run: yarn test
