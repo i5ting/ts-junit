@@ -3,8 +3,8 @@ import * as path from "path";
 import * as ts from "typescript";
 
 import { EventEmitter } from "node:events";
-import { Debug, getCompileFiles } from "./Utils";
-import Context from "./Context";
+import { Debug, getCompileFiles } from "./utils";
+import Context from "./context";
 
 const debug = Debug("watch");
 

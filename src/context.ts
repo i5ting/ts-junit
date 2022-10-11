@@ -1,10 +1,10 @@
 import * as Promise2 from "bluebird";
 import { loadFromCache } from "./loadObject/scan";
-import { Debug } from "./Utils";
+import { Debug } from "./utils";
 
 const debug = Debug("ts-junit");
 
-import IStrategy from "./IStrategy";
+import IStrategy from "./iStrategy";
 
 /**
  * The Context defines the interface of interest to clients.

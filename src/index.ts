@@ -1,16 +1,16 @@
-import Context from "./Context";
-import UvuStrategy from "./UvuStrategy";
-import { WatchFiles } from "./Watch";
-import { Debug, getFiles } from "./Utils";
-import IStrategy from "./IStrategy";
+import Context from "./context";
+import UvuStrategy from "./uvuStrategy";
+import { WatchFiles } from "./watch";
+import { Debug, getFiles } from "./utils";
+import IStrategy from "./iStrategy";
 
 const debug = Debug();
 
-export * from "./Decrator";
-export * from "./IStrategy";
-export * from "./Watch";
-export * from "./Ast";
-export * from "./Utils";
+export * from "./decrator";
+export * from "./iStrategy";
+export * from "./watch";
+export * from "./ast";
+export * from "./utils";
 export * from "./parse";
 export * from "./loadObject/scan";
 export * from "./loadObject/require";
