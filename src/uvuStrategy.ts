@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 
-import IStrategy from './IStrategy'
-import { Debug } from './Utils'
+import IStrategy from './iStrategy'
+import { Debug } from './utils'
 
 const debug = Debug()
 

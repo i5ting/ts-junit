@@ -2,7 +2,7 @@ import exp = require("node:constants");
 import { flattenObj, getDataMapping, requireDir, emptydata } from "../";
 import { data } from "../";
 
-import { Debug } from "../Utils";
+import { Debug } from "../utils";
 
 const debug = Debug();
 
