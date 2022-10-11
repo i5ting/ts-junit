@@ -4,11 +4,19 @@ on:
   push:
     branches:
       - "**"
-    paths-ignore:
-      - README.md
+    paths:
+      - ".github/workflows/*.yml"
+      - "**.json"
+      - "**.js"
+      - "**.ts"
   pull_request:
     branches:
       - "**"
+    paths:
+      - ".github/workflows/*.yml"
+      - "**.json"
+      - "**.js"
+      - "**.ts"
 
 jobs:
   test:
