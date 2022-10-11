@@ -1,4 +1,5 @@
 /output
 /dist
+/types
 /node_modules
 /test/fixtures
