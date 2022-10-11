@@ -4,7 +4,7 @@
   "description": "use junit decorator with typescript",
   "main": "dist/index.js",
   "sideEffects": false,
-  "typings": "./dist/junit.d.ts",
+  "types": "./types",
   "bin": {
     "junit": "dist/bin.js"
   },
