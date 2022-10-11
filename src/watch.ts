@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as ts from "typescript";
+import ts from "typescript";
 
 import { EventEmitter } from "node:events";
 import { Debug, getCompileFiles } from "./utils";
@@ -116,8 +116,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
           diagnostic.start!
         );
         console.log(
-          `  Error ${diagnostic.file.fileName} (${line + 1},${
-            character + 1
+          `  Error ${diagnostic.file.fileName} (${line + 1},${character + 1
           }): ${message}`
         );
       } else {

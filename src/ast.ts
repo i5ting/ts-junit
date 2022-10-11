@@ -1,6 +1,6 @@
 import { readFileSync, existsSync } from 'fs'
 import { join, dirname } from 'path'
-import * as ts from 'typescript'
+import ts from 'typescript'
 import { FileReference } from 'typescript'
 
 export const libFiles = new Set()
