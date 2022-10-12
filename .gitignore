@@ -110,3 +110,4 @@ output
 
 # api-extractor temp files
 temp
+tsdoc-metadata.json
