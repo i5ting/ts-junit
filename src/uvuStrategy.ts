@@ -21,18 +21,18 @@ export default class UvuStrategy implements IStrategy {
     i: string,
     clz_name: IStrategy,
     Clazz: any,
-    obj: Object,
+    obj: object,
   ): void {
     if (Clazz["skipClaas"]) {
       console.warn(`Class skip ${clz_name} reason: ${Clazz.skipClaasReason}`);
     } else {
-      for (var j in Clazz) {
+      for (const j in Clazz) {
         if (j === "hook") {
-          for (var z in Clazz["hook"]) {
+          for (const z in Clazz["hook"]) {
             debug(z + " hook=" + Clazz["hook"][z]);
 
             if (z.split(".").length == 2) {
-              let a = z.split(".");
+              const a = z.split(".");
 
               debug("a1= " + a);
 

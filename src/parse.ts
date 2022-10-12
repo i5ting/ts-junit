@@ -27,16 +27,16 @@ export function getDataMapping(commonjsFile: string) {
   debug(commonjsFile);
   debug(decoratorJson);
 
-  var arr = [];
+  const arr = [];
 
   decoratorJson.forEach(function (item) {
     if (item.type === 1) {
-      var classInfo = type1(item);
+      const classInfo = type1(item);
       // console.dir(i)
       if (Object.keys(classInfo).length > 0) arr.push(classInfo);
     }
     if (item.type === 2) {
-      var testOrHookInfo = type2(item);
+      const testOrHookInfo = type2(item);
       // console.dir(i)
       if (Object.keys(testOrHookInfo).length > 0) arr.push(testOrHookInfo);
     }
@@ -109,7 +109,7 @@ export function getDataMapping(commonjsFile: string) {
     // }
     //
 
-    let result = { method: item["c"] },
+    const result = { method: item["c"] },
       key,
       value = item["c"],
       disable;
@@ -163,7 +163,7 @@ export function getDataMapping(commonjsFile: string) {
     //    Disabled: "Disabled all Clazz until bug #99 has been fixed"
     // }
 
-    let result = { Class: item["b"] },
+    const result = { Class: item["b"] },
       key,
       value = item["b"],
       disable;
@@ -223,7 +223,7 @@ export function Parse(commonjsFile: string) {
       //     // @Disabled("Disabled all Clazz until bug #99 has been fixed")
       // ], MyFirstJUnitJupiterTests);
 
-      var _obj = {};
+      let _obj = {};
 
       if (node["callee"] && node["callee"]["name"] === "__decorate") {
         const type = node.arguments.length;
@@ -269,17 +269,17 @@ export function type1(node) {
     args: node.arguments.length,
   };
   // d(node)
-  var a = node.arguments[0];
-  var b = node.arguments[1];
+  const a = node.arguments[0];
+  const b = node.arguments[1];
 
-  var o = [];
+  const o = [];
   a.elements.forEach(function (i) {
     if (i.type === "MemberExpression") {
       // d(i.object.name + ' - ' + i.property.name)
     }
 
     if (i.type === "CallExpression") {
-      let a1, a2, a3, a4;
+      let a1, a2, a3;
       if (i.callee.type === "SequenceExpression") {
         // d(i.callee.expressions[0].value)
         // d(i.callee.expressions[1].object.name)
@@ -290,7 +290,7 @@ export function type1(node) {
         a3 = i.callee.expressions[1].property.name;
       }
 
-      a4 = i.arguments[0].value;
+      const a4 = i.arguments[0].value;
 
       o.push([a1, a2, a3, a4]);
     }
@@ -328,13 +328,13 @@ export function type2(node) {
     args: node.arguments.length,
   };
   // d(node)
-  var a = node.arguments[0];
-  var b = node.arguments[1];
-  var c = node.arguments[2];
+  const a = node.arguments[0];
+  const b = node.arguments[1];
+  const c = node.arguments[2];
 
   // d(a)
 
-  var o = [];
+  const o = [];
   a.elements.forEach(function (i) {
     // d('i.type = ' + i.type)
     // [
@@ -363,7 +363,7 @@ export function type2(node) {
         a3 = i.callee.expressions[1].property.name;
       }
 
-      let a4 = i.arguments[0].value;
+      const a4 = i.arguments[0].value;
 
       o.push(["CallExpression", a1, a2, a3, a4]);
     }

@@ -17,7 +17,9 @@ test.only("requireDir(dir)", () => {
   const files = requireDir(dir, {
     recurse: true,
     extensions: [".ts"],
-    require: function () {},
+    require: function () {
+      /** do nothing */
+    },
   });
 
   console.dir(files);

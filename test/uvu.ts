@@ -32,7 +32,7 @@ test.only("getAllImportsForFile()", () => {
 
   getAllImportsForFile(testTsFile, { verbose: false });
 
-  var needCompileFiles = getNeedCompileFiles();
+  const needCompileFiles = getNeedCompileFiles();
 
   assert.is(needCompileFiles.length, 14);
 });

@@ -10,7 +10,7 @@ export const localFiles = new Set<string>();
 /** @internal */
 export const processedFiles = new Set();
 /** @internal */
-export const needCompileFiles = new Array();
+export const needCompileFiles = [];
 
 function getImportsForFile(file: string, options?: any) {
   const fileInfo = ts.preProcessFile(readFileSync(file).toString());
@@ -60,11 +60,11 @@ function getImportsForFile(file: string, options?: any) {
 }
 
 /** @internal */
-export function getAllImportsForFile(file: string, options?: Object) {
+export function getAllImportsForFile(file: string, options?: object) {
   processedFiles.add(file);
   needCompileFiles.push(file);
   getImportsForFile(file, options);
-  let count: number = 0;
+  let count = 0;
   localFiles.forEach((i) => {
     count++;
 

@@ -74,7 +74,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   });
 
   function emitFile(fileName: string) {
-    let output = services.getEmitOutput(fileName);
+    const output = services.getEmitOutput(fileName);
 
     if (!output.emitSkipped) {
       debug(`Emitting ${fileName}`);
@@ -101,20 +101,19 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
   }
 
   function logErrors(fileName: string) {
-    let allDiagnostics = services
+    const allDiagnostics = services
       .getCompilerOptionsDiagnostics()
       .concat(services.getSyntacticDiagnostics(fileName))
       .concat(services.getSemanticDiagnostics(fileName));
 
     allDiagnostics.forEach((diagnostic) => {
-      let message = ts.flattenDiagnosticMessageText(
+      const message = ts.flattenDiagnosticMessageText(
         diagnostic.messageText,
         "\n",
       );
       if (diagnostic.file) {
-        let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
-          diagnostic.start!,
-        );
+        const { line, character } =
+          diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
         console.log(
           `  Error ${diagnostic.file.fileName} (${line + 1},${
             character + 1
@@ -147,7 +146,7 @@ export function WatchFiles(testFiles: string[], context: Context) {
 }
 
 function ensureDirectoryExistence(filePath) {
-  var dirname = path.dirname(filePath);
+  const dirname = path.dirname(filePath);
   if (fs.existsSync(dirname)) {
     return true;
   }
