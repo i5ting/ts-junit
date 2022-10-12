@@ -10,8 +10,8 @@
   },
   "scripts": {
     "start": "ts-node ./src/bin.ts",
-    "gen-types": "rm -rf ./types && tsc -p ./config/tsconfig.json",
-    "build": "rm -rf ./dist && tsc -p ./tsconfig.build.json && npm run gen-types && npm run api-extractor",
+    "gen-types": "rimraf ./types && tsc -p ./config/tsconfig.json",
+    "build": "rimraf ./dist && tsc -p ./tsconfig.build.json && npm run gen-types && npm run api-extractor",
     "release": "npm test && npm build && np",
     "test": "uvu -r ts-node/register test -i fixtures",
     "dev": "ts-node test.ts",
@@ -70,6 +70,7 @@
     "husky": "^8.0.1",
     "np": "^7.6.2",
     "prettier": "^2.7.1",
+    "rimraf": "^3.0.2",
     "ts-node": "^10.9.1"
   },
   "files": [
