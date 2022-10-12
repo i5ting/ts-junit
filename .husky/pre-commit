@@ -3,4 +3,3 @@
 
 npm run format:check
 npm run lint:check
-git add -u
