@@ -21,11 +21,7 @@ import * as assert from "uvu/assert";
 
 import Calculator from "../../../calculator";
 
-import {
-  Test,
-  DisplayName,
-  Disabled,
-} from "../../../src";
+import { Test, DisplayName, Disabled } from "../../../src";
 
 @DisplayName("Clz3 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")

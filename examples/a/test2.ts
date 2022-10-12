@@ -20,11 +20,7 @@ import * as assert from "uvu/assert";
 
 import Calculator from "../../calculator";
 
-import {
-  Test,
-  DisplayName,
-  Disabled,
-} from "../../src/index";
+import { Test, DisplayName, Disabled } from "../../src/index";
 
 @DisplayName("Clz2 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")

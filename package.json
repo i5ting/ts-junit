@@ -20,8 +20,8 @@
     "api-extractor": "api-extractor run --local",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint --fix --quiet **/*.ts",
-    "lint:check": "eslint **/*.ts",
+    "lint": "eslint --fix \"**/*.ts\"",
+    "lint:check": "eslint \"**/*.ts\"",
     "prepare": "husky install"
   },
   "repository": {
