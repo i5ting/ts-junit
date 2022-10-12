@@ -109,10 +109,7 @@ export function getDataMapping(commonjsFile: string) {
     // }
     //
 
-    const result = { method: item["c"] },
-      key,
-      value = item["c"],
-      disable;
+    const result = { method: item["c"] };
 
     item["a"].forEach(function (i) {
       // test or hook
@@ -163,10 +160,7 @@ export function getDataMapping(commonjsFile: string) {
     //    Disabled: "Disabled all Clazz until bug #99 has been fixed"
     // }
 
-    const result = { Class: item["b"] },
-      key,
-      value = item["b"],
-      disable;
+    const result = { Class: item["b"] };
 
     item["a"].forEach(function (i) {
       result[i[2]] = i[3];
