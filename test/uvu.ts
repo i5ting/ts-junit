@@ -14,20 +14,20 @@ test.only("getAllImportsForFile()", () => {
   const testFile = process.cwd() + "/examples/test";
 
   let testTsFile = testFile;
-  let testJsFile = testFile;
+  // let testJsFile = testFile;
 
   // const a = getDependencyImports(['./tests/test.ts','./tests/a/test2.ts'])
   const extension = path.extname(testFile);
   if (!extension) {
     testTsFile += ".ts";
-    testJsFile += ".js";
+    // testJsFile += ".js";
 
     testTsFile = testTsFile.replace(process.cwd() + "/", "");
 
-    testJsFile =
-      path.resolve(process.cwd(), "./") +
-      "/output" +
-      testJsFile.replace(process.cwd(), "");
+    // testJsFile =
+    //   path.resolve(process.cwd(), "./") +
+    //   "/output" +
+    //   testJsFile.replace(process.cwd(), "");
   }
 
   getAllImportsForFile(testTsFile, { verbose: false });

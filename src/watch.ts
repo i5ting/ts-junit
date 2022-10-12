@@ -112,6 +112,7 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
         "\n",
       );
       if (diagnostic.file) {
+        /* eslint-disable  @typescript-eslint/no-non-null-assertion */
         const { line, character } =
           diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
         console.log(
