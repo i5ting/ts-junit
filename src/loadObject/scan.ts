@@ -1,4 +1,4 @@
-import exp = require("node:constants");
+// import exp from "node:constants";
 import { flattenObj, getDataMapping, requireDir, emptydata } from "../";
 import { data } from "../";
 
@@ -6,7 +6,7 @@ import { Debug } from "../utils";
 
 const debug = Debug();
 
-var cache = {};
+let cache = {};
 
 /** @internal */
 export function clearCache() {
@@ -15,10 +15,10 @@ export function clearCache() {
 
 /** @internal */
 export function getAllTsFiles(dirs: string[]) {
-  var allfiles = [];
+  const allfiles = [];
   dirs.map(function (dir) {
     // watch(dir, { module: ts.ModuleKind.CommonJS });
-    var files = getTsFiles(dir);
+    const files = getTsFiles(dir);
     Object.keys(files).map(function (file) {
       const testFile =
         dir + "/" + file.replace(".default", "").split(".").join("/");
@@ -31,10 +31,12 @@ export function getAllTsFiles(dirs: string[]) {
 /** @internal */
 export function getTsFiles(dir: string) {
   // 定制require-dir
-  var Classes = requireDir(dir, {
+  const Classes = requireDir(dir, {
     recurse: true,
     extensions: [".ts"],
-    require: function () {},
+    require: function () {
+      /** NOOP */
+    },
   });
   debug(Classes);
 
@@ -43,9 +45,11 @@ export function getTsFiles(dir: string) {
 
 /** @internal */
 export function loadFromDecorator(file: string) {
-  var Clazz = require(`${file}`);
-  var obj = new Clazz.default();
-  var clz_name = obj.constructor.name;
+  // FIXME: require is nodejs only
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  const Clazz = require(`${file}`);
+  const obj = new Clazz.default();
+  const clz_name = obj.constructor.name;
   const data = getDataFromDecoratorJson(file, obj);
   if (!data) return;
 
@@ -55,7 +59,7 @@ export function loadFromDecorator(file: string) {
 
   // obj.__data = data
 
-  var newClz = data[clz_name]; //|| {}
+  const newClz = data[clz_name]; //|| {}
   if (newClz) newClz.__obj = obj;
 
   return { clz_name, newClz };
@@ -64,8 +68,8 @@ export function loadFromDecorator(file: string) {
 /** @internal */
 export function loadFromCache(file: string) {
   return import(file).then(function (Clazz) {
-    var obj = new Clazz.default();
-    var clz_name = obj.constructor.name;
+    const obj = new Clazz.default();
+    const clz_name = obj.constructor.name;
     const _data = data();
     if (!_data) return;
 
@@ -73,7 +77,7 @@ export function loadFromCache(file: string) {
     emptydata();
     // obj.__data = _data;
 
-    var newClz = _data[clz_name]; //|| {}
+    const newClz = _data[clz_name]; //|| {}
     if (newClz) newClz.__obj = obj;
 
     return Promise.resolve({ clz_name, newClz });
@@ -115,9 +119,9 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   const data = getDataMapping(file);
   const clazz = data.find((item) => item["Class"]?.length > 0);
 
-  let className = clazz["Class"];
+  const className = clazz["Class"];
   // let classDisplayName = clazz["DisplayName"];
-  let classDisabledDesc = clazz["Disabled"];
+  const classDisabledDesc = clazz["Disabled"];
 
   if (!cache[className]) cache[className] = {};
   if (!cache[className]["hook"]) cache[className]["hook"] = {};
@@ -179,9 +183,9 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   //     fn: [Function (anonymous)]
   //   }
   // }
-  for (var i in cache) {
-    for (var j in cache[i]) {
-      var method = cache[i][j];
+  for (const i in cache) {
+    for (const j in cache[i]) {
+      const method = cache[i][j];
       if (Object.keys(method).length === 0) delete cache[i][j];
     }
   }
