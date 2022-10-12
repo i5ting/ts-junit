@@ -8,7 +8,7 @@ export function flatten(node: any, path = "", nodeList = []) {
     debug("node i");
 
     // let children = node.children
-    for (let i in node) {
+    for (const i in node) {
       debug(i);
       debug(node[i]);
 
@@ -37,7 +37,7 @@ export function flatten(node: any, path = "", nodeList = []) {
 export function flattenObj(ob: any) {
   // The object which contains the
   // final result
-  let result = {};
+  const result = {};
 
   // loop through the object "ob"
   for (const i in ob) {

@@ -1,14 +1,13 @@
 // requireDir.js
-// @ts-nocheck
 
-var fs = require("fs");
-var path = require("path");
+import fs from "node:fs";
+import path from "node:path";
 // make a note of the calling file's path, so that we can resolve relative
 // paths. this only works if a fresh version of this module is run on every
 // require(), so important: we clear the require() cache each time!
-var parent = module.parent;
-var parentFile = parent.filename;
-var parentDir = path.dirname(parentFile);
+const parent = module.parent;
+const parentFile = parent.filename;
+const parentDir = path.dirname(parentFile);
 delete require.cache[__filename];
 
 /** @internal */
@@ -22,16 +21,16 @@ export function requireDir(dir, opts) {
 
   // read the directory's files:
   // note that this'll throw an error if the path isn't a directory.
-  var files = fs.readdirSync(dir);
+  const files = fs.readdirSync(dir);
 
   // to prioritize between multiple files with the same basename, we'll
   // first derive all the basenames and create a map from them to files:
-  var filesForBase = {};
+  const filesForBase = {};
 
-  for (var i = 0; i < files.length; i++) {
-    var file = files[i];
-    var ext = path.extname(file);
-    var base = path.basename(file, ext);
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    const ext = path.extname(file);
+    const base = path.basename(file, ext);
     (filesForBase[base] = filesForBase[base] || []).push(file);
   }
 
@@ -43,27 +42,27 @@ export function requireDir(dir, opts) {
   // we create and return a map from basename to require()'d contents! and
   // if duplicates are asked for, we'll never short-circuit; we'll just add
   // to the map using the full filename as a key also.
-  var map = {};
+  const map = {};
 
   // get the array of extensions we need to require
   // TODO 默认.ts
-  var extensions = opts.extensions || Object.keys(require.extensions);
+  const extensions = opts.extensions || Object.keys(require.extensions);
 
-  for (var base in filesForBase) {
+  for (const base in filesForBase) {
     // protect against enumerable object prototype extensions:
-    if (!filesForBase.hasOwnProperty(base)) {
+    if (!Object.prototype.hasOwnProperty.call(filesForBase, base)) {
       continue;
     }
 
     // go through the files for this base and check for directories. we'll
     // also create a hash "set" of the non-dir files so that we can
     // efficiently check for existence in the next step:
-    var files = filesForBase[base];
-    var filesMinusDirs = {};
+    const files = filesForBase[base];
+    const filesMinusDirs = {};
 
-    for (var i = 0; i < files.length; i++) {
-      var file = files[i];
-      var abs = path.resolve(dir, file);
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const abs = path.resolve(dir, file);
 
       // ignore the calling file:
       if (abs === parentFile) {
@@ -99,10 +98,10 @@ export function requireDir(dir, opts) {
     }
 
     // otherwise, go through and try each require.extension key!
-    for (ext of extensions) {
+    for (const ext of extensions) {
       // if a file exists with this extension, we'll require() it:
-      var file = base + ext;
-      var abs = filesMinusDirs[file];
+      const file = base + ext;
+      const abs = filesMinusDirs[file];
 
       if (abs) {
         // ignore TypeScript declaration files. They should never be
@@ -121,6 +120,7 @@ export function requireDir(dir, opts) {
         // has higher priority than any that follow it). if duplicates
         // aren't wanted, we're done with this basename.
         if (opts.duplicates) {
+          // eslint-disable-next-line @typescript-eslint/no-var-requires
           map[file] = opts.require ? opts.require(require(abs)) : require(abs);
           if (!map[base]) {
             map[base] = map[file];
@@ -145,14 +145,16 @@ export function requireDir(dir, opts) {
   }
 
   if (opts.mapKey || opts.mapValue) {
-    for (var base in map) {
+    for (const base in map) {
       // protect against enumerable object prototype extensions:
-      if (!map.hasOwnProperty(base)) {
+      if (!Object.prototype.hasOwnProperty.call(map, base)) {
         continue;
       }
 
-      var newKey = opts.mapKey ? opts.mapKey(map[base], base) : base;
-      var newVal = opts.mapValue ? opts.mapValue(map[base], newKey) : map[base];
+      const newKey = opts.mapKey ? opts.mapKey(map[base], base) : base;
+      const newVal = opts.mapValue
+        ? opts.mapValue(map[base], newKey)
+        : map[base];
       delete map[base];
 
       map[newKey] = newVal;
