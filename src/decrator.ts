@@ -2,7 +2,7 @@ import { Debug } from "./utils";
 
 const debug = Debug("ts-junit");
 
-var cache = {};
+let cache = {};
 
 /** @alpha */
 export function emptydata() {
@@ -91,7 +91,7 @@ export function AfterAll(
 
 /** @alpha */
 export function Test(
-  target: Object,
+  target: object,
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
@@ -126,12 +126,12 @@ export function DisplayName(
 ): ClassDecorator & PropertyDecorator {
   // console.dir(message)
   return function (
-    clsOrObject: Function | Object,
+    clsOrObject: CallableFunction | object,
     propertyName?: string | symbol,
   ) {
     const target = propertyName
       ? clsOrObject.constructor
-      : (clsOrObject as Function);
+      : (clsOrObject as CallableFunction);
     const className = target.name;
     if (!cache[className]) cache[className] = {};
 
@@ -175,12 +175,12 @@ export function DisplayName(
 export function Disabled(message: string): ClassDecorator & PropertyDecorator {
   // console.dir(message)
   return function (
-    clsOrObject: Function | Object,
+    clsOrObject: CallableFunction | object,
     propertyName?: string | symbol,
   ) {
     const target = propertyName
       ? clsOrObject.constructor
-      : (clsOrObject as Function);
+      : (clsOrObject as CallableFunction);
     const className = target.name;
     if (!cache[className]) cache[className] = {};
 

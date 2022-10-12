@@ -15,8 +15,8 @@ import {
 @DisplayName("Clz test case")
 @Disabled("Disabled all Clazz until bug #99 has been fixed")
 export default class ClassDisableTests {
-  a: Number = 1;
-  b: String;
+  a = 1;
+  b: string;
   calculator = new Calculator();
   // @Test
   @BeforeAll

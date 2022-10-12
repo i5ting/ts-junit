@@ -33,18 +33,16 @@ class MyFirstJUnitJupiterTests {
 这种写法是非常简单的，这就是 Java 面向的好处。如果换成 TypeScript，几乎可以保持写法一模一样，代码如下。
 
 ```ts
-import assert from 'assert'
-import { Test } from 'ts-junit'
+import assert from "assert";
+import { Test } from "ts-junit";
 
-export default class MyFirstJUnitJupiterTests  {
-
+export default class MyFirstJUnitJupiterTests {
   calculator = new Calculator();
 
   @Test
   addition() {
     assert.is(2, calculator.add(1, 1));
   }
-
 }
 ```
 
