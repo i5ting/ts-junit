@@ -25,7 +25,7 @@ export function BeforeAll(
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
-  debug(`BeforeAll`);
+  debug(`BeforeAll` + descriptor);
   // console.dir(propertyName)
   // console.dir(descriptor)
   // test(cache[propertyName] || "default", target[propertyName])
@@ -44,7 +44,7 @@ export function BeforeEach(
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
-  debug(target[propertyName]);
+  debug(target[propertyName] + descriptor);
   // console.dir(propertyName)
   // console.dir(descriptor)
   const className = target.constructor.name;
@@ -61,7 +61,7 @@ export function AfterEach(
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
-  debug(target[propertyName]);
+  debug(target[propertyName] + descriptor);
   // console.dir(propertyName)
   // console.dir(descriptor)
   const className = target.constructor.name;
@@ -78,7 +78,7 @@ export function AfterAll(
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
-  debug(target[propertyName]);
+  debug(target[propertyName] + descriptor);
   // console.dir(propertyName)
   // console.dir(descriptor)
   const className = target.constructor.name;
@@ -95,7 +95,7 @@ export function Test(
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
-  debug(target[propertyName]);
+  debug(target[propertyName] + descriptor);
 
   //classname
   const className = target.constructor.name;
@@ -157,7 +157,7 @@ export function DisplayName(
       // when @DisplayName with class
       // const testSuite = suite(message);
       debug(`when @DisplayName with class: ${message}`);
-      const className = target.name;
+      // const className = target.name;
       // console.dir(className)
       // cache[className]['desc'] = message
     }

@@ -115,9 +115,9 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   const data = getDataMapping(file);
   const clazz = data.find((item) => item["Class"]?.length > 0);
 
-  var className = clazz["Class"];
-  var classDisplayName = clazz["DisplayName"];
-  var classDisabledDesc = clazz["Disabled"];
+  let className = clazz["Class"];
+  // let classDisplayName = clazz["DisplayName"];
+  let classDisabledDesc = clazz["Disabled"];
 
   if (!cache[className]) cache[className] = {};
   if (!cache[className]["hook"]) cache[className]["hook"] = {};
