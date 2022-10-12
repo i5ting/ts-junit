@@ -22,10 +22,6 @@ import Calculator from "../../calculator";
 
 import {
   Test,
-  BeforeEach,
-  BeforeAll,
-  AfterAll,
-  AfterEach,
   DisplayName,
   Disabled,
 } from "../../src/index";
@@ -33,8 +29,8 @@ import {
 @DisplayName("Clz2 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")
 export default class ATests {
-  a: Number = 1;
-  b: String;
+  a = 1;
+  b: string;
   calculator = new Calculator();
   // @Test
   // @BeforeAll

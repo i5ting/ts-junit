@@ -63,7 +63,7 @@ export function get_closest_package_json(): any;
 // Warning: (ae-internal-missing-underscore) The name "getAllImportsForFile" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export function getAllImportsForFile(file: string, options?: Object): void;
+export function getAllImportsForFile(file: string, options?: object): void;
 
 // Warning: (ae-internal-missing-underscore) The name "getAllTsFiles" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -163,7 +163,7 @@ export function run(rest: any, strategy?: IStrategy): void;
 export function runCli(rest: any, strategy?: IStrategy): void;
 
 // @alpha (undocumented)
-export function Test(target: Object, propertyName: string, descriptor: TypedPropertyDescriptor<any>): void;
+export function Test(target: object, propertyName: string, descriptor: TypedPropertyDescriptor<any>): void;
 
 // Warning: (ae-internal-missing-underscore) The name "type1" should be prefixed with an underscore because the declaration is marked as @internal
 //
