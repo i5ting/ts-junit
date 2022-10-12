@@ -5,7 +5,9 @@ import * as assert from "uvu/assert";
 import { Parse, getDataMapping, getEableRunDataMapping } from "../src";
 
 test("Parse(commonjsFile)", () => {
-  const file = true ? "./fixtures/test-class-disable.js" : "./fixtures/test.js";
+  const file = (true as unknown)
+    ? "./fixtures/test-class-disable.js"
+    : "./fixtures/test.js";
   const source = path.resolve(__dirname, file);
   const json = Parse(source);
   // console.dir(json)

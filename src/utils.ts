@@ -13,7 +13,7 @@ const debug = Debug();
  * @see https://github.com/i5ting/quickdebug/
  */
 export function Debug(name?: string) {
-  var key = name ? name : get_closest_package_json().name;
+  const key = name ? name : get_closest_package_json().name;
 
   return DebugWith(key);
 }
@@ -24,8 +24,8 @@ export function Debug(name?: string) {
  * @see https://github.com/i5ting/colondebug/
  */
 export function DebugWith(key: string) {
-  var operation = key.split(":").pop();
-  var debug = debugModule(key);
+  const operation = key.split(":").pop();
+  let debug = debugModule(key);
 
   if (Object.keys(console).includes(operation)) {
     debug = console[operation];
@@ -38,11 +38,11 @@ export function DebugWith(key: string) {
 export function get_closest_package_json() {
   const debug = DebugWith("ts-junit:utils");
 
-  var config;
-  var isNext = true;
+  let config;
+  let isNext = true;
 
   module.paths.forEach(function (i) {
-    var file = i.replace("node_modules", "package.json");
+    const file = i.replace("node_modules", "package.json");
 
     if (isNext && fs.existsSync(file) === true) {
       try {
@@ -67,39 +67,35 @@ export function get_closest_package_json() {
 
 /** @internal */
 export function getFiles(rest: any) {
-  var allfiles = [];
+  const allfiles = [];
   rest.map(function (i: string) {
-    let item = path.resolve(process.cwd(), i);
+    const item = path.resolve(process.cwd(), i);
 
-    try {
-      const stat = fs.lstatSync(item);
+    const stat = fs.lstatSync(item);
 
-      let fileOrDirType = stat.isDirectory()
-        ? "dir"
-        : stat.isFile()
-        ? "file"
-        : "other";
+    const fileOrDirType = stat.isDirectory()
+      ? "dir"
+      : stat.isFile()
+      ? "file"
+      : "other";
 
-      switch (fileOrDirType) {
-        case "dir":
-          console.warn("find dir " + item);
-          getAllTsFiles([item]).map(function (i) {
-            allfiles.push(i);
-          });
+    switch (fileOrDirType) {
+      case "dir":
+        console.warn("find dir " + item);
+        getAllTsFiles([item]).map(function (i) {
+          allfiles.push(i);
+        });
 
-          break;
-        case "file":
-          console.warn("find file " + item.replace(".ts", ""));
+        break;
+      case "file":
+        console.warn("find file " + item.replace(".ts", ""));
 
-          // runTestFile([item.replace(".ts", "")]);
-          allfiles.push(item.replace(".ts", ""));
-          break;
-        default:
-          console.warn("unknow type");
-          break;
-      }
-    } catch (error) {
-      throw error;
+        // runTestFile([item.replace(".ts", "")]);
+        allfiles.push(item.replace(".ts", ""));
+        break;
+      default:
+        console.warn("unknow type");
+        break;
     }
   });
 
@@ -108,7 +104,7 @@ export function getFiles(rest: any) {
 
 /** @internal */
 export function getCompileFiles(testFiles: string[]) {
-  let allfiles = [];
+  const allfiles = [];
   for (let testFile of testFiles) {
     // make sure cli args 'file.ts'
     testFile = testFile.replace(".ts", "");

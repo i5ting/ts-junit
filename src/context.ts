@@ -41,49 +41,45 @@ export default class Context {
   }
 
   public runTsTestFiles(files: string[]): any {
-    let that = this;
-
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
 
-    const iterator = async (element) => that._runTsTestFile(element);
+    const iterator = async (element) => this._runTsTestFile(element);
     return Promise2.each(files, iterator);
   }
 
   private _runTsTestFile(file: string): any {
-    let that = this;
-
     debug(" --- runTest --- ");
-    return loadFromCache(file).then(function (result) {
-      let nodeList = [result];
+    return loadFromCache(file).then((result) => {
+      const nodeList = [result];
       // console.dir(result);
-      for (let i in nodeList) {
-        let Clazz = nodeList[i];
+      for (const i in nodeList) {
+        const Clazz = nodeList[i];
         debug("Clazz---");
         debug(Clazz);
 
-        let newClz = Clazz.newClz;
+        const newClz = Clazz.newClz;
 
         debug(newClz);
 
-        let obj = Clazz.newClz.__obj;
+        const obj = Clazz.newClz.__obj;
         delete newClz.__obj;
 
         debug(
           "Context: Run tests using the strategy (not sure how it'll do it)",
         );
 
-        that.strategy.testcase(Clazz.clz_name);
+        this.strategy.testcase(Clazz.clz_name);
 
         // let d = console.dir;
         // d(i);
         // d(Clazz.clz_name);
         // d(newClz);
         // d(obj);
-        that.strategy.parseData(i, Clazz.clz_name, newClz, obj);
+        this.strategy.parseData(i, Clazz.clz_name, newClz, obj);
 
-        that.strategy.test.run();
+        this.strategy.test.run();
       }
     });
   }
