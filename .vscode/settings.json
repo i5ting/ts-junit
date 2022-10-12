@@ -29,7 +29,7 @@
   "prettier.requireConfig": true,
   "files.associations": { "*.json": "jsonc" },
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false,
+    "source.fixAll.eslint": true,
     "source.fixAll.tslint": false,
     "source.fixAll.stylelint": false
   },
