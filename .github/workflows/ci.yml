@@ -37,7 +37,7 @@ jobs:
         run: pnpm i
 
       - name: lint
-        run: yarn lint:check
+        run: pnpm lint:check
 
       - name: test
-        run: yarn test
+        run: pnpm test
