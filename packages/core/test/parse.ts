@@ -2,7 +2,7 @@ import { test } from "uvu";
 import * as path from "node:path";
 import * as assert from "uvu/assert";
 
-import { Parse, getDataMapping, getEableRunDataMapping } from "../src";
+import { Parse, getDataMapping, getEnableRunDataMapping } from "../src";
 
 test("Parse(commonjsFile)", () => {
   const file = (true as unknown)
@@ -53,18 +53,18 @@ test("getData() with class disabled", () => {
   assert.is(arr.length, 8);
 });
 
-test("getEableRunDataMapping() with class disabled", () => {
+test("getEnableRunDataMapping() with class disabled", () => {
   const source = path.resolve(__dirname, "./fixtures/test-class-disable.js");
-  const arr = getEableRunDataMapping(source);
+  const arr = getEnableRunDataMapping(source);
 
   // console.log(arr)
 
   assert.is(arr.length, 0);
 });
 
-test("getEableRunDataMapping() ", () => {
+test("getEnableRunDataMapping() ", () => {
   const source1 = path.resolve(__dirname, "./fixtures/test.js");
-  const arr1 = getEableRunDataMapping(source1);
+  const arr1 = getEnableRunDataMapping(source1);
 
   // console.log(arr1)
 

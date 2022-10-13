@@ -88,10 +88,10 @@ export function getDependencyImports(files: any): {
     local: Set<unknown>;
 };
 
-// Warning: (ae-internal-missing-underscore) The name "getEableRunDataMapping" should be prefixed with an underscore because the declaration is marked as @internal
+// Warning: (ae-internal-missing-underscore) The name "getEnableRunDataMapping" should be prefixed with an underscore because the declaration is marked as @internal
 //
 // @internal (undocumented)
-export function getEableRunDataMapping(commonjsFile: string): any[];
+export function getEnableRunDataMapping(commonjsFile: string): any[];
 
 // Warning: (ae-internal-missing-underscore) The name "getFiles" should be prefixed with an underscore because the declaration is marked as @internal
 //

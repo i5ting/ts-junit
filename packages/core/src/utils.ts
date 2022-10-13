@@ -94,7 +94,7 @@ export function getFiles(rest: any) {
         allfiles.push(item.replace(".ts", ""));
         break;
       default:
-        console.warn("unknow type");
+        console.warn("unknown type");
         break;
     }
   });
