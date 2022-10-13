@@ -30,8 +30,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install
-        run: yarn
+      - name: Install PNPM
+        run: npm i -g pnpm
+
+      - name: Install Deps
+        run: pnpm i
 
       - name: lint
         run: yarn lint:check
