@@ -4,7 +4,7 @@ import { Debug } from "./utils";
 
 const debug = Debug("ts-junit");
 
-import IStrategy from "./iStrategy";
+import { IStrategy } from "./iStrategy";
 
 /**
  * The Context defines the interface of interest to clients.

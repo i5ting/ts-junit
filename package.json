@@ -1,50 +1,24 @@
 {
   "name": "ts-junit",
+  "private": true,
   "version": "1.0.18",
   "description": "use junit decorator with typescript",
-  "sideEffects": false,
-  "private": true,
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "start": "pnpm --filter \"@ts-junit/cli\" start",
-    "cli": "pnpm start ../core/examples/test.ts",
-    "api": "pnpm --filter \"@ts-junit/core\" api",
-    "test": "pnpm --filter \"@ts-junit/core\" test",
-    "format": "prettier --write \"packages/**/*.{ts,js,md}\"",
-    "format:check": "prettier --check \"packages/**/*.{ts,js,md}\"",
+    "prepare": "husky install",
+    "start": "pnpm build && ts-node ./samples/run.ts",
+    "watch": "pnpm -r run watch",
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "format": "prettier --cache --loglevel=warn --write \"**/*.{ts,js,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,js,md}\"",
     "lint": "eslint --fix \"**/*.ts\"",
     "lint:check": "eslint \"**/*.ts\"",
-    "build": "pnpm --filter \"@ts-junit/core\" build",
-    "build-cli": "pnpm --filter \"@ts-junit/cli...\" build",
-    "prepare": "husky install",
-    "cspell": "cspell lint **/*.{ts,js,md,json}"
+    "cspell": "cspell lint \"**/*.{ts,js,md,json}\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/i5ting/ts-junit.git"
-  },
-  "keywords": [
-    "uvu",
-    "jest",
-    "test",
-    "tdd",
-    "junit",
-    "ts",
-    "node",
-    "cli",
-    "ava",
-    "mocha",
-    "tape",
-    "qunit"
-  ],
-  "author": "i5ting",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/i5ting/ts-junit/issues"
-  },
-  "homepage": "https://github.com/i5ting/ts-junit#readme",
   "dependencies": {
-    "typescript": "^4.8.3"
+    "@ts-junit/core": "workspace:*",
+    "uvu": "^0.5.6"
   },
   "devDependencies": {
     "@types/node": "^18.7.18",
@@ -54,15 +28,12 @@
     "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tsdoc": "^0.2.17",
     "husky": "^8.0.1",
-    "np": "^7.6.2",
     "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
   },
-  "files": [
-    "dist",
-    "types",
-    "README.md"
-  ]
+  "author": "i5ting",
+  "license": "MIT"
 }

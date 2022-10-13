@@ -2,7 +2,7 @@ import Context from "./context";
 import UvuStrategy from "./uvuStrategy";
 import { WatchFiles } from "./watch";
 import { Debug, getFiles } from "./utils";
-import IStrategy from "./iStrategy";
+import { IStrategy } from "./iStrategy";
 
 const debug = Debug();
 
