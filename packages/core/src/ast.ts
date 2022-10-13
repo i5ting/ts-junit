@@ -84,18 +84,18 @@ export function getNeedCompileFiles() {
 
 /** @internal */
 export function getDependencyImports(files: any) {
-  const alibFiles = new Set();
-  const alocalFiles = new Set();
+  const aLibFiles = new Set();
+  const aLocalFiles = new Set();
 
   files.map((file: string) => {
     getImportsForFile(file);
 
-    libFiles.forEach(alibFiles.add, alibFiles);
-    localFiles.forEach(alibFiles.add, alocalFiles);
+    libFiles.forEach(aLibFiles.add, aLibFiles);
+    localFiles.forEach(aLocalFiles.add, aLocalFiles);
   });
 
   return {
-    lib: alibFiles,
-    local: alocalFiles,
+    lib: aLibFiles,
+    local: aLocalFiles,
   };
 }

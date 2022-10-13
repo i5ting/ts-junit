@@ -209,8 +209,8 @@ export function Disabled(message: string): ClassDecorator & PropertyDecorator {
       // const testSuite = suite(message);
       debug(`when @DisplayName with class: ${message}`);
 
-      cache[className]["skipClaas"] = true;
-      cache[className]["skipClaasReason"] = message;
+      cache[className]["skipClass"] = true;
+      cache[className]["skipClassReason"] = message;
     }
   };
 }

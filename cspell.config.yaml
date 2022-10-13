@@ -1,0 +1,21 @@
+version: "0.2"
+ignorePaths: ["node_modules", "pnpm-lock.yaml", "package-lock.json"]
+dictionaryDefinitions: []
+dictionaries: ["en_US", "softwareTerms", "typescript", "node", "bash"]
+words: ["junit", "tsdoc", "qunit"]
+ignoreWords:
+  [
+    "allfiles",
+    "basenames",
+    "clazz",
+    "classname",
+    "emptydata",
+    "testcase",
+    "uvustrategy",
+    "preinstall",
+    "memfs",
+    "sayhello",
+    "halign",
+    "tableblock",
+  ]
+import: []
