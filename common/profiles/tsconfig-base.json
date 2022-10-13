@@ -6,6 +6,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strict": true,
+    "useDefineForClassFields": true,
     "useUnknownInCatchVariables": false,
     "esModuleInterop": true,
     "noEmitOnError": false,
