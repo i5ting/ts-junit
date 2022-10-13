@@ -84,6 +84,11 @@
     "esm": true,
     "experimentalSpecifierResolution": "node"
   },
-  "exclude": ["node_modules", "dist", "./example/**/node_modules"],
-  "include": ["./src/**/*.ts", "./examples/", "./calculator.ts"]
+  "exclude": ["node_modules", "dist", "./packages/**/node_modules"],
+  "include": [
+    "./packages/**/*.ts",
+    "packages/core/examples",
+    "./calculator.ts",
+    "./test.ts"
+  ]
 }

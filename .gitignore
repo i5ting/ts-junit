@@ -43,7 +43,7 @@ jspm_packages/
 
 # TypeScript v1 declaration files
 typings/
-types/
+types
 
 # TypeScript cache
 *.tsbuildinfo
@@ -108,6 +108,5 @@ yarn.lock
 .DS_Store
 output
 
-# api-extractor temp files
 temp
 tsdoc-metadata.json

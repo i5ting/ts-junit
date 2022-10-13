@@ -1,0 +1,24 @@
+{
+  "name": "@ts-junit/cli",
+  "version": "1.0.0",
+  "description": "",
+  "bin": {
+    "junit": "dist/bin.js"
+  },
+  "scripts": {
+    "start": "ts-node ./bin.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ts-junit/core": "workspace:^1.0.0",
+    "yargs": "^17.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.18",
+    "@types/yargs": "^17.0.13",
+    "typescript": "^4.8.3",
+    "ts-node": "^10.9.1"
+  }
+}

@@ -2,26 +2,18 @@
   "name": "ts-junit",
   "version": "1.0.18",
   "description": "use junit decorator with typescript",
-  "main": "dist/index.js",
   "sideEffects": false,
-  "types": "./types",
-  "bin": {
-    "junit": "dist/bin.js"
-  },
+  "private": true,
   "scripts": {
-    "start": "ts-node ./src/bin.ts",
-    "gen-types": "rimraf ./types && tsc -p ./config/tsconfig.json",
-    "build": "rimraf ./dist && tsc -p ./tsconfig.build.json && npm run gen-types && npm run api-extractor",
-    "release": "npm test && npm build && np",
-    "test": "uvu -r ts-node/register test -i fixtures",
-    "dev": "ts-node test.ts",
-    "cli": "ts-node src/bin.ts examples/test.ts",
+    "preinstall": "npx only-allow pnpm",
+    "start": "pnpm --filter \"@ts-junit/cli\" start",
+    "cli": "pnpm start ../core/examples/test.ts",
     "api": "ts-node api.ts",
-    "api-extractor": "api-extractor run --local",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint --fix \"**/*.ts\"",
     "lint:check": "eslint \"**/*.ts\"",
+    "build": "pnpm --filter \"@ts-junit/core\" build",
     "prepare": "husky install"
   },
   "repository": {
@@ -49,19 +41,10 @@
   },
   "homepage": "https://github.com/i5ting/ts-junit#readme",
   "dependencies": {
-    "bluebird": "^3.7.2",
-    "debug": "^4.3.1",
-    "recast": "^0.21.5",
-    "typescript": "^4.8.3",
-    "uvu": "^0.5.1",
-    "yargs": "^17.5.1"
+    "typescript": "^4.8.3"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "^7.32.0",
-    "@types/bluebird": "^3.5.37",
-    "@types/debug": "^4.1.7",
     "@types/node": "^18.7.18",
-    "@types/yargs": "^17.0.13",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",

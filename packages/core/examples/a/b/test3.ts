@@ -1,5 +1,6 @@
 // tests/demo.js
 import * as assert from "uvu/assert";
+
 // test('Math.sqrt()', () => {
 //   assert.is(Math.sqrt(4), 2);
 //   assert.is(Math.sqrt(144), 12);
@@ -18,28 +19,28 @@ import * as assert from "uvu/assert";
 //   assert.equal(JSON.parse(output), input, 'matches original');
 // });
 
-import Calculator from "../../calculator";
+import Calculator from "../../../../../calculator";
 
-import { Test, DisplayName, Disabled } from "../../src/index";
+import { Test, DisplayName, Disabled } from "../../../src";
 
-@DisplayName("Clz2 test case")
+@DisplayName("Clz3 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")
-export default class ATests {
+export default class BTests {
   a = 1;
   b: string;
   calculator = new Calculator();
   // @Test
   // @BeforeAll
-  initAll() {
-    // assert.is(Math.sqrt(4), 12);
-    console.log("BeforeAll initAll");
-    this.a = 2;
-  }
+  // initAll() {
+  //     // assert.is(Math.sqrt(4), 12);
+  //     console.log('BeforeAll initAll')
+  //     this.a = 2
+  // }
 
-  // @BeforeEach
-  init() {
-    console.log("BeforeEach");
-  }
+  // // @BeforeEach
+  // init() {
+  //     console.log('BeforeEach')
+  // }
 
   // @AfterEach
   // tearDown() {
@@ -53,8 +54,6 @@ export default class ATests {
 
   @Test
   succeedingTest() {
-    // console.dir('succeedingTest')
-    // console.dir(this)
     // assert.ok(this.a === 2);
     assert.is(Math.sqrt(4), 2);
   }
