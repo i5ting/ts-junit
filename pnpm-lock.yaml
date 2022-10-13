@@ -4,6 +4,7 @@ importers:
 
   .:
     specifiers:
+      '@ts-junit/core': workspace:*
       '@types/node': ^18.7.18
       '@typescript-eslint/eslint-plugin': ^5.40.0
       '@typescript-eslint/parser': ^5.40.0
@@ -11,14 +12,15 @@ importers:
       eslint: ^8.25.0
       eslint-config-prettier: ^8.5.0
       eslint-plugin-prettier: ^4.2.1
+      eslint-plugin-tsdoc: ^0.2.17
       husky: ^8.0.1
-      np: ^7.6.2
       prettier: ^2.7.1
-      rimraf: ^3.0.2
       ts-node: ^10.9.1
       typescript: ^4.8.3
+      uvu: ^0.5.6
     dependencies:
-      typescript: 4.8.4
+      '@ts-junit/core': link:packages/core
+      uvu: 0.5.6
     devDependencies:
       '@types/node': 18.8.5
       '@typescript-eslint/eslint-plugin': 5.40.0_25sstg4uu2sk4pm7xcyzuov7xq
@@ -27,41 +29,46 @@ importers:
       eslint: 8.25.0
       eslint-config-prettier: 8.5.0_eslint@8.25.0
       eslint-plugin-prettier: 4.2.1_hvbqyfstm4urdpm6ffpwfka4e4
+      eslint-plugin-tsdoc: 0.2.17
       husky: 8.0.1
-      np: 7.6.2
       prettier: 2.7.1
-      rimraf: 3.0.2
       ts-node: 10.9.1_ptpocrdt7oaz4ni5mlvucph5pa
+      typescript: 4.8.4
 
   packages/cli:
     specifiers:
-      '@ts-junit/core': workspace:^1.0.0
+      '@microsoft/api-extractor': ^7.32.0
+      '@ts-junit/core': workspace:*
       '@types/node': ^18.7.18
       '@types/yargs': ^17.0.13
-      ts-node: ^10.9.1
+      np: ^7.6.2
+      rimraf: ^3.0.2
       typescript: ^4.8.3
       yargs: ^17.5.1
     dependencies:
       '@ts-junit/core': link:../core
       yargs: 17.6.0
     devDependencies:
+      '@microsoft/api-extractor': 7.33.1
       '@types/node': 18.8.5
       '@types/yargs': 17.0.13
-      ts-node: 10.9.1_ptpocrdt7oaz4ni5mlvucph5pa
+      np: 7.6.2
+      rimraf: 3.0.2
       typescript: 4.8.4
 
   packages/core:
     specifiers:
       '@microsoft/api-extractor': ^7.32.0
       '@types/bluebird': ^3.5.37
-      '@types/debug': ^4.1.7
       '@types/node': ^18.7.18
+      '@types/yargs': ^17.0.13
       bluebird: ^3.7.2
       debug: ^4.3.1
+      np: ^7.6.2
       recast: ^0.21.5
-      ts-node: ^10.9.1
+      rimraf: ^3.0.2
       typescript: ^4.8.3
-      uvu: ^0.5.1
+      uvu: ^0.5.6
     dependencies:
       bluebird: 3.7.2
       debug: 4.3.4
@@ -70,9 +77,10 @@ importers:
     devDependencies:
       '@microsoft/api-extractor': 7.33.1
       '@types/bluebird': 3.5.37
-      '@types/debug': 4.1.7
       '@types/node': 18.8.5
-      ts-node: 10.9.1_ptpocrdt7oaz4ni5mlvucph5pa
+      '@types/yargs': 17.0.13
+      np: 7.6.2
+      rimraf: 3.0.2
       typescript: 4.8.4
 
 packages:
@@ -562,12 +570,6 @@ packages:
       '@types/responselike': 1.0.0
     dev: true
 
-  /@types/debug/4.1.7:
-    resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
-    dependencies:
-      '@types/ms': 0.7.31
-    dev: true
-
   /@types/http-cache-semantics/4.0.1:
     resolution: {integrity: sha512-SZs7ekbP8CN0txVG2xVRH6EgKmEm31BOxA07vkFaETzZz1xh+cbt8BcI0slpymvwhx5dlFnQG2rTlPVQn+iRPQ==}
     dev: true
@@ -584,10 +586,6 @@ packages:
 
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
-    dev: true
-
-  /@types/ms/0.7.31:
-    resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
   /@types/node/12.20.24:
@@ -1513,6 +1511,13 @@ packages:
       eslint-config-prettier: 8.5.0_eslint@8.25.0
       prettier: 2.7.1
       prettier-linter-helpers: 1.0.0
+    dev: true
+
+  /eslint-plugin-tsdoc/0.2.17:
+    resolution: {integrity: sha512-xRmVi7Zx44lOBuYqG8vzTXuL6IdGOeF9nHX17bjJ8+VE6fsxpdGem0/SBTmAwgYMKYB1WBkqRJVQ+n8GK041pA==}
+    dependencies:
+      '@microsoft/tsdoc': 0.14.2
+      '@microsoft/tsdoc-config': 0.16.2
     dev: true
 
   /eslint-scope/5.1.1:
@@ -3675,6 +3680,7 @@ packages:
     resolution: {integrity: sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /unique-string/2.0.0:
     resolution: {integrity: sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==}

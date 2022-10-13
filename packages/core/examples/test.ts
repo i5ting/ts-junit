@@ -1,6 +1,6 @@
 // tests/demo.js
 import * as assert from "uvu/assert";
-import Calculator from "../../../calculator";
+import Calculator from "./calculator";
 
 import {
   Test,
