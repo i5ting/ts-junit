@@ -32,6 +32,8 @@ jobs:
 
       - name: Install PNPM
         uses: pnpm/action-setup@v2
+        with:
+          version: ^7.0
 
       - name: Install Deps
         run: pnpm i
