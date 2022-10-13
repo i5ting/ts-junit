@@ -30,11 +30,16 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Install
-        run: yarn
+      - name: Install PNPM
+        uses: pnpm/action-setup@v2
+        with:
+          version: ^7.0
+
+      - name: Install Deps
+        run: pnpm i
 
       - name: lint
-        run: yarn lint:check
+        run: pnpm lint:check
 
       - name: test
-        run: yarn test
+        run: pnpm test

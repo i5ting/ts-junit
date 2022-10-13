@@ -1,7 +1,7 @@
-/output
-/temp
-/dist
-/types
-/node_modules
-/test/fixtures
+**/output
+**/temp
+**/dist
+**/types
+**/node_modules
+**/test/fixtures
 junit.api.md
