@@ -10,6 +10,7 @@
     "release": "npm test && npm build && np",
     "test": "uvu -r ts-node/register test -i fixtures",
     "dev": "ts-node test.ts",
+    "api": "ts-node api.ts",
     "api-extractor": "api-extractor run --local"
   },
   "keywords": [],
