@@ -4,20 +4,20 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  plugins: ["eslint-plugin-tsdoc", "@typescript-eslint", "prettier"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
   ],
-  overrides: [],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "error",
-  }
+    "tsdoc/syntax": "warn",
+  },
 };

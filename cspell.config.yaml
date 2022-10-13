@@ -17,5 +17,6 @@ ignoreWords:
     "sayhello",
     "halign",
     "tableblock",
+    "precheck",
   ]
 import: []

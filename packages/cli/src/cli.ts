@@ -6,8 +6,7 @@ import { hideBin } from "yargs/helpers";
 
 import { runCli } from "@ts-junit/core";
 
-const files = yargs(hideBin(process.argv)).argv["_"].map((file: string) =>
-  resolve(file),
-);
+const argv = yargs(hideBin(process.argv)).argv as Record<"_", string[]>;
+const files = argv["_"].map((file: string) => resolve(file));
 
 runCli(files);

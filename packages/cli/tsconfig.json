@@ -1,8 +1,10 @@
 {
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../common/profiles/tsconfig-base.json",
   "compilerOptions": {
-    "outDir": "./dist",
-    "target": "es6",
-    "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
-  }
+    "removeComments": true,
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"]
 }

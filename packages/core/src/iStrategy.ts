@@ -4,8 +4,10 @@
  *
  * The Context uses this interface to call the test framework defined by Concrete
  * Strategies.
+ *
+ * @alpha
  */
-export default interface IStrategy {
+export interface IStrategy {
   test: any;
   testcase(name: string): any;
   parseData(i: string, clz_name: IStrategy, Clazz: any, obj: object): void;

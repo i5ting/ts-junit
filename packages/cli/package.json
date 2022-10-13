@@ -1,25 +1,59 @@
 {
   "name": "@ts-junit/cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "use junit decorator with typescript",
+  "keywords": [
+    "uvu",
+    "jest",
+    "test",
+    "tdd",
+    "junit",
+    "ts",
+    "node",
+    "cli",
+    "ava",
+    "mocha",
+    "tape",
+    "qunit"
+  ],
   "bin": {
-    "junit": "dist/bin.js"
+    "junit": "dist/cli.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "ts-node ./bin.ts",
-    "build": "rimraf ./dist && tsc"
+    "watch": "tsc --watch",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "release": "npm test && npm run build && np",
+    "types:check": "tsc --noEmit",
+    "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@ts-junit/core": "workspace:^1.0.0",
+    "@ts-junit/core": "workspace:*",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
-    "@types/node": "^18.7.18",
+    "@microsoft/api-extractor": "^7.32.0",
     "@types/yargs": "^17.0.13",
-    "typescript": "^4.8.3",
-    "ts-node": "^10.9.1"
-  }
+    "@types/node": "^18.7.18",
+    "np": "^7.6.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.3"
+  },
+  "homepage": "https://github.com/i5ting/ts-junit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i5ting/ts-junit.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/i5ting/ts-junit/issues"
+  },
+  "author": "i5ting",
+  "license": "MIT"
 }
