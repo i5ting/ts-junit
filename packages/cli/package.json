@@ -6,7 +6,8 @@
     "junit": "dist/bin.js"
   },
   "scripts": {
-    "start": "ts-node ./bin.ts"
+    "start": "ts-node ./bin.ts",
+    "build": "rimraf ./dist && tsc"
   },
   "keywords": [],
   "author": "",

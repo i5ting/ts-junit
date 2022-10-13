@@ -15,6 +15,7 @@
     "lint": "eslint --fix \"**/*.ts\"",
     "lint:check": "eslint \"**/*.ts\"",
     "build": "pnpm --filter \"@ts-junit/core\" build",
+    "build-cli": "pnpm --filter \"@ts-junit/cli...\" build",
     "prepare": "husky install"
   },
   "repository": {
