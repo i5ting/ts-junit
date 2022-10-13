@@ -23,8 +23,8 @@ export default class UvuStrategy implements IStrategy {
     Clazz: any,
     obj: object,
   ): void {
-    if (Clazz["skipClaas"]) {
-      console.warn(`Class skip ${clz_name} reason: ${Clazz.skipClaasReason}`);
+    if (Clazz["skipClass"]) {
+      console.warn(`Class skip ${clz_name} reason: ${Clazz.skipClassReason}`);
     } else {
       for (const j in Clazz) {
         if (j === "hook") {

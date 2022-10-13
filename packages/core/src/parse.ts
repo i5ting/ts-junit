@@ -7,7 +7,7 @@ import { Debug } from "./utils";
 const debug = Debug("parse");
 
 /** @internal */
-export function getEableRunDataMapping(commonjsFile: string) {
+export function getEnableRunDataMapping(commonjsFile: string) {
   const allTest = getDataMapping(commonjsFile);
   const clazz = allTest.find((item) => item["Class"]?.length > 0);
 

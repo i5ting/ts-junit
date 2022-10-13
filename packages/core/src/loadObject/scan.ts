@@ -54,7 +54,7 @@ export function loadFromDecorator(file: string) {
   if (!data) return;
 
   // Clazz.default.data = data
-  // require('../decrator').emptydata()
+  // require('../decorator').emptydata()
   clearCache();
 
   // obj.__data = data
@@ -89,7 +89,7 @@ export function loadFromCache(file: string) {
  * if need, go to uvustrategy
  */
 function getDataFromDecoratorJson(file: string, obj: object) {
-  // getEableRunDataMapping
+  // getEnableRunDataMapping
   // [
   //     { method: 'initAll', hook: 'BeforeAll' },
   //     { method: 'init', hook: 'BeforeEach' },
@@ -193,8 +193,8 @@ function getDataFromDecoratorJson(file: string, obj: object) {
   // if { Class: 'MyFirstJUnitJupiterTests', DisplayName: 'Clz test case', Disabled: 'Disabled until bug #42 has been resolved'}
   // remove all method
   if (classDisabledDesc) {
-    cache[className]["skipClaas"] = true;
-    cache[className]["skipClaasReason"] = classDisabledDesc;
+    cache[className]["skipClass"] = true;
+    cache[className]["skipClassReason"] = classDisabledDesc;
   }
 
   return cache;

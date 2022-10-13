@@ -6,7 +6,7 @@ import IStrategy from "./iStrategy";
 
 const debug = Debug();
 
-export * from "./decrator";
+export * from "./decorator";
 export * from "./iStrategy";
 export * from "./watch";
 export * from "./ast";
