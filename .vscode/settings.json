@@ -46,7 +46,7 @@
     "files.insertFinalNewline": true
   },
   "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.insertFinalNewline": true
   },
   "[javascriptreact]": {
@@ -54,7 +54,7 @@
     "files.insertFinalNewline": true
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "files.insertFinalNewline": true
   },
   "[typescriptreact]": {
