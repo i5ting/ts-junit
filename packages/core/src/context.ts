@@ -6,6 +6,30 @@ const debug = Debug("ts-junit");
 
 import { IStrategy } from "./iStrategy";
 
+function registerRequireExtension(
+  target: NodeJS.RequireExtensions,
+  callback: (ext: string, module: NodeJS.Module, context: string) => void,
+) {
+  const extensions = Object.keys(target) as (keyof typeof target)[];
+
+  Object.assign(
+    require.extensions,
+    extensions.reduce((result, ext) => {
+      return {
+        ...result,
+        [ext]: (module: NodeJS.Module, context: string) => {
+          callback(ext as string, module, context);
+          return target[ext]?.(module, context);
+        },
+      };
+    }, {} as NodeJS.RequireExtensions),
+  );
+}
+
+function unregisterRequireExtension(target: NodeJS.RequireExtensions) {
+  Object.assign(require.extensions, target);
+}
+
 /**
  * The Context defines the interface of interest to clients.
  *
@@ -40,13 +64,30 @@ export default class Context {
     this.strategy = strategy;
   }
 
-  public runTsTestFiles(files: string[]): any {
+  public async runTsTestFiles(files: string[]): Promise<any> {
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
 
     const iterator = async (element) => this._runTsTestFile(element);
-    return Promise2.each(files, iterator);
+
+    const deps: string[] = [];
+    const originExtension = { ...require.extensions };
+
+    // 收集测试用例引用的依赖
+    registerRequireExtension(originExtension, (ext, module) => {
+      deps.push(module.filename);
+    });
+
+    const result = await Promise2.each(files, iterator);
+
+    unregisterRequireExtension(originExtension);
+
+    // 删除依赖
+    // todo: exclude some path
+    deps.forEach((filename) => Reflect.deleteProperty(require.cache, filename));
+
+    return result;
   }
 
   private _runTsTestFile(file: string): any {
