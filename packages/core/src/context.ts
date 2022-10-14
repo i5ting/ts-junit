@@ -14,7 +14,7 @@ function registerRequireExtension(
 
   Object.assign(
     require.extensions,
-    <NodeJS.RequireExtensions>extensions.reduce((result, ext) => {
+    extensions.reduce((result, ext) => {
       return {
         ...result,
         [ext]: (module: NodeJS.Module, context: string) => {
@@ -22,7 +22,7 @@ function registerRequireExtension(
           return target[ext]?.(module, context);
         },
       };
-    }, {}),
+    }, {} as NodeJS.RequireExtensions),
   );
 }
 
