@@ -1,0 +1,54 @@
+{
+  "name": "@ts-junit/template",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "./types/index.d.ts",
+  "description": "use junit decorator with typescript",
+  "keywords": [
+    "uvu",
+    "jest",
+    "test",
+    "tdd",
+    "junit",
+    "ts",
+    "node",
+    "cli",
+    "ava",
+    "mocha",
+    "tape",
+    "qunit"
+  ],
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "watch": "tsc --watch",
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "release": "npm test && npm run build && np",
+    "types:check": "tsc --noEmit",
+    "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.32.0",
+    "@types/node": "^18.7.18",
+    "np": "^7.6.2",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.3"
+  },
+  "homepage": "https://github.com/i5ting/ts-junit#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i5ting/ts-junit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/i5ting/ts-junit/issues"
+  },
+  "author": "i5ting",
+  "license": "MIT"
+}

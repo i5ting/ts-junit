@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../common/profiles/tsconfig-base.json",
+  "compilerOptions": {
+    "declarationDir": "./types",
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"]
+}
