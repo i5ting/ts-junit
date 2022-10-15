@@ -30,7 +30,7 @@
   "dependencies": {
     "@ts-junit/utils": "workspace:*",
     "@ts-junit/decorator": "workspace:*",
-    "@ts-junit/uvu-strategy": "workspace:*",
+    "@ts-junit/strategy": "workspace:*",
     "bluebird": "^3.7.2",
     "debug": "^4.3.1",
     "recast": "^0.21.5",
