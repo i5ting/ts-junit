@@ -19,7 +19,7 @@ import * as assert from "uvu/assert";
 //   assert.equal(JSON.parse(output), input, 'matches original');
 // });
 
-import Calculator from "../../../../../calculator";
+import Calculator from "../../../calculator";
 
 import { Test, DisplayName, Disabled } from "../../../src";
 

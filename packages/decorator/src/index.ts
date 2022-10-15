@@ -2,6 +2,8 @@ import { debug } from "@ts-junit/utils";
 
 let cache: any = {};
 
+export * from "./load";
+
 /** @alpha */
 export function emptydata() {
   debug("emptydata := {}");

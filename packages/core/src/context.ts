@@ -2,9 +2,11 @@
 
 import Promise2 from "bluebird";
 
-import { debug, loadFromCache } from "@ts-junit/utils";
+import { debug } from "@ts-junit/utils";
 
 import { Strategy } from "@ts-junit/strategy";
+
+import { loadFromCache } from "@ts-junit/decorator";
 
 function registerRequireExtension(
   target: NodeJS.RequireExtensions,
@@ -64,34 +66,53 @@ export default class Context {
     this.strategy = strategy;
   }
 
-  public async runTsTestFiles(files: string[]): Promise<any> {
+  // public async runTsTestFiles(files: string[]): Promise<any> {
+  //   files = files.map(function (file) {
+  //     return file.replace(".ts", "");
+  //   });
+
+  //   const iterator = async (element) => this._runTsTestFile(element);
+
+  //   const deps: string[] = [];
+  //   const originExtension = { ...require.extensions };
+
+  //   // 收集测试用例引用的依赖
+  //   registerRequireExtension(originExtension, (ext, module) => {
+  //     deps.push(module.filename);
+  //   });
+
+  //   const result = await Promise2.each(files, iterator);
+
+  //   unregisterRequireExtension(originExtension);
+
+  //   // 删除依赖
+  //   // todo: exclude some path
+  //   deps.forEach((filename) => Reflect.deleteProperty(require.cache, filename));
+
+  //   return result;
+  // }
+
+  public runTsTestFiles(files: string[]): any {
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
 
+    debug(files);
     const iterator = async (element) => this._runTsTestFile(element);
-
-    const deps: string[] = [];
-    const originExtension = { ...require.extensions };
-
-    // 收集测试用例引用的依赖
-    registerRequireExtension(originExtension, (ext, module) => {
-      deps.push(module.filename);
-    });
-
-    const result = await Promise2.each(files, iterator);
-
-    unregisterRequireExtension(originExtension);
-
-    // 删除依赖
-    // todo: exclude some path
-    deps.forEach((filename) => Reflect.deleteProperty(require.cache, filename));
-
-    return result;
+    return Promise2.each(files, iterator);
   }
 
+  /**
+   * Usually, run single typescript test for api mode
+   *
+   * 1. import ts test file (in exmaple/*.js)
+   * 2. require ts-junit dist/decorator.js
+   * 3. parse data from dist/decorator.js cache
+   * 4. final, run tests
+   */
   private _runTsTestFile(file: string): any {
     debug(" --- runTest --- ");
+    // console.dir(file)
     return loadFromCache(file).then((result) => {
       const nodeList = [result];
       // console.dir(result);
