@@ -33,15 +33,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
-    "@ts-junit/core": "workspace:*",
-    "yargs": "^17.5.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
-    "@types/yargs": "^17.0.13",
     "@types/node": "^18.7.18",
-    "np": "^7.6.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.3"
   },

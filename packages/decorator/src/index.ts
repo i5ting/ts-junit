@@ -2,7 +2,7 @@ import { Debug } from "@ts-junit/utils";
 
 const debug = Debug("ts-junit");
 
-let cache = {};
+let cache: any = {};
 
 /** @alpha */
 export function emptydata() {
@@ -91,7 +91,7 @@ export function AfterAll(
 
 /** @alpha */
 export function Test(
-  target: object,
+  target: object | any,
   propertyName: string,
   descriptor: TypedPropertyDescriptor<any>,
 ) {
