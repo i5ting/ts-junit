@@ -1,6 +1,4 @@
-import { Debug } from "@ts-junit/utils";
-
-const debug = Debug("ts-junit");
+import { debug } from "@ts-junit/utils";
 
 let cache: any = {};
 
