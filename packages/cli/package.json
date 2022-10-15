@@ -19,7 +19,7 @@
     "qunit"
   ],
   "bin": {
-    "junit": "dist/cli.js"
+    "junit": "dist/index.js"
   },
   "files": [
     "dist"

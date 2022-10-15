@@ -10,4 +10,6 @@ import { debug } from "@ts-junit/utils";
 const argv = yargs(hideBin(process.argv)).argv as Record<"_", string[]>;
 const files = argv["_"].map((file: string) => resolve(file));
 
+debug(files);
+
 runCli(files);

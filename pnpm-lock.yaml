@@ -39,6 +39,7 @@ importers:
     specifiers:
       '@microsoft/api-extractor': ^7.32.0
       '@ts-junit/core': workspace:*
+      '@ts-junit/utils': workspace:*
       '@types/node': ^18.7.18
       '@types/yargs': ^17.0.13
       np: ^7.6.2
@@ -47,6 +48,7 @@ importers:
       yargs: ^17.5.1
     dependencies:
       '@ts-junit/core': link:../core
+      '@ts-junit/utils': link:../utils
       yargs: 17.6.0
     devDependencies:
       '@microsoft/api-extractor': 7.33.1
