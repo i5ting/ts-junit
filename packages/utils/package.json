@@ -17,7 +17,7 @@
     "qunit"
   ],
   "bin": {
-    "junit": "dist/cli.js"
+    "junit": "dist/index.js"
   },
   "files": [
     "dist"
@@ -33,7 +33,12 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {},
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "debug": "^4.3.1",
+    "recast": "^0.21.5",
+    "uvu": "^0.5.6"
+  },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
     "@types/node": "^18.7.18",

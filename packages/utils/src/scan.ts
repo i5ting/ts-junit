@@ -1,8 +1,7 @@
 // import exp from "node:constants";
-import { flattenObj, getDataMapping, requireDir, emptydata } from "../";
-import { data } from "../";
+import { flattenObj, getDataMapping, requireDir } from "./";
 
-import { Debug } from "../utils";
+import { Debug } from ".";
 
 const debug = Debug();
 
@@ -74,7 +73,7 @@ export function loadFromCache(file: string) {
     if (!_data) return;
 
     // Clazz.default.data = data
-    emptydata();
+    // emptydata();
     // obj.__data = _data;
 
     const newClz = _data[clz_name]; //|| {}

@@ -12,3 +12,5 @@ export interface IStrategy {
   testcase(name: string): any;
   parseData(i: string, clz_name: IStrategy, Clazz: any, obj: object): void;
 }
+
+export * from "./uvu";

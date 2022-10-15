@@ -35,7 +35,8 @@
   },
   "dependencies": {
     "@ts-junit/core": "workspace:*",
-    "yargs": "^17.5.1"
+    "yargs": "^17.5.1",
+    "uvu": "^0.5.6"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",

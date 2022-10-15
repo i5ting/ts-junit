@@ -1,20 +1,13 @@
 import Context from "./context";
-import UvuStrategy from "./uvuStrategy";
+import UvuStrategy from "../../uvu-strategy/src";
 import { WatchFiles } from "./watch";
-import { Debug, getFiles } from "./utils";
-import { IStrategy } from "./iStrategy";
+import { IStrategy } from "../../uvu-strategy/src/iStrategy";
 
 const debug = Debug();
 
-export * from "./decorator";
-export * from "./iStrategy";
+export * from "../../uvu-strategy/src/iStrategy";
 export * from "./watch";
-export * from "./ast";
-export * from "./utils";
 export * from "./parse";
-export * from "./loadObject/scan";
-export * from "./loadObject/require";
-export * from "./loadObject/flatten";
 
 /**
  * for cli invoke (need compile ts to js)

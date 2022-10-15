@@ -4,7 +4,7 @@ import { Debug } from "./utils";
 
 const debug = Debug("ts-junit");
 
-import { IStrategy } from "./iStrategy";
+import { IStrategy } from "../../uvu-strategy/src/iStrategy";
 
 function registerRequireExtension(
   target: NodeJS.RequireExtensions,

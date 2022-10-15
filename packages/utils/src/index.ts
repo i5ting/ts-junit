@@ -3,9 +3,14 @@ import * as path from "node:path";
 import debugModule from "debug";
 
 import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
-import { getAllTsFiles } from "./loadObject/scan";
+import { getAllTsFiles } from "./scan";
 
 const debug = Debug();
+
+export * from "./ast";
+export * from "./scan";
+export * from "./require";
+export * from "./flatten";
 
 /**
  *

@@ -2,7 +2,7 @@
 
 import * as fs from "node:fs";
 import { parse, visit } from "recast";
-import { Debug } from "./utils";
+import { Debug } from "@ts-junit/utils";
 
 const debug = Debug("parse");
 
