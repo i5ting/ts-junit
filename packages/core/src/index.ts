@@ -51,8 +51,6 @@ export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   // get all file from rest(file or folder)
   const files = getFiles(rest);
 
-  console.dir(files);
-
   // run tests
   context.runTsTestFiles(files);
 
