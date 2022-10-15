@@ -1,5 +1,5 @@
 import Context from "./context";
-import UvuStrategy from "../../uvu-strategy/src";
+import { IStrategy, UvuStrategy } from "@ts-junit/strategy";
 import { WatchFiles } from "./watch";
 import { IStrategy } from "../../uvu-strategy/src/iStrategy";
 

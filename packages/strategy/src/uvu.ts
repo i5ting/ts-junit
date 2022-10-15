@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { suite } from "uvu";
 import { debug } from "@ts-junit/utils";
 import { IStrategy } from ".";
@@ -6,7 +7,7 @@ import { IStrategy } from ".";
  * Concrete Strategies implement the Uvu test framework while following the base Strategy
  * interface. The interface makes them interchangeable in the Context.
  */
-export default class UvuStrategy implements IStrategy {
+export class UvuStrategy implements IStrategy {
   test: any;
 
   testcase(name: string): any {
