@@ -1,6 +1,6 @@
-// @ts-nocheck
+// tests/demo.js
 import * as assert from "uvu/assert";
-import Calculator from "../calculator";
+import Calculator from "./calculator";
 
 import {
   Test,
@@ -10,11 +10,11 @@ import {
   AfterEach,
   DisplayName,
   Disabled,
-} from "@ts-junit/core";
+} from "../src/index";
 
 @DisplayName("Clz test case")
-@Disabled("Disabled all Clazz until bug #99 has been fixed")
-export default class ClassDisableTests {
+// @Disabled("Disabled all Clazz until bug #99 has been fixed")
+export default class MyFirstJUnitJupiterTests {
   a = 1;
   b: string;
   calculator = new Calculator();
@@ -42,7 +42,6 @@ export default class ClassDisableTests {
   }
 
   @Test
-  @Disabled("Disabled succeedingTest")
   succeedingTest() {
     assert.ok(this.a === 2);
     assert.is(Math.sqrt(4), 2);

@@ -1,5 +1,5 @@
 {
-  "name": "@ts-junit/cli",
+  "name": "@ts-junit/strategy",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
     "qunit"
   ],
   "bin": {
-    "junit": "dist/index.js"
+    "junit": "dist/cli.js"
   },
   "files": [
     "dist"
@@ -36,13 +36,11 @@
     "access": "public"
   },
   "dependencies": {
-    "@ts-junit/core": "workspace:*",
     "@ts-junit/utils": "workspace:*",
-    "yargs": "^17.5.1"
+    "uvu": "^0.5.6"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
-    "@types/yargs": "^17.0.13",
     "@types/node": "^18.7.18",
     "np": "^7.6.2",
     "rimraf": "^3.0.2",

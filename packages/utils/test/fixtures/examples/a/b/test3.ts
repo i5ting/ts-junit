@@ -1,4 +1,4 @@
-// @ts-nocheck
+// tests/demo.js
 import * as assert from "uvu/assert";
 
 // test('Math.sqrt()', () => {
@@ -19,9 +19,9 @@ import * as assert from "uvu/assert";
 //   assert.equal(JSON.parse(output), input, 'matches original');
 // });
 
-import Calculator from "../../../calculator";
+import Calculator from "../../../../../calculator";
 
-import { Test, DisplayName, Disabled } from "@ts-junit/core";
+import { Test, DisplayName, Disabled } from "../../../src";
 
 @DisplayName("Clz3 test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")

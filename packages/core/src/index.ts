@@ -1,45 +1,14 @@
-import Context from "./context";
-import UvuStrategy from "./uvuStrategy";
-import { WatchFiles } from "./watch";
-import { Debug, getFiles } from "./utils";
-import { IStrategy } from "./iStrategy";
+import * as path from "path";
 
-const debug = Debug();
+import { Context } from "./context";
+import { Strategy, UvuStrategy } from "@ts-junit/strategy";
+import { debug } from "@ts-junit/utils";
 
-export * from "./decorator";
-export * from "./iStrategy";
-export * from "./watch";
-export * from "./ast";
-export * from "./utils";
-export * from "./parse";
-export * from "./loadObject/scan";
-export * from "./loadObject/require";
-export * from "./loadObject/flatten";
+export * from "./context";
 
-/**
- * for cli invoke (need compile ts to js)
- *
- * run([path.resolve(process.cwd(), "./tests/")])
- * run([path.resolve(process.cwd(), "./tests/"),path.resolve(process.cwd(), "./tests/test.ts")])
- *
- * @public
- */
-export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
-  debug("runCli With UvuStrategy");
-  console.time("build ts");
-
-  // set context use default strategy
-  const context = new Context(strategy);
-
-  // get all file from rest(file or folder)
-  const files = getFiles(rest);
-
-  // compile and watch, then run test
-  WatchFiles(files, context);
-
-  // time statistics
-  console.timeEnd("build ts");
-}
+export * from "@ts-junit/decorator";
+export * from "@ts-junit/strategy";
+export * from "@ts-junit/utils";
 
 /**
  * for api invoke (use ts-node)
@@ -49,18 +18,18 @@ export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
  *
  * @public
  */
-export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
+export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   debug("run With UvuStrategy");
   console.time("run ts");
 
-  // set context use default strategy
-  const context = new Context(strategy);
+  // get file base
+  const base = path.resolve(__dirname, ".");
 
-  // get all file from rest(file or folder)
-  const files = getFiles(rest);
+  // set context use default strategy
+  const context = new Context(strategy, { rest: rest, base: base });
 
   // run tests
-  context.runTsTestFiles(files);
+  context.runTests();
 
   // time statistics
   console.timeEnd("run ts");
