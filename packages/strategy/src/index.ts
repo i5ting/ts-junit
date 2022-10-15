@@ -7,10 +7,10 @@
  *
  * @alpha
  */
-export interface IStrategy {
+export interface Strategy {
   test: any;
   testcase(name: string): any;
-  parseData(i: string, clz_name: IStrategy, Clazz: any, obj: object): void;
+  parseData(i: string, clz_name: Strategy, Clazz: any, obj: object): void;
 }
 
 export * from "./uvu";
