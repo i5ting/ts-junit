@@ -25,9 +25,9 @@
     "dist"
   ],
   "scripts": {
-    "watch": "tsc --watch",
-    "build": "tsc",
-    "clean": "rimraf dist",
+    "watch": "tsc --build --watch",
+    "build": "tsc --build",
+    "clean": "rimraf dist types *.tsbuildinfo",
     "release": "npm test && npm run build && np",
     "types:check": "tsc --noEmit",
     "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"

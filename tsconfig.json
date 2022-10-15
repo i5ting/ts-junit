@@ -3,7 +3,11 @@
   "compilerOptions": {
     "strict": false, // 等类型解决完再设置为 true
     "declarationDir": "./types",
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ts-junit/*": ["package/*/src"]
+    }
   },
   "include": ["samples"]
 }

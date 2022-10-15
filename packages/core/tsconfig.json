@@ -7,9 +7,17 @@
     "rootDir": "src",
     "outDir": "dist"
   },
-  "include": [
-    "src",
-    "../uvu-strategy/src/iStrategy.ts",
-    "../uvu-strategy/src/uvuStrategy.ts"
+  "include": ["src"],
+  // See https://www.typescriptlang.org/docs/handbook/project-references.html
+  "references": [
+    {
+      "path": "../utils"
+    },
+    {
+      "path": "../strategy"
+    },
+    {
+      "path": "../decorator"
+    }
   ]
 }
