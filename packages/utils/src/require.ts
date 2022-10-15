@@ -1,4 +1,4 @@
-// requireDir.js
+// @ts-nocheck
 
 import fs from "node:fs";
 import path from "node:path";

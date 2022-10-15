@@ -5,12 +5,12 @@ import debugModule from "debug";
 import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
 import { getAllTsFiles } from "./scan";
 
-const debug = Debug();
-
 export * from "./ast";
 export * from "./scan";
 export * from "./require";
 export * from "./flatten";
+
+export const debug = Debug();
 
 /**
  *
@@ -29,21 +29,28 @@ export function Debug(name?: string) {
  * @see https://github.com/i5ting/colondebug/
  */
 export function DebugWith(key: string) {
-  const operation = key.split(":").pop();
+  const operation: string = key.split(":").pop() || "";
   let debug = debugModule(key);
 
   if (Object.keys(console).includes(operation)) {
+    // @ts-ignore
     debug = console[operation];
   }
 
   return debug;
 }
 
+interface Config {
+  name: string;
+}
+
 /** @internal */
-export function get_closest_package_json() {
+export function get_closest_package_json(): Config {
   const debug = DebugWith("ts-junit:utils");
 
-  let config;
+  let config: Config = {
+    name: "",
+  };
   let isNext = true;
 
   module.paths.forEach(function (i) {
@@ -72,7 +79,7 @@ export function get_closest_package_json() {
 
 /** @internal */
 export function getFiles(rest: any) {
-  const allfiles = [];
+  const allfiles: string[] = [];
   rest.map(function (i: string) {
     const item = path.resolve(process.cwd(), i);
 
@@ -109,7 +116,7 @@ export function getFiles(rest: any) {
 
 /** @internal */
 export function getCompileFiles(testFiles: string[]) {
-  const allfiles = [];
+  const allfiles: string[] = [];
   for (let testFile of testFiles) {
     // make sure cli args 'file.ts'
     testFile = testFile.replace(".ts", "");

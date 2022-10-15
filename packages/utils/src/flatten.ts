@@ -1,6 +1,5 @@
-import { Debug } from ".";
-
-const debug = Debug();
+// @ts-nocheck
+import { debug } from ".";
 
 /** @internal */
 export function flatten(node: any, path = "", nodeList = []) {

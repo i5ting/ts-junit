@@ -10,7 +10,7 @@ export const localFiles = new Set<string>();
 /** @internal */
 export const processedFiles = new Set();
 /** @internal */
-export const needCompileFiles = [];
+export const needCompileFiles: string[] = [];
 
 function getImportsForFile(file: string, options?: any) {
   const fileInfo = ts.preProcessFile(readFileSync(file).toString());

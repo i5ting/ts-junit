@@ -19,5 +19,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "prettier/prettier": "error",
     "tsdoc/syntax": "warn",
+    // "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
   },
 };
