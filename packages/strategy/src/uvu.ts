@@ -1,8 +1,6 @@
 import { suite } from "uvu";
-import { Debug } from "@ts-junit/utils";
+import { debug } from "@ts-junit/utils";
 import { IStrategy } from ".";
-
-const debug = Debug();
 
 /**
  * Concrete Strategies implement the Uvu test framework while following the base Strategy
