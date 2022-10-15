@@ -1,4 +1,4 @@
-import { Debug } from "./utils";
+import { Debug } from "@ts-junit/utils";
 
 const debug = Debug("ts-junit");
 
