@@ -12,4 +12,4 @@
 
 run test with some package
 
-> pnpm test --filter  @ts-junit/utils
+> pnpm --filter  @ts-junit/utils test

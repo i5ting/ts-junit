@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@ts-junit/core": "workspace:*",
+    "@ts-junit/utils": "workspace:*",
     "yargs": "^17.5.1"
   },
   "devDependencies": {
