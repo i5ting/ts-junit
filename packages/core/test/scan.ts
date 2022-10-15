@@ -2,7 +2,7 @@ import { test } from "uvu";
 import * as path from "node:path";
 import * as assert from "uvu/assert";
 
-import { getTsFiles, requireDir } from "../src/";
+import { getTsFiles, requireDir } from "@ts-junit/utils";
 
 test("getTsFiles(dir)", () => {
   const dir = path.resolve(process.cwd(), "./examples/");

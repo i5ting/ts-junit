@@ -2,7 +2,7 @@ import { test } from "uvu";
 import * as path from "node:path";
 import * as assert from "uvu/assert";
 
-import { getAllImportsForFile, getNeedCompileFiles } from "../src/ast";
+import { getAllImportsForFile, getNeedCompileFiles } from "@ts-junit/utils";
 
 test("Math.sqrt()", () => {
   assert.is(Math.sqrt(4), 2);
@@ -34,7 +34,7 @@ test.only("getAllImportsForFile()", () => {
 
   const needCompileFiles = getNeedCompileFiles();
 
-  assert.is(needCompileFiles.length, 14);
+  assert.is(needCompileFiles.length, 6);
 });
 
 test("JSON", () => {
