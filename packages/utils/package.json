@@ -22,6 +22,8 @@
   "files": [
     "dist"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "watch": "tsc --watch",
     "test": "uvu -r ts-node/register test -i fixtures",
