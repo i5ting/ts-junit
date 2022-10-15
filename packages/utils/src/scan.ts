@@ -3,12 +3,12 @@ import { flattenObj, requireDir } from "./";
 
 import { debug } from ".";
 
-let cache = {};
+// let cache = {};
 
 /** @internal */
-export function clearCache() {
-  cache = {};
-}
+// export function clearCache() {
+//   cache = {};
+// }
 
 /** @internal */
 export function getAllTsFiles(dirs: string[]) {
