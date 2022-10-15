@@ -1,5 +1,5 @@
 {
-  "name": "@ts-junit/cli",
+  "name": "@ts-junit/utils",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,14 +18,12 @@
     "tape",
     "qunit"
   ],
-  "bin": {
-    "junit": "dist/index.js"
-  },
   "files": [
     "dist"
   ],
   "scripts": {
     "watch": "tsc --watch",
+    "test": "uvu -r ts-node/register test -i fixtures",
     "build": "tsc",
     "clean": "rimraf dist",
     "release": "npm test && npm run build && np",
@@ -36,17 +34,15 @@
     "access": "public"
   },
   "dependencies": {
-    "@ts-junit/core": "workspace:*",
-    "@ts-junit/utils": "workspace:*",
-    "yargs": "^17.5.1"
+    "@types/debug": "^4.1.7",
+    "debug": "^4.3.4"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
-    "@types/yargs": "^17.0.13",
     "@types/node": "^18.7.18",
-    "np": "^7.6.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "uvu": "^0.5.6"
   },
   "homepage": "https://github.com/i5ting/ts-junit#readme",
   "repository": {

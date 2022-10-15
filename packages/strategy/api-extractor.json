@@ -1,0 +1,22 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/api-extractor/v7/api-extractor.schema.json",
+  "mainEntryPointFilePath": "<projectFolder>/temp/types/index.d.ts",
+  "bundledPackages": [],
+  "compiler": {
+    "tsconfigFilePath": "<projectFolder>/tsconfig.check.json",
+    "overrideTsconfig": {}
+  },
+  "apiReport": {
+    "enabled": true,
+    "reportFolder": "<projectFolder>/temp/"
+  },
+  "docModel": {
+    "enabled": false
+  },
+  "tsdocMetadata": {
+    "enabled": false
+  },
+  "dtsRollup": {
+    "enabled": false
+  }
+}

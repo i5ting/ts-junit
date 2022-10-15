@@ -1,5 +1,5 @@
 {
-  "name": "@ts-junit/cli",
+  "name": "@ts-junit/decorator",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,9 +18,6 @@
     "tape",
     "qunit"
   ],
-  "bin": {
-    "junit": "dist/index.js"
-  },
   "files": [
     "dist"
   ],
@@ -36,15 +33,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@ts-junit/core": "workspace:*",
-    "@ts-junit/utils": "workspace:*",
-    "yargs": "^17.5.1"
+    "@ts-junit/utils": "workspace:*"
   },
   "devDependencies": {
+    "@ts-junit/core": "workspace:*",
     "@microsoft/api-extractor": "^7.32.0",
-    "@types/yargs": "^17.0.13",
     "@types/node": "^18.7.18",
-    "np": "^7.6.2",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.3"
   },
