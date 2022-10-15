@@ -1,5 +1,6 @@
 import { suite } from "uvu";
 import { Debug } from "@ts-junit/utils";
+import { IStrategy } from ".";
 
 const debug = Debug();
 
