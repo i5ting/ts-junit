@@ -1,11 +1,8 @@
 import Context from "./context";
-import { IStrategy, UvuStrategy } from "@ts-junit/strategy";
+import { Strategy, UvuStrategy } from "@ts-junit/strategy";
+import { debug, getFiles } from "@ts-junit/utils";
 import { WatchFiles } from "./watch";
-import { IStrategy } from "../../uvu-strategy/src/iStrategy";
 
-const debug = Debug();
-
-export * from "../../uvu-strategy/src/iStrategy";
 export * from "./watch";
 export * from "./parse";
 
@@ -17,7 +14,7 @@ export * from "./parse";
  *
  * @public
  */
-export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
+export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
   debug("runCli With UvuStrategy");
   console.time("build ts");
 
@@ -42,7 +39,7 @@ export function runCli(rest: any, strategy: IStrategy = new UvuStrategy()) {
  *
  * @public
  */
-export function run(rest: any, strategy: IStrategy = new UvuStrategy()) {
+export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   debug("run With UvuStrategy");
   console.time("run ts");
 

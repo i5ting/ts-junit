@@ -1,10 +1,10 @@
+// @ts-nocheck
+
 import Promise2 from "bluebird";
-import { loadFromCache } from "./loadObject/scan";
-import { Debug } from "./utils";
 
-const debug = Debug("ts-junit");
+import { debug, loadFromCache } from "@ts-junit/utils";
 
-import { IStrategy } from "../../uvu-strategy/src/iStrategy";
+import { Strategy } from "@ts-junit/strategy";
 
 function registerRequireExtension(
   target: NodeJS.RequireExtensions,
@@ -43,7 +43,7 @@ export default class Context {
    *
    * @remarks
    */
-  private strategy: IStrategy;
+  private strategy: Strategy;
 
   /**
    * Usually, the Context accepts a strategy through the constructor, but also
@@ -51,7 +51,7 @@ export default class Context {
 
    * @remarks
    */
-  constructor(strategy: IStrategy) {
+  constructor(strategy: Strategy) {
     this.strategy = strategy;
   }
 
@@ -60,7 +60,7 @@ export default class Context {
    *
    * @remarks
    */
-  public setStrategy(strategy: IStrategy) {
+  public setStrategy(strategy: Strategy) {
     this.strategy = strategy;
   }
 

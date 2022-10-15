@@ -3,10 +3,8 @@ import * as path from "path";
 import ts from "typescript";
 
 import { EventEmitter } from "node:events";
-import { Debug, getCompileFiles } from "./utils";
+import { debug, getCompileFiles } from "@ts-junit/utils";
 import Context from "./context";
-
-const debug = Debug("watch");
 
 const runTestEmitter = new EventEmitter();
 const files: ts.MapLike<{ version: number }> = {};

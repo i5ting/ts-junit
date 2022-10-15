@@ -32,9 +32,7 @@
     "@ts-junit/decorator": "workspace:*",
     "@ts-junit/strategy": "workspace:*",
     "bluebird": "^3.7.2",
-    "debug": "^4.3.1",
-    "recast": "^0.21.5",
-    "uvu": "^0.5.6"
+    "recast": "^0.21.5"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
@@ -43,7 +41,8 @@
     "@types/yargs": "^17.0.13",
     "np": "^7.6.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.8.3"
+    "typescript": "^4.8.3",
+    "uvu": "^0.5.6"
   },
   "homepage": "https://github.com/i5ting/ts-junit#readme",
   "repository": {

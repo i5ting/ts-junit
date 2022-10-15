@@ -2,9 +2,7 @@
 
 import * as fs from "node:fs";
 import { parse, visit } from "recast";
-import { Debug } from "@ts-junit/utils";
-
-const debug = Debug("parse");
+import { debug } from "@ts-junit/utils";
 
 /** @internal */
 export function getEnableRunDataMapping(commonjsFile: string) {
