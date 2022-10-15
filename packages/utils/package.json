@@ -1,6 +1,8 @@
 {
   "name": "@ts-junit/utils",
   "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "description": "use junit decorator with typescript",
   "keywords": [
     "uvu",
@@ -22,8 +24,6 @@
   "files": [
     "dist"
   ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "scripts": {
     "watch": "tsc --watch",
     "test": "uvu -r ts-node/register test -i fixtures",
