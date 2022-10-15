@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { suite } from "uvu";
 import { debug } from "@ts-junit/utils";
 import { IStrategy } from ".";
