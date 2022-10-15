@@ -6,6 +6,8 @@ import { WatchFiles } from "./watch";
 export * from "./watch";
 export * from "./parse";
 
+export * from "@ts-junit/decorator";
+
 /**
  * for cli invoke (need compile ts to js)
  *
@@ -48,6 +50,8 @@ export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
 
   // get all file from rest(file or folder)
   const files = getFiles(rest);
+
+  console.dir(files);
 
   // run tests
   context.runTsTestFiles(files);

@@ -1,4 +1,4 @@
-// tests/demo.js
+// @ts-nocheck
 import * as assert from "uvu/assert";
 import Calculator from "./calculator";
 
@@ -10,7 +10,7 @@ import {
   AfterEach,
   DisplayName,
   Disabled,
-} from "../src/index";
+} from "@ts-junit/core";
 
 @DisplayName("Clz test case")
 // @Disabled("Disabled all Clazz until bug #99 has been fixed")
