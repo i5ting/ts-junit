@@ -92,7 +92,7 @@ export class Context {
   //   return result;
   // }
 
-  public runTsTestFiles(files: string[]): any {
+  public runTests(files: string[]): any {
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });

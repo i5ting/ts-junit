@@ -3,8 +3,6 @@ import { Strategy, UvuStrategy } from "@ts-junit/strategy";
 import { debug, getFiles } from "@ts-junit/utils";
 
 export * from "./context";
-export * from "./watch";
-export * from "./parse";
 
 export * from "@ts-junit/decorator";
 export * from "@ts-junit/strategy";
@@ -29,7 +27,7 @@ export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   const files = getFiles(rest);
 
   // run tests
-  context.runTsTestFiles(files);
+  context.runTests(files);
 
   // time statistics
   console.timeEnd("run ts");
