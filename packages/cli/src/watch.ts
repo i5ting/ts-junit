@@ -162,7 +162,6 @@ export function WatchFiles(context: Context) {
     module: ts.ModuleKind.CommonJS,
   });
 
-  const output = path.resolve(__dirname, "../output");
   // when file change run after 100ms * testFiles.length
   setTimeout(function () {
     // run test at once
@@ -263,7 +262,7 @@ export function processRequire(
       // var calculator_1 = require("../../calculator");
       // var index_1 = require("../../src/index");
       // 'src/index' 替换 "../../src/index"
-      const filePath = path.resolve(fileName, aline);
+      // const filePath = path.resolve(fileName, aline);
 
       // console.dir(filePath);
       needReplaceFiles.forEach(function (file) {

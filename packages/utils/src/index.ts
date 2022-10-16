@@ -4,8 +4,6 @@ import * as path from "node:path";
 import debugModule from "debug";
 
 import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
-import { getAllTsFiles } from "./scan";
-import { requireDir } from "./require";
 
 export * from "./ast";
 export * from "./scan";
