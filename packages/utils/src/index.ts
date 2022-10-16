@@ -191,7 +191,7 @@ export function processRequire(
       // 'src/index' 替换 "../../src/index"
       const filePath = path.resolve(fileName, aline);
 
-      // console.dir(filePath)
+      console.dir(filePath);
       needReplaceFiles.forEach(function (file) {
         if (line.match(file.split("/").join("/"))) {
           // console.dir(file.split('src/')[1])
