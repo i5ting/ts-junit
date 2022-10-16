@@ -5,6 +5,7 @@ import debugModule from "debug";
 
 import { getAllImportsForFile, getNeedCompileFiles } from "./ast";
 import { getAllTsFiles } from "./scan";
+import { requireDir } from "./require";
 
 export * from "./ast";
 export * from "./scan";
@@ -72,48 +73,6 @@ export function get_closest_package_json() {
 }
 
 /** @internal */
-export function getFiles(rest: any) {
-  const allfiles = [];
-  rest.map(function (i: string) {
-    const item = path.resolve(process.cwd(), i);
-
-    const stat = fs.lstatSync(item);
-
-    const fileOrDirType = stat.isDirectory()
-      ? "dir"
-      : stat.isFile()
-      ? "file"
-      : "other";
-
-    switch (fileOrDirType) {
-      case "dir":
-        console.warn("find dir " + item);
-        getAllTsFiles([item]).map(function (i) {
-          allfiles.push(i);
-        });
-
-        break;
-      case "file":
-        console.warn("find file " + item.replace(".ts", ""));
-
-        // runTestFile([item.replace(".ts", "")]);
-        allfiles.push(item.replace(".ts", ""));
-        break;
-      default:
-        console.warn("unknow type");
-        break;
-    }
-  });
-
-  return unique(allfiles);
-}
-
-/** @internal */
-export function getCompileFilesNotExistInDistDirectory(compileFiles: string[]) {
-  return processCompileFiles(compileFiles);
-}
-
-/** @internal */
 export function getCompileFiles(testFiles: string[]) {
   const allfiles = [];
   for (let testFile of testFiles) {
@@ -154,61 +113,6 @@ export function getCompileFiles(testFiles: string[]) {
 /** @internal */
 export function unique(arr: string[]): string[] {
   return Array.from(new Set(arr));
-}
-
-/** @internal */
-export function processRequire(
-  fileName: string,
-  code: string,
-  needReplaceFiles: string[],
-) {
-  const _code = [];
-  const _needReplaceFiles = needReplaceFiles.filter((item) =>
-    item.match(/index/),
-  );
-
-  // 在ts-junit cli模式下，本地调试才会用到
-  // ../src/index 替换成 dist/index'
-  // ../../../src 替换成 dist/index'
-  needReplaceFiles.push(
-    ..._needReplaceFiles.map((item) => item.replace(/\/index/, "")),
-  );
-  needReplaceFiles.push(
-    ..._needReplaceFiles.map((item) => item.replace(/\/index/, "/")),
-  );
-
-  // console.dir("needReplaceFiles2")
-  // console.dir(needReplaceFiles)
-
-  code.split(/\r?\n/).forEach(function (line) {
-    // console.dir(line)
-    if (line.match("require")) {
-      const require_re = /(\brequire\s*?\(\s*?)(['"])([^'"]+)(\2\s*?\))/g;
-      const aline = new RegExp(require_re).exec(line)[3];
-
-      // var calculator_1 = require("../../calculator");
-      // var index_1 = require("../../src/index");
-      // 'src/index' 替换 "../../src/index"
-      const filePath = path.resolve(fileName, aline);
-
-      console.dir(filePath);
-      needReplaceFiles.forEach(function (file) {
-        if (line.match(file.split("/").join("/"))) {
-          // console.dir(file.split('src/')[1])
-          const a = file.split("src/")[1] ? file.split("src/")[1] : "";
-          const base = fileName.split("ts-junit")[0] + "ts-junit/dist/" + a;
-          // console.dir(base)
-          line = line.replace(aline, base);
-          // console.dir(line)
-        }
-      });
-      //
-    }
-
-    _code.push(line);
-  });
-
-  return _code.join("\n");
 }
 
 /** @internal */

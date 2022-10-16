@@ -1,8 +1,11 @@
 // @ts-nocheck
 
+import * as path from "node:path";
+import * as fs from "node:fs";
+
 import Promise2 from "bluebird";
 
-import { debug } from "@ts-junit/utils";
+import { debug, unique } from "@ts-junit/utils";
 
 import { Strategy } from "@ts-junit/strategy";
 
@@ -53,8 +56,12 @@ export class Context {
 
    * @remarks
    */
-  constructor(strategy: Strategy) {
+  constructor(strategy: Strategy, options: any) {
     this.strategy = strategy;
+    this.options = options;
+    this.base = options?.base || process.cwd();
+    this.buildBase = options.buildBase;
+    this.rest = options.rest;
   }
 
   /**
@@ -92,12 +99,32 @@ export class Context {
   //   return result;
   // }
 
-  public runTests(files: string[]): any {
+  public runCliTests(): any {
+    // const that = this;
+    // console.dir("runCliTests");
+    // console.dir(this.base);
+    // console.dir(this.buildBase);
+    // console.dir(this.rest);
+    let files = this.rest;
+    // console.dir(files);
+    files = files.map(function (file) {
+      return path.resolve(this.buildBase, file.replace(".ts", "") + ".js");
+    });
+
+    // console.dir(files);
+    const iterator = async (element) => this._runTsTestFile(element);
+    return Promise2.each(files, iterator);
+  }
+
+  public runTests(rest: string[]): any {
+    // get all file from rest(file or folder)
+    const files = this.getFiles(rest);
+
     files = files.map(function (file) {
       return file.replace(".ts", "");
     });
 
-    debug(files);
+    // console.dir(files);
     const iterator = async (element) => this._runTsTestFile(element);
     return Promise2.each(files, iterator);
   }
@@ -112,7 +139,7 @@ export class Context {
    */
   private _runTsTestFile(file: string): any {
     debug(" --- runTest --- ");
-    // console.dir(file)
+    // console.dir(file);
     return loadFromCache(file).then((result) => {
       const nodeList = [result];
       // console.dir(result);
@@ -144,5 +171,50 @@ export class Context {
         this.strategy.test.run();
       }
     });
+  }
+
+  /** @internal */
+  public getFiles() {
+    const rest = this.rest;
+    // const that = this;
+    // console.dir("getFiles");
+    // console.dir(this.base);
+    // console.dir(rest);
+    const allfiles = [];
+    rest.map(function (i: string) {
+      const item = path.resolve(this.base, i);
+
+      // console.dir("getFiles = " + i);
+      // console.dir("getFiles = " + item);
+
+      const stat = fs.lstatSync(item);
+
+      const fileOrDirType = stat.isDirectory()
+        ? "dir"
+        : stat.isFile()
+        ? "file"
+        : "other";
+
+      switch (fileOrDirType) {
+        case "dir":
+          console.warn("find dir " + item);
+          getAllTsFiles([item]).map(function (i) {
+            allfiles.push(i);
+          });
+
+          break;
+        case "file":
+          console.warn("find file " + item.replace(".ts", ""));
+
+          // runTestFile([item.replace(".ts", "")]);
+          allfiles.push(item.replace(".ts", ""));
+          break;
+        default:
+          console.warn("unknow type");
+          break;
+      }
+    });
+
+    return unique(allfiles);
   }
 }

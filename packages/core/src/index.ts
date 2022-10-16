@@ -1,6 +1,8 @@
+import * as path from "path";
+
 import { Context } from "./context";
 import { Strategy, UvuStrategy } from "@ts-junit/strategy";
-import { debug, getFiles } from "@ts-junit/utils";
+import { debug } from "@ts-junit/utils";
 
 export * from "./context";
 
@@ -20,14 +22,14 @@ export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   debug("run With UvuStrategy");
   console.time("run ts");
 
-  // set context use default strategy
-  const context = new Context(strategy);
+  // get file base
+  const base = path.resolve(__dirname, ".");
 
-  // get all file from rest(file or folder)
-  const files = getFiles(rest);
+  // set context use default strategy
+  const context = new Context(strategy, { rest: rest, base: base });
 
   // run tests
-  context.runTests(files);
+  context.runTests(rest);
 
   // time statistics
   console.timeEnd("run ts");
