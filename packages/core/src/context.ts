@@ -100,7 +100,7 @@ export class Context {
   // }
 
   public runCliTests(): any {
-    // const that = this;
+    const that = this;
     // console.dir("runCliTests");
     // console.dir(this.base);
     // console.dir(this.buildBase);
@@ -108,7 +108,7 @@ export class Context {
     let files = this.rest;
     // console.dir(files);
     files = files.map(function (file) {
-      return path.resolve(this.buildBase, file.replace(".ts", "") + ".js");
+      return path.resolve(that.buildBase, file.replace(".ts", "") + ".js");
     });
 
     // console.dir(files);
@@ -176,13 +176,13 @@ export class Context {
   /** @internal */
   public getFiles() {
     const rest = this.rest;
-    // const that = this;
+    const that = this;
     // console.dir("getFiles");
     // console.dir(this.base);
     // console.dir(rest);
     const allfiles = [];
     rest.map(function (i: string) {
-      const item = path.resolve(this.base, i);
+      const item = path.resolve(that.base, i);
 
       // console.dir("getFiles = " + i);
       // console.dir("getFiles = " + item);

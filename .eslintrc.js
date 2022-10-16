@@ -21,5 +21,6 @@ module.exports = {
     "tsdoc/syntax": "warn",
     // "@typescript-eslint/ban-ts-ignore": "off",
     "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-this-alias": "off",
   },
 };
