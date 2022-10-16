@@ -3,13 +3,24 @@ import * as path from "path";
 import ts from "typescript";
 
 import { EventEmitter } from "node:events";
-import { debug, getCompileFiles } from "@ts-junit/utils";
-import { Context } from "./context";
+import {
+  debug,
+  getCompileFiles,
+  ensureDirectoryExistence,
+  processRequire,
+  getCompileFilesNotExistInDistDirectory,
+} from "@ts-junit/core";
+
+import { Context } from "@ts-junit/core";
 
 const runTestEmitter = new EventEmitter();
 const files: ts.MapLike<{ version: number }> = {};
 
-function watch(rootFileNames: string[], options: ts.CompilerOptions) {
+function watch(
+  rootFileNames: string[],
+  needReplaceFiles: string[],
+  options: ts.CompilerOptions,
+) {
   debug("rootFileNames+");
   debug(rootFileNames);
 
@@ -82,16 +93,22 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
     }
 
     output.outputFiles.forEach((o) => {
-      const destination = path.join(
+      const fileName = path.join(
         path.resolve(__dirname, "../"),
         "output/" + o.name.replace(path.resolve(__dirname, "../"), ""),
       );
-      debug("destination = " + destination);
+      debug("destination = " + fileName);
 
       // mkdir -p
-      ensureDirectoryExistence(destination);
+      ensureDirectoryExistence(fileName);
 
-      fs.writeFileSync(destination, o.text);
+      // console.dir('fileName = ' + fileName)
+
+      const code = processRequire(fileName, o.text, needReplaceFiles);
+
+      // console.dir(code)
+
+      fs.writeFileSync(fileName, code);
     });
 
     // debug('done')
@@ -129,26 +146,22 @@ function watch(rootFileNames: string[], options: ts.CompilerOptions) {
 export function WatchFiles(testFiles: string[], context: Context) {
   const compileFiles = getCompileFiles(testFiles);
 
+  const { finalCompileFiles, needReplaceFiles } =
+    getCompileFilesNotExistInDistDirectory(compileFiles);
+
   // start compile and watch files
-  watch(compileFiles, { module: ts.ModuleKind.CommonJS });
+  watch(finalCompileFiles, needReplaceFiles, {
+    module: ts.ModuleKind.CommonJS,
+  });
 
   // when file change run after 100ms * testFiles.length
   setTimeout(function () {
     // run test at once
-    context.runTsTestFiles(testFiles);
+    context.runTests(testFiles);
 
     runTestEmitter.on("runTestEvent", function () {
       // debug("run tests" + testFile);
-      context.runTsTestFiles(testFiles);
+      context.runTests(testFiles);
     });
   }, 100 * testFiles.length);
-}
-
-function ensureDirectoryExistence(filePath) {
-  const dirname = path.dirname(filePath);
-  if (fs.existsSync(dirname)) {
-    return true;
-  }
-  ensureDirectoryExistence(dirname);
-  fs.mkdirSync(dirname);
 }

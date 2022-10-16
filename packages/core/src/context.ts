@@ -37,7 +37,7 @@ import { loadFromCache } from "@ts-junit/decorator";
  *
  * @public
  */
-export default class Context {
+export class Context {
   /**
    * The Context maintains a reference to one of the Strategy
    * objects. The Context does not know the concrete class of a strategy. It
