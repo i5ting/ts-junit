@@ -144,7 +144,7 @@ export default class MyFirstJUnitJupiterTests {
 不依赖当前项目的 ts 环境，直接通过 cli 执行，参考源码中 tests 目录下的文件。
 
 ```shell
-$ npm i --global ts-junit
+$ npm i --global @ts-junit/cli
 $ junit tests
 $ junit tests/test.ts
 ```
@@ -153,7 +153,7 @@ $ junit tests/test.ts
 
 ```ts
 import assert from 'assert'
-import { Test } from 'ts-junit'
+import { Test } from '@ts-junit/core'
 
 export default class MyFirstJUnitJupiterTests  {
 
@@ -169,14 +169,14 @@ export default class MyFirstJUnitJupiterTests  {
 ### 方式 2: 依赖当前项目的 ts 环境进行编译
 
 ```shell
-$ npm i --save-dev ts-junit
+$ npm i --save-dev @ts-junit/core
 ```
 
 编写测试入口文件 ts-junit.ts，文件内指定测试文件或测试目录即可。
 
 ```ts
 import * as path from "node:path";
-import { run } from "ts-junit";
+import { run } from "@ts-junit/core";
 
 const folder = path.resolve(process.cwd(), "./tests");
 const file = path.resolve(process.cwd(), "./tests/test.ts");
