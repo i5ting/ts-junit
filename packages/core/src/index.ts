@@ -29,7 +29,7 @@ export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
   const context = new Context(strategy, { rest: rest, base: base });
 
   // run tests
-  context.runTests(rest);
+  context.runTests();
 
   // time statistics
   console.timeEnd("run ts");

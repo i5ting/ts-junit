@@ -5,7 +5,7 @@ import * as fs from "node:fs";
 
 import Promise2 from "bluebird";
 
-import { debug, unique } from "@ts-junit/utils";
+import { debug, unique, getAllTsFiles } from "@ts-junit/utils";
 
 import { Strategy } from "@ts-junit/strategy";
 
@@ -116,9 +116,10 @@ export class Context {
     return Promise2.each(files, iterator);
   }
 
-  public runTests(rest: string[]): any {
+  public runTests(): any {
+    const rest = this.rest;
     // get all file from rest(file or folder)
-    const files = this.getFiles(rest);
+    let files = this.getFiles(rest);
 
     files = files.map(function (file) {
       return file.replace(".ts", "");
