@@ -1,9 +1,11 @@
 import * as path from "path";
-import { Context, Strategy, UvuStrategy } from "@ts-junit/core";
+import { Strategy, UvuStrategy } from "@ts-junit/core";
 import { debug } from "@ts-junit/utils";
-import { WatchFiles } from "./watch";
+import { CliContext } from "./context";
 
+export * from "./run";
 export * from "./watch";
+export * from "./context";
 
 /**
  * for cli invoke (need compile ts to js)
@@ -24,7 +26,7 @@ export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
   const base = process.cwd();
 
   // set context use default strategy
-  const context = new Context(strategy, {
+  const context = new CliContext(strategy, {
     rest: rest,
     base: base,
     buildRoot: buildRoot,
@@ -32,7 +34,7 @@ export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
   });
 
   // compile and watch, then run test
-  WatchFiles(context);
+  context.watch();
 
   // time statistics
   console.timeEnd("build ts");
