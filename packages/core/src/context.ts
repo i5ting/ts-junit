@@ -1,8 +1,7 @@
 // @ts-nocheck
 
-import * as path from "node:path";
 import * as fs from "node:fs";
-
+import * as path from "node:path";
 import Promise2 from "bluebird";
 
 import { debug, unique, getAllTsFiles } from "@ts-junit/utils";
@@ -60,6 +59,7 @@ export class Context {
     this.strategy = strategy;
     this.options = options;
     this.base = options?.base || process.cwd();
+    this.buildRoot = options.buildRoot;
     this.buildBase = options.buildBase;
     this.rest = options.rest;
   }
@@ -105,10 +105,15 @@ export class Context {
     // console.dir(this.base);
     // console.dir(this.buildBase);
     // console.dir(this.rest);
-    let files = this.rest;
-    // console.dir(files);
+    let files = this.getFiles();
     files = files.map(function (file) {
-      return path.resolve(that.buildBase, file.replace(".ts", "") + ".js");
+      return (
+        that.buildBase +
+        path.resolve(
+          that.buildBase,
+          file.replace(that.buildRoot, "").replace(".ts", "") + ".js",
+        )
+      );
     });
 
     // console.dir(files);
@@ -119,7 +124,7 @@ export class Context {
   public runTests(): any {
     const rest = this.rest;
     // get all file from rest(file or folder)
-    let files = this.getFiles(rest);
+    let files = this.getFiles();
 
     files = files.map(function (file) {
       return file.replace(".ts", "");
