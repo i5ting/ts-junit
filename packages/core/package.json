@@ -31,8 +31,7 @@
     "@ts-junit/utils": "workspace:*",
     "@ts-junit/decorator": "workspace:*",
     "@ts-junit/strategy": "workspace:*",
-    "bluebird": "^3.7.2",
-    "recast": "^0.21.5"
+    "bluebird": "^3.7.2"
   },
   "devDependencies": {
     "@microsoft/api-extractor": "^7.32.0",
