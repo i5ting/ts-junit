@@ -18,9 +18,6 @@
     "tape",
     "qunit"
   ],
-  "bin": {
-    "junit": "dist/cli.js"
-  },
   "files": [
     "dist"
   ],
