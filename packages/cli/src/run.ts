@@ -18,13 +18,16 @@ export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
   console.time("build ts");
 
   // get file base
+  const buildRoot = path.resolve(__dirname, "..");
   const buildBase = path.resolve(__dirname, "../output");
+
   const base = process.cwd();
 
   // set context use default strategy
   const context = new Context(strategy, {
     rest: rest,
     base: base,
+    buildRoot: buildRoot,
     buildBase: buildBase,
   });
 

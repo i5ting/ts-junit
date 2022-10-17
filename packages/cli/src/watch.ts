@@ -145,6 +145,7 @@ function watch(
 
 /** @internal */
 export function WatchFiles(context: Context) {
+  // console.dir(context.rest);
   const testFiles = context.getFiles();
   // console.dir(testFiles);
 

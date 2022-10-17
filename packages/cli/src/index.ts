@@ -8,9 +8,9 @@ import { runCli } from "./run";
 
 const argv = yargs(hideBin(process.argv)).argv as Record<"_", string[]>;
 
-const files = argv["_"];
+const fileOrDir = argv["_"];
 
 debug(argv);
 
 // run
-runCli(files);
+runCli(fileOrDir);
