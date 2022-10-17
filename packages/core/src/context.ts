@@ -122,7 +122,7 @@ export class Context {
   }
 
   public runTests(): any {
-    const rest = this.rest;
+    // const rest = this.rest;
     // get all file from rest(file or folder)
     let files = this.getFiles();
 
