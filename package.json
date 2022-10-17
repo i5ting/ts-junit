@@ -9,6 +9,7 @@
     "start": "pnpm build && ts-node ./samples/run.ts",
     "watch": "pnpm -r run watch",
     "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
     "test": "pnpm -r run test",
     "format": "prettier --cache --loglevel=warn --write \"**/*.{ts,js,md}\"",
     "format:check": "prettier --check \"**/*.{ts,js,md}\"",
