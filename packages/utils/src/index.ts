@@ -122,3 +122,6 @@ export function ensureDirectoryExistence(filePath: string) {
   ensureDirectoryExistence(dirname);
   fs.mkdirSync(dirname);
 }
+
+/** @internal */
+export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
