@@ -2,15 +2,14 @@
 
 import yargs from "yargs/yargs";
 import { hideBin } from "yargs/helpers";
-import { debug } from "@ts-junit/utils";
-
+import { debug } from "./debug";
 import { runCli } from "./run";
 
 const argv = yargs(hideBin(process.argv)).argv as Record<"_", string[]>;
 
-const fileOrDir = argv["_"];
+const fileOrDirs = argv["_"];
 
-debug(argv);
+debug(fileOrDirs);
 
-// run
-runCli(fileOrDir);
+// compile and run tests
+runCli(fileOrDirs);

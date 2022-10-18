@@ -18,18 +18,17 @@ export class CliContext extends Context {
   }
 
   public watch() {
-    // console.dir(context.rest);
     const testFiles = this.getFiles();
-    // console.dir(testFiles);
+    debug(testFiles);
 
     const compileFiles = getCompileFiles(testFiles);
-    // console.dir(compileFiles);
+    debug(compileFiles);
 
     const { finalCompileFiles, needReplaceFiles } =
       this.getCompileFilesNotExistInDistDirectory(compileFiles);
 
-    // console.dir(finalCompileFiles);
-    // console.dir(needReplaceFiles);
+    debug(finalCompileFiles);
+    debug(needReplaceFiles);
 
     // start compile and watch files
     watch(finalCompileFiles, needReplaceFiles, {
@@ -41,7 +40,7 @@ export class CliContext extends Context {
     // run test at once
     that.runCliTests();
 
-    // when file change run after 100ms * testFiles.length
+    // when file change run after 100ms
     setTimeout(function () {
       runTestEmitter.on("runTestEvent", function () {
         // debug("run tests" + testFile);
@@ -51,11 +50,11 @@ export class CliContext extends Context {
   }
 
   getJsFilesInDist() {
-    // console.dir("getJsFilesInDist");
+    debug("getJsFilesInDist");
     const dir = __dirname.search(/ts-junit/)
       ? path.resolve(__dirname, "../dist")
       : path.resolve(__dirname, "../");
-    // console.dir(`getJsFilesInDist dir = ` + dir);
+    debug(`getJsFilesInDist dir = ` + dir);
     // 定制require-dir
     const Classes = requireDir(dir, {
       recurse: true,
@@ -86,11 +85,6 @@ export class CliContext extends Context {
         needReplaceFiles.push(jsFile);
       }
     }
-
-    // console.dir("compileFiles");
-    // console.dir(compileFiles);
-    // console.dir("needReplaceFiles");
-    // console.dir(needReplaceFiles);
 
     return {
       finalCompileFiles: compileFiles,
