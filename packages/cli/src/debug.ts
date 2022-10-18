@@ -1,5 +1,5 @@
 import { Debug } from "@ts-junit/utils";
 
-type debug = (name: string) => void;
+type debug = (name: any) => void;
 
 export const debug: debug = Debug("@ts-junit/cli");
