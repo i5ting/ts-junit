@@ -185,16 +185,14 @@ export class Context {
 
   /** @internal */
   public getFiles() {
-    const rest = this.rest;
     const that = this;
+    const allfiles = [];
+
     debug("getFiles");
     debug(this.base);
-    debug(rest);
-    const allfiles = [];
-    rest.map(function (i: string) {
-      const item = path.resolve(that.base, i);
 
-      debug("getFiles = " + i);
+    this.rest.map(function (i: string) {
+      const item = path.resolve(that.base, i);
       debug("getFiles = " + item);
 
       const stat = fs.lstatSync(item);
