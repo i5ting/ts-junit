@@ -1,8 +1,8 @@
 import * as path from "path";
+import { Strategy, UvuStrategy } from "@ts-junit/strategy";
 
 import { Context } from "./context";
-import { Strategy, UvuStrategy } from "@ts-junit/strategy";
-import { debug } from "@ts-junit/utils";
+import { debug } from "./debug";
 
 export * from "./context";
 
