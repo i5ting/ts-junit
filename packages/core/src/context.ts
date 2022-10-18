@@ -4,7 +4,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import Promise2 from "bluebird";
 
-import { debug, unique, getAllTsFiles } from "@ts-junit/utils";
+import { sleep, debug, unique, getAllTsFiles } from "@ts-junit/utils";
 
 import { Strategy } from "@ts-junit/strategy";
 
@@ -117,7 +117,9 @@ export class Context {
     });
 
     // console.dir(files);
-    const iterator = async (element) => this._runTsTestFile(element);
+    const iterator = async (element) => {
+      return this._runTsTestFile(element).then(sleep(100));
+    };
     return Promise2.each(files, iterator);
   }
 

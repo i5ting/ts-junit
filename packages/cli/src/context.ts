@@ -37,16 +37,17 @@ export class CliContext extends Context {
     });
 
     const that = this;
+
+    // run test at once
+    that.runCliTests();
+
     // when file change run after 100ms * testFiles.length
     setTimeout(function () {
-      // run test at once
-      that.runCliTests();
-
       runTestEmitter.on("runTestEvent", function () {
         // debug("run tests" + testFile);
         that.runCliTests();
       });
-    }, 100 * testFiles.length);
+    }, 100);
   }
 
   getJsFilesInDist() {
