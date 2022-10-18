@@ -4,11 +4,13 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import Promise2 from "bluebird";
 
-import { sleep, debug, unique, getAllTsFiles } from "@ts-junit/utils";
+import { sleep, unique, getAllTsFiles } from "@ts-junit/utils";
 
 import { Strategy } from "@ts-junit/strategy";
 
 import { loadFromCache } from "@ts-junit/decorator";
+
+import { debug } from "./debug";
 
 // function registerRequireExtension(
 //   target: NodeJS.RequireExtensions,
@@ -101,10 +103,10 @@ export class Context {
 
   public runCliTests(): any {
     const that = this;
-    // console.dir("runCliTests");
-    // console.dir(this.base);
-    // console.dir(this.buildBase);
-    // console.dir(this.rest);
+    debug("runCliTests");
+    debug(this.base);
+    debug(this.buildBase);
+    debug(this.rest);
     let files = this.getFiles();
     files = files.map(function (file) {
       return (
@@ -116,7 +118,7 @@ export class Context {
       );
     });
 
-    // console.dir(files);
+    debug(files);
     const iterator = async (element) => {
       return this._runTsTestFile(element).then(sleep(100));
     };
@@ -132,7 +134,7 @@ export class Context {
       return file.replace(".ts", "");
     });
 
-    // console.dir(files);
+    debug(files);
     const iterator = async (element) => this._runTsTestFile(element);
     return Promise2.each(files, iterator);
   }
@@ -147,10 +149,10 @@ export class Context {
    */
   private _runTsTestFile(file: string): any {
     debug(" --- runTest --- ");
-    // console.dir(file);
+    debug(file);
     return loadFromCache(file).then((result) => {
       const nodeList = [result];
-      // console.dir(result);
+      debug(result);
       for (const i in nodeList) {
         const Clazz = nodeList[i];
         debug("Clazz---");
@@ -185,15 +187,15 @@ export class Context {
   public getFiles() {
     const rest = this.rest;
     const that = this;
-    // console.dir("getFiles");
-    // console.dir(this.base);
-    // console.dir(rest);
+    debug("getFiles");
+    debug(this.base);
+    debug(rest);
     const allfiles = [];
     rest.map(function (i: string) {
       const item = path.resolve(that.base, i);
 
-      // console.dir("getFiles = " + i);
-      // console.dir("getFiles = " + item);
+      debug("getFiles = " + i);
+      debug("getFiles = " + item);
 
       const stat = fs.lstatSync(item);
 
