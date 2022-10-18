@@ -1,11 +1,7 @@
 import * as path from "path";
 import { Strategy, UvuStrategy } from "@ts-junit/core";
-import { debug } from "@ts-junit/utils";
+import { debug } from "./debug";
 import { CliContext } from "./context";
-
-export * from "./run";
-export * from "./watch";
-export * from "./context";
 
 /**
  * for cli invoke (need compile ts to js)
@@ -19,13 +15,12 @@ export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
   debug("runCli With UvuStrategy");
   console.time("build ts");
 
-  // get file base
+  // prepare options for context
+  const base = process.cwd();
   const buildRoot = path.resolve(__dirname, "..");
   const buildBase = path.resolve(__dirname, "../output");
 
-  const base = process.cwd();
-
-  // set context use default strategy
+  // set context use strategy and options
   const context = new CliContext(strategy, {
     rest: rest,
     base: base,

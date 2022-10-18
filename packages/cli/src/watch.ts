@@ -2,11 +2,10 @@ import * as fs from "fs";
 import * as path from "path";
 import { EventEmitter } from "node:events";
 import ts from "typescript";
-
-import { debug, ensureDirectoryExistence } from "@ts-junit/core";
+import { ensureDirectoryExistence } from "@ts-junit/core";
+import { debug } from "./debug";
 
 const files: ts.MapLike<{ version: number }> = {};
-
 export const runTestEmitter = new EventEmitter();
 
 export function watch(
@@ -95,16 +94,11 @@ export function watch(
       // mkdir -p
       ensureDirectoryExistence(fileName);
 
-      // console.dir('fileName = ' + fileName)
-
       const code = processRequire(fileName, o.text, needReplaceFiles);
-
-      // console.dir(code)
 
       fs.writeFileSync(fileName, code);
     });
 
-    // debug('done')
     runTestEmitter.emit("runTestEvent");
   }
 
@@ -156,11 +150,11 @@ export function processRequire(
     ..._needReplaceFiles.map((item: string) => item.replace(/\/index/, "/")),
   );
 
-  // console.dir("needReplaceFiles2")
-  // console.dir(needReplaceFiles)
+  debug("needReplaceFiles2");
+  debug(needReplaceFiles);
 
   code.split(/\r?\n/).forEach(function (line) {
-    // console.dir(line)
+    debug(line);
     if (line.match("require")) {
       const require_re = /(\brequire\s*?\(\s*?)(['"])([^'"]+)(\2\s*?\))/g;
       const aline: any = new RegExp(require_re).exec(line)?.[3];
@@ -169,16 +163,14 @@ export function processRequire(
       // var index_1 = require("../../src/index");
       // 'src/index' 替换 "../../src/index"
       // const filePath = path.resolve(fileName, aline);
-
-      // console.dir(filePath);
       needReplaceFiles.forEach(function (file) {
         if (line.match(file.split("/").join("/"))) {
-          // console.dir(file.split('src/')[1])
+          debug(file.split("src/")[1]);
           const a = file.split("src/")[1] ? file.split("src/")[1] : "";
           const base = fileName.split("ts-junit")[0] + "ts-junit/dist/" + a;
-          // console.dir(base)
+          debug(base);
           line = line.replace(aline, base);
-          // console.dir(line)
+          debug(line);
         }
       });
       //

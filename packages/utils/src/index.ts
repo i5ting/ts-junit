@@ -10,7 +10,7 @@ export * from "./scan";
 export * from "./require";
 export * from "./flatten";
 
-export const debug = Debug();
+export const debug = Debug("ts-junit");
 
 /**
  *
