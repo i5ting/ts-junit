@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@ts-junit/core": "workspace:*",
+    "@ts-junit/decorators": "workspace:*",
     "uvu": "^0.5.6"
   },
   "devDependencies": {
