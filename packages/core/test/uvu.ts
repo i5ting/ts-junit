@@ -1,5 +1,4 @@
 import { test } from "uvu";
-import * as path from "node:path";
 import * as assert from "uvu/assert";
 
 test("Math.sqrt()", () => {
