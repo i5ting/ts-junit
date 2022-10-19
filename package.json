@@ -14,13 +14,18 @@
     "format:check": "prettier --check \"**/*.{ts,js,md}\"",
     "lint": "eslint --fix \"**/*.ts\"",
     "lint:check": "eslint \"**/*.ts\"",
-    "cspell": "cspell lint \"**/*.{ts,js,md,json}\""
+    "cspell": "cspell lint \"**/*.{ts,js,md,json}\"",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
   },
   "dependencies": {
     "@ts-junit/core": "workspace:*",
     "uvu": "^0.5.6"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.0",
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
