@@ -18,11 +18,15 @@
     "tape",
     "qunit"
   ],
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch",
+    "build": "tsc --build",
+    "watch": "tsc --build --watch",
     "test": "uvu -r ts-node/register test -i fixtures",
-    "clean": "rimraf ./dist",
+    "clean": "rimraf ./dist ./types ./tsconfig.tsbuildinfo",
     "release": "npm test && npm run clean && npm run build && np",
     "types:check": "tsc --noEmit",
     "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
