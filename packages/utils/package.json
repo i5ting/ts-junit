@@ -1,8 +1,8 @@
 {
   "name": "@ts-junit/utils",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
   "description": "use junit decorator with typescript",
   "keywords": [
     "uvu",
@@ -19,14 +19,15 @@
     "qunit"
   ],
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
-    "watch": "tsc --watch",
+    "build": "tsc --build",
+    "watch": "tsc --build --watch",
     "test": "uvu -r ts-node/register test -i fixtures",
-    "build": "tsc",
-    "clean": "rimraf dist",
-    "release": "npm test && npm run build && np",
+    "clean": "rimraf ./dist ./types ./tsconfig.tsbuildinfo",
+    "release": "npm test && npm run clean && npm run build && np",
     "types:check": "tsc --noEmit",
     "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
   },

@@ -1,8 +1,8 @@
 {
   "name": "@ts-junit/decorator",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
   "description": "use junit decorator with typescript",
   "keywords": [
     "uvu",
@@ -19,13 +19,14 @@
     "qunit"
   ],
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
-    "watch": "tsc --watch",
-    "build": "tsc",
-    "clean": "rimraf dist",
-    "release": "npm test && npm run build && np",
+    "build": "tsc --build",
+    "watch": "tsc --build --watch",
+    "clean": "rimraf ./dist ./types ./tsconfig.tsbuildinfo",
+    "release": "npm run clean && npm run build && np",
     "types:check": "tsc --noEmit",
     "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
   },
@@ -36,7 +37,6 @@
     "@ts-junit/utils": "workspace:*"
   },
   "devDependencies": {
-    "@ts-junit/core": "workspace:*",
     "@microsoft/api-extractor": "^7.32.0",
     "@types/node": "^18.7.18",
     "rimraf": "^3.0.2",

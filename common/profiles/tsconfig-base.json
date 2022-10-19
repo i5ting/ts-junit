@@ -1,6 +1,7 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "composite": true,
     "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
