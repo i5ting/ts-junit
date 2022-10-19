@@ -90,7 +90,6 @@ importers:
   packages/decorator:
     specifiers:
       '@microsoft/api-extractor': ^7.32.0
-      '@ts-junit/core': workspace:*
       '@ts-junit/utils': workspace:*
       '@types/node': ^18.7.18
       rimraf: ^3.0.2
@@ -99,7 +98,6 @@ importers:
       '@ts-junit/utils': link:../utils
     devDependencies:
       '@microsoft/api-extractor': 7.33.1
-      '@ts-junit/core': link:../core
       '@types/node': 18.8.5
       rimraf: 3.0.2
       typescript: 4.8.4
@@ -182,8 +180,8 @@ packages:
       '@cspell/dict-docker': 1.1.1
       '@cspell/dict-dotnet': 2.0.1
       '@cspell/dict-elixir': 2.0.1
-      '@cspell/dict-en-gb': 1.1.33
       '@cspell/dict-en_us': 2.3.3
+      '@cspell/dict-en-gb': 1.1.33
       '@cspell/dict-filetypes': 2.1.1
       '@cspell/dict-fonts': 2.1.0
       '@cspell/dict-fullstack': 2.0.6

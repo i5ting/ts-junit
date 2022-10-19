@@ -142,7 +142,7 @@ export class Context {
   /**
    * Usually, run single typescript test for api mode
    *
-   * 1. import ts test file (in exmaple/*.js)
+   * 1. import ts test file (in example/*.js)
    * 2. require ts-junit dist/decorator.js
    * 3. parse data from dist/decorator.js cache
    * 4. final, run tests
@@ -218,7 +218,7 @@ export class Context {
           allfiles.push(item.replace(".ts", ""));
           break;
         default:
-          console.warn("unknow type");
+          console.warn("unknown type");
           break;
       }
     });
