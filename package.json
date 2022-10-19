@@ -5,7 +5,6 @@
   "description": "use junit decorator with typescript",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "pnpm build",
     "prepare": "husky install",
     "start": "pnpm build && ts-node ./samples/run.ts",
     "watch": "pnpm -r run watch",
