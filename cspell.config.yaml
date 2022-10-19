@@ -18,5 +18,7 @@ ignoreWords:
     "halign",
     "tableblock",
     "precheck",
+    "nocheck",
+    "loglevel",
   ]
 import: []
