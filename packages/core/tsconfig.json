@@ -2,14 +2,20 @@
   "extends": "../../common/profiles/tsconfig-base.json",
   "compileOnSave": true,
   "compilerOptions": {
-    "strict": false, // 等类型解决完再设置为 true
-    "declarationDir": "./types",
     "rootDir": "src",
-    "outDir": "dist"
+    "outDir": "dist",
+    "declarationDir": "./types"
   },
-  "include": [
-    "src",
-    "../uvu-strategy/src/iStrategy.ts",
-    "../uvu-strategy/src/uvuStrategy.ts"
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../utils"
+    },
+    {
+      "path": "../decorator"
+    },
+    {
+      "path": "../strategy"
+    }
   ]
 }

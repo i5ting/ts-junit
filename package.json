@@ -5,16 +5,20 @@
   "description": "use junit decorator with typescript",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
+    "postinstall": "pnpm build",
     "prepare": "husky install",
     "start": "pnpm build && ts-node ./samples/run.ts",
     "watch": "pnpm -r run watch",
     "build": "pnpm -r run build",
+    "clean": "pnpm -r run clean",
     "test": "pnpm -r run test",
-    "format": "prettier --cache --loglevel=warn --write \"**/*.{ts,js,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,js,md}\"",
-    "lint": "eslint --fix \"**/*.ts\"",
-    "lint:check": "eslint \"**/*.ts\"",
-    "cspell": "cspell lint \"**/*.{ts,js,md,json}\""
+    "format": "pnpm _phase:fmt --write",
+    "lint": "pnpm _phase:lint --fix",
+    "check": "pnpm _phase:fmt --check && pnpm _phase:lint && pnpm _phase:cspell",
+    "ci": "pnpm _phase:fmt --no-color --check && pnpm _phase:lint --no-color && pnpm _phase:cspell --no-color",
+    "_phase:fmt": "prettier \"**/*.{js,ts,md}\" --loglevel=warn",
+    "_phase:lint": "eslint \"**/*.{js,ts}\"",
+    "_phase:cspell": "cspell \"**/*.{js,ts,md,json}\" --no-progress"
   },
   "dependencies": {
     "@ts-junit/core": "workspace:*",

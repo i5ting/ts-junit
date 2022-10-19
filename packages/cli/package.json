@@ -2,7 +2,7 @@
   "name": "@ts-junit/cli",
   "version": "1.0.0",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "types/index.d.ts",
   "description": "use junit decorator with typescript",
   "keywords": [
     "uvu",
@@ -22,13 +22,14 @@
     "junit": "dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
-    "watch": "tsc --watch",
-    "build": "tsc",
-    "clean": "rimraf dist",
-    "release": "npm test && npm run build && np",
+    "build": "tsc --build",
+    "watch": "tsc --build --watch",
+    "clean": "rimraf ./dist ./types ./tsconfig.tsbuildinfo",
+    "release": "npm test && npm run clean && npm run build && np",
     "types:check": "tsc --noEmit",
     "api:check": "rimraf temp && tsc --project tsconfig.check.json && api-extractor run"
   },

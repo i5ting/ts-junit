@@ -1,3 +1,4 @@
-types
-dist
-temp
+types/
+dist/
+temp/
+fixtures/
