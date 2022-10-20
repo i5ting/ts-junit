@@ -14,7 +14,7 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && pnpm release:only",
-    "release:only": "changeset publish --registry=https://registry.npmjs.com/"
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/",
     "format": "pnpm _phase:fmt --write",
     "lint": "pnpm _phase:lint --fix",
     "check": "pnpm _phase:fmt --check && pnpm _phase:lint && pnpm _phase:cspell",
