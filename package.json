@@ -11,6 +11,10 @@
     "build": "pnpm -r run build",
     "clean": "pnpm -r run clean",
     "test": "pnpm -r run test",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && pnpm release:only",
+    "release:only": "changeset publish --registry=https://registry.npmjs.com/",
     "format": "pnpm _phase:fmt --write",
     "lint": "pnpm _phase:lint --fix",
     "check": "pnpm _phase:fmt --check && pnpm _phase:lint && pnpm _phase:cspell",
@@ -24,6 +28,7 @@
     "uvu": "^0.5.6"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.25.0",
     "@types/node": "^18.7.18",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
