@@ -517,24 +517,3 @@ $ npm test
    ```
 
 2. use vm2 with require from memfs
-
-3. 目前 ts 编译成 js 之后，是通过 ast 去解析的 js 提取装饰器信息的，
-
-   提取方式是
-
-   <!-- prettier-ignore -->
-   ```js
-   __decorate([index_1.BeforeAll], MyFirstJUnitJupiterTests.prototype, 'initAll');
-   ```
-
-   这里面可以试试能否直接反射出来，用一个类似探针的方式，运行时去提取装饰器，应该也是可行的。
-
-   <!-- prettier-ignore -->
-   ```js
-   var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-       return c > 3 && r && Object.defineProperty(target, key, r), r;
-   };
-   ```
