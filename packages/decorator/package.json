@@ -1,8 +1,8 @@
 {
   "name": "@ts-junit/decorator",
-  "version": "1.0.0",
-  "main": "./dist/index.js",
-  "types": "./types/index.d.ts",
+  "version": "1.0.9",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "description": "use junit decorator with typescript",
   "keywords": [
     "uvu",
