@@ -7,29 +7,31 @@ import { loadFromCache } from "@ts-junit/decorator";
 import { debug } from "./debug";
 import { getFiles } from "./utils";
 
-// function registerRequireExtension(
-//   target: NodeJS.RequireExtensions,
-//   callback: (ext: string, module: NodeJS.Module, context: string) => void,
-// ) {
-//   const extensions = Object.keys(target) as (keyof typeof target)[];
+function registerRequireExtension(
+  target: NodeJS.RequireExtensions,
+  callback: (ext: string, module: NodeJS.Module, context: string) => void,
+) {
+  const extensions = Object.keys(target) as (keyof typeof target)[];
 
-//   Object.assign(
-//     require.extensions,
-//     extensions.reduce((result, ext) => {
-//       return {
-//         ...result,
-//         [ext]: (module: NodeJS.Module, context: string) => {
-//           callback(ext as string, module, context);
-//           return target[ext]?.(module, context);
-//         },
-//       };
-//     }, {} as NodeJS.RequireExtensions),
-//   );
-// }
+  Object.assign(
+    require.extensions,
+    extensions.reduce((result, ext) => {
+      return {
+        ...result,
+        [ext]: (module: NodeJS.Module, context: string) => {
+          callback(ext as string, module, context);
+          return target[ext]?.(module, context);
+        },
+      };
+    }, {} as NodeJS.RequireExtensions),
+  );
+}
 
-// function unregisterRequireExtension(target: NodeJS.RequireExtensions) {
-//   Object.assign(require.extensions, target);
-// }
+function unregisterRequireExtension(target: NodeJS.RequireExtensions) {
+  Object.assign(require.extensions, target);
+}
+
+const deps: string[] = [];
 
 interface ContextOptions {
   rest: string[];
@@ -103,7 +105,7 @@ export class Context {
   //   return result;
   // }
 
-  public runCliTests(): any {
+  public async runCliTests(): any {
     const that = this;
     debug("runCliTests");
     debug(this.base);
@@ -121,10 +123,29 @@ export class Context {
     });
 
     debug(files);
+
     const iterator = async (element) => {
       return this._runTsTestFile(element).then(sleep(100));
     };
-    return Promise2.each(files, iterator);
+
+    if (deps.length) {
+      deps.forEach((filename) =>
+        Reflect.deleteProperty(require.cache, filename),
+      );
+      deps.length = 0;
+    }
+
+    const originExtension = { ...require.extensions };
+
+    registerRequireExtension(originExtension, (_, module) => {
+      deps.push(module.id);
+    });
+
+    const result = await Promise2.each(files, iterator);
+
+    unregisterRequireExtension(originExtension);
+
+    return result;
   }
 
   public runTests(): any {
