@@ -11,21 +11,21 @@ import { CliContext } from "./context";
  *
  * @public
  */
-export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
+export function runCli(rest: string[], strategy: Strategy = new UvuStrategy()) {
   debug("runCli With UvuStrategy");
   console.time("build ts");
 
   // prepare options for context
   const base = process.cwd();
   const buildRoot = path.resolve(__dirname, "..");
-  const buildBase = path.resolve(__dirname, "../output");
+  const buildOutput = path.resolve(__dirname, "../output");
 
   // set context use strategy and options
   const context = new CliContext(strategy, {
     rest: rest,
     base: base,
     buildRoot: buildRoot,
-    buildBase: buildBase,
+    buildOutput: buildOutput,
   });
 
   // compile and watch

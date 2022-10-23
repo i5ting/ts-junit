@@ -1,5 +1,5 @@
 import ts from "typescript";
-import { getCompileFiles, Context, Strategy } from "@ts-junit/core";
+import { getFiles, getCompileFiles, Context, Strategy } from "@ts-junit/core";
 import { watch, runTestEmitter } from "./watch";
 import { getCompileFilesNotExistInDistDirectory } from "./utils";
 import { debug } from "./debug";
@@ -10,7 +10,7 @@ export class CliContext extends Context {
   }
 
   public watch() {
-    const testFiles = this.getFiles();
+    const testFiles = getFiles(this);
     debug(testFiles);
 
     const compileFiles = getCompileFiles(testFiles);

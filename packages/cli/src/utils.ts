@@ -49,3 +49,55 @@ export function processCompileFiles(compileFiles: string[]) {
 export function getCompileFilesNotExistInDistDirectory(compileFiles: string[]) {
   return processCompileFiles(compileFiles);
 }
+
+/** @internal */
+export function processRequire(
+  fileName: string,
+  code: string,
+  needReplaceFiles: string[],
+) {
+  const _code: any[] = [];
+  const _needReplaceFiles = needReplaceFiles.filter((item: string) =>
+    item.match(/index/),
+  );
+
+  // 在ts-junit cli模式下，本地调试才会用到
+  // ../src/index 替换成 dist/index'
+  // ../../../src 替换成 dist/index'
+  needReplaceFiles.push(
+    ..._needReplaceFiles.map((item: string) => item.replace(/\/index/, "")),
+  );
+  needReplaceFiles.push(
+    ..._needReplaceFiles.map((item: string) => item.replace(/\/index/, "/")),
+  );
+
+  debug("needReplaceFiles2");
+  debug(needReplaceFiles);
+
+  code.split(/\r?\n/).forEach(function (line) {
+    debug(line);
+    if (line.match("require")) {
+      const require_re = /(\brequire\s*?\(\s*?)(['"])([^'"]+)(\2\s*?\))/g;
+      const aline: any = new RegExp(require_re).exec(line)?.[3];
+
+      // var calculator_1 = require("../../calculator");
+      // var index_1 = require("../../src/index");
+      // 'src/index' 替换 "../../src/index"
+      // const filePath = path.resolve(fileName, aline);
+      needReplaceFiles.forEach(function (file) {
+        if (line.match(file.split("/").join("/"))) {
+          debug(file.split("src/")[1]);
+          const a = file.split("src/")[1] ? file.split("src/")[1] : "";
+          const base = fileName.split("ts-junit")[0] + "ts-junit/dist/" + a;
+          debug(base);
+          line = line.replace(aline, base);
+          debug(line);
+        }
+      });
+    }
+
+    _code.push(line);
+  });
+
+  return _code.join("\n");
+}

@@ -5,6 +5,7 @@ import { Context } from "./context";
 import { debug } from "./debug";
 
 export * from "./context";
+export * from "./utils";
 
 export * from "@ts-junit/decorator";
 export * from "@ts-junit/strategy";
@@ -18,7 +19,7 @@ export * from "@ts-junit/utils";
  *
  * @public
  */
-export function run(rest: any, strategy: Strategy = new UvuStrategy()) {
+export function run(rest: string[], strategy: Strategy = new UvuStrategy()) {
   debug("run With UvuStrategy");
   console.time("run ts");
 

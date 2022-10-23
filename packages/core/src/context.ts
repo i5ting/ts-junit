@@ -1,16 +1,11 @@
 // @ts-nocheck
-
-import * as fs from "node:fs";
 import * as path from "node:path";
 import Promise2 from "bluebird";
-
-import { sleep, unique, getAllTsFiles } from "@ts-junit/utils";
-
+import { sleep } from "@ts-junit/utils";
 import { Strategy } from "@ts-junit/strategy";
-
 import { loadFromCache } from "@ts-junit/decorator";
-
 import { debug } from "./debug";
+import { getFiles } from "./utils";
 
 // function registerRequireExtension(
 //   target: NodeJS.RequireExtensions,
@@ -36,6 +31,13 @@ import { debug } from "./debug";
 //   Object.assign(require.extensions, target);
 // }
 
+interface ContextOptions {
+  rest: string[];
+  base: string;
+  buildRoot?: string;
+  buildOutput?: string;
+}
+
 /**
  * The Context defines the interface of interest to clients.
  *
@@ -57,12 +59,12 @@ export class Context {
 
    * @remarks
    */
-  constructor(strategy: Strategy, options: any) {
+  constructor(strategy: Strategy, options: ContextOptions) {
     this.strategy = strategy;
     this.options = options;
     this.base = options?.base || process.cwd();
     this.buildRoot = options.buildRoot;
-    this.buildBase = options.buildBase;
+    this.buildOutput = options.buildOutput;
     this.rest = options.rest;
   }
 
@@ -105,14 +107,14 @@ export class Context {
     const that = this;
     debug("runCliTests");
     debug(this.base);
-    debug(this.buildBase);
+    debug(this.buildOutput);
     debug(this.rest);
-    let files = this.getFiles();
+    let files = getFiles(this);
     files = files.map(function (file) {
       return (
-        that.buildBase +
+        that.buildOutput +
         path.resolve(
-          that.buildBase,
+          that.buildOutput,
           file.replace(that.buildRoot, "").replace(".ts", "") + ".js",
         )
       );
@@ -128,7 +130,7 @@ export class Context {
   public runTests(): any {
     // const rest = this.rest;
     // get all file from rest(file or folder)
-    let files = this.getFiles();
+    let files = getFiles(this);
 
     files = files.map(function (file) {
       return file.replace(".ts", "");
@@ -181,48 +183,5 @@ export class Context {
         this.strategy.test.run();
       }
     });
-  }
-
-  /** @internal */
-  public getFiles() {
-    const that = this;
-    const allfiles = [];
-
-    debug("getFiles");
-    debug(this.base);
-
-    this.rest.map(function (i: string) {
-      const item = path.resolve(that.base, i);
-      debug("getFiles = " + item);
-
-      const stat = fs.lstatSync(item);
-
-      const fileOrDirType = stat.isDirectory()
-        ? "dir"
-        : stat.isFile()
-        ? "file"
-        : "other";
-
-      switch (fileOrDirType) {
-        case "dir":
-          console.warn("find dir " + item);
-          getAllTsFiles([item]).map(function (i) {
-            allfiles.push(i);
-          });
-
-          break;
-        case "file":
-          console.warn("find file " + item.replace(".ts", ""));
-
-          // runTestFile([item.replace(".ts", "")]);
-          allfiles.push(item.replace(".ts", ""));
-          break;
-        default:
-          console.warn("unknown type");
-          break;
-      }
-    });
-
-    return unique(allfiles);
   }
 }
