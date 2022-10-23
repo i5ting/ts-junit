@@ -1,7 +1,7 @@
 {
   "name": "ts-junit",
   "private": true,
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "use junit decorator with typescript",
   "scripts": {
     "preinstall": "npx only-allow pnpm",

@@ -1,6 +1,6 @@
 {
   "name": "@ts-junit/decorator",
-  "version": "1.0.9",
+  "version": "1.0.19",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "description": "use junit decorator with typescript",
