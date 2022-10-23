@@ -4,6 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
+  ignorePatterns: ["temp.js", "**/output/*.js"],
   plugins: ["eslint-plugin-tsdoc", "@typescript-eslint", "prettier"],
   extends: [
     "eslint:recommended",

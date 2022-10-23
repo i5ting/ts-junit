@@ -28,8 +28,11 @@ export function runCli(rest: any, strategy: Strategy = new UvuStrategy()) {
     buildBase: buildBase,
   });
 
-  // compile and watch, then run test
+  // compile and watch
   context.watch();
+
+  // run tests
+  context.runTests();
 
   // time statistics
   console.timeEnd("build ts");
