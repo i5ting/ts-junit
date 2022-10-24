@@ -75,7 +75,7 @@ export function watch(
     );
   });
 
-  function emitFile(fileName: string) {
+  async function emitFile(fileName: string) {
     const output = services.getEmitOutput(fileName);
 
     if (!output.emitSkipped) {
@@ -85,20 +85,23 @@ export function watch(
       logErrors(fileName);
     }
 
-    output.outputFiles.forEach((o) => {
-      const fileName = path.join(
-        path.resolve(__dirname, "../"),
-        "output/" + o.name.replace(path.resolve(__dirname, "../"), ""),
-      );
-      debug("destination = " + fileName);
+    // wait file write
+    await Promise.all(
+      output.outputFiles.map((o) => {
+        const fileName = path.join(
+          path.resolve(__dirname, "../"),
+          "output/" + o.name.replace(path.resolve(__dirname, "../"), ""),
+        );
+        debug("destination = " + fileName);
 
-      // mkdir -p
-      ensureDirectoryExistence(fileName);
+        // mkdir -p
+        ensureDirectoryExistence(fileName);
 
-      const code = processRequire(fileName, o.text, needReplaceFiles);
+        const code = processRequire(fileName, o.text, needReplaceFiles);
 
-      fs.writeFileSync(fileName, code);
-    });
+        return fs.promises.writeFile(fileName, code);
+      }),
+    );
 
     runTestEmitter.emit("runTestEvent");
   }
