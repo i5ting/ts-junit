@@ -4,7 +4,7 @@ import { EventEmitter } from "node:events";
 import ts from "typescript";
 import { ensureDirectoryExistence } from "@ts-junit/core";
 import { debug } from "./debug";
-import { processRequire } from "./utils";
+import { cleanUnitTestsRequireCache, processRequire } from "./utils";
 
 const files: ts.MapLike<{ version: number }> = {};
 export const runTestEmitter = new EventEmitter();
@@ -84,6 +84,8 @@ export function watch(
       console.log(`Emitting ${fileName} failed`);
       logErrors(fileName);
     }
+
+    cleanUnitTestsRequireCache();
 
     // wait file write
     await Promise.all(

@@ -1,37 +1,9 @@
 // @ts-nocheck
-import * as path from "node:path";
 import Promise2 from "bluebird";
-import { sleep } from "@ts-junit/utils";
 import { Strategy } from "@ts-junit/strategy";
 import { loadFromCache } from "@ts-junit/decorator";
 import { debug } from "./debug";
 import { getFiles } from "./utils";
-
-function registerRequireExtension(
-  target: NodeJS.RequireExtensions,
-  callback: (ext: string, module: NodeJS.Module, context: string) => void,
-) {
-  const extensions = Object.keys(target) as (keyof typeof target)[];
-
-  Object.assign(
-    require.extensions,
-    extensions.reduce((result, ext) => {
-      return {
-        ...result,
-        [ext]: (module: NodeJS.Module, context: string) => {
-          callback(ext as string, module, context);
-          return target[ext]?.(module, context);
-        },
-      };
-    }, {} as NodeJS.RequireExtensions),
-  );
-}
-
-function unregisterRequireExtension(target: NodeJS.RequireExtensions) {
-  Object.assign(require.extensions, target);
-}
-
-const deps: string[] = [];
 
 interface ContextOptions {
   rest: string[];
@@ -77,75 +49,6 @@ export class Context {
    */
   public setStrategy(strategy: Strategy) {
     this.strategy = strategy;
-  }
-
-  // public async runTsTestFiles(files: string[]): Promise<any> {
-  //   files = files.map(function (file) {
-  //     return file.replace(".ts", "");
-  //   });
-
-  //   const iterator = async (element) => this._runTsTestFile(element);
-
-  //   const deps: string[] = [];
-  //   const originExtension = { ...require.extensions };
-
-  //   // 收集测试用例引用的依赖
-  //   registerRequireExtension(originExtension, (ext, module) => {
-  //     deps.push(module.filename);
-  //   });
-
-  //   const result = await Promise2.each(files, iterator);
-
-  //   unregisterRequireExtension(originExtension);
-
-  //   // 删除依赖
-  //   // todo: exclude some path
-  //   deps.forEach((filename) => Reflect.deleteProperty(require.cache, filename));
-
-  //   return result;
-  // }
-
-  public async runCliTests(): any {
-    const that = this;
-    debug("runCliTests");
-    debug(this.base);
-    debug(this.buildOutput);
-    debug(this.rest);
-    let files = getFiles(this);
-    files = files.map(function (file) {
-      return (
-        that.buildOutput +
-        path.resolve(
-          that.buildOutput,
-          file.replace(that.buildRoot, "").replace(".ts", "") + ".js",
-        )
-      );
-    });
-
-    debug(files);
-
-    const iterator = async (element) => {
-      return this._runTsTestFile(element).then(sleep(100));
-    };
-
-    if (deps.length) {
-      deps.forEach((filename) =>
-        Reflect.deleteProperty(require.cache, filename),
-      );
-      deps.length = 0;
-    }
-
-    const originExtension = { ...require.extensions };
-
-    registerRequireExtension(originExtension, (_, module) => {
-      deps.push(module.id);
-    });
-
-    const result = await Promise2.each(files, iterator);
-
-    unregisterRequireExtension(originExtension);
-
-    return result;
   }
 
   public runTests(): any {

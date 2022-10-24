@@ -37,6 +37,12 @@ importers:
       ts-node: 10.9.1_ptpocrdt7oaz4ni5mlvucph5pa
       typescript: 4.8.4
 
+  examples:
+    specifiers:
+      '@ts-junit/cli': workspace:^1.0.19
+    dependencies:
+      '@ts-junit/cli': link:../packages/cli
+
   packages/cli:
     specifiers:
       '@microsoft/api-extractor': ^7.32.0
@@ -44,6 +50,7 @@ importers:
       '@ts-junit/utils': workspace:*
       '@types/node': ^18.7.18
       '@types/yargs': ^17.0.13
+      bluebird: ^3.7.2
       np: ^7.6.2
       rimraf: ^3.0.2
       typescript: ^4.8.3
@@ -51,6 +58,7 @@ importers:
     dependencies:
       '@ts-junit/core': link:../core
       '@ts-junit/utils': link:../utils
+      bluebird: 3.7.2
       yargs: 17.6.0
     devDependencies:
       '@microsoft/api-extractor': 7.33.1
@@ -372,8 +380,8 @@ packages:
       '@cspell/dict-docker': 1.1.1
       '@cspell/dict-dotnet': 2.0.1
       '@cspell/dict-elixir': 2.0.1
-      '@cspell/dict-en-gb': 1.1.33
       '@cspell/dict-en_us': 2.3.3
+      '@cspell/dict-en-gb': 1.1.33
       '@cspell/dict-filetypes': 2.1.1
       '@cspell/dict-fonts': 2.1.0
       '@cspell/dict-fullstack': 2.0.6
