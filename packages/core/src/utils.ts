@@ -11,8 +11,20 @@ export function getFiles(obj: any) {
   debug(obj.base);
 
   obj.rest.map(function (i: string) {
-    const item = path.resolve(that.base, i);
+    let item = path.resolve(that.base, i);
     debug("getFiles = " + item);
+
+    const exists = fs.existsSync(item);
+
+    // maybe it's a file
+    if (!exists) {
+      const extensions = [".ts", ".js"];
+      const ext = extensions.find((ext) => fs.existsSync(`${item}${ext}`));
+      if (!ext) {
+        throw new Error(`"${i}" not file or dir`);
+      }
+      item = `${item}${ext}`;
+    }
 
     const stat = fs.lstatSync(item);
 
