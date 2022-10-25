@@ -4,7 +4,7 @@ import { EventEmitter } from "node:events";
 import ts from "typescript";
 import { ensureDirectoryExistence } from "@ts-junit/core";
 import { debug } from "./debug";
-import { processRequire } from "./utils";
+import { cleanUnitTestsRequireCache, processRequire } from "./utils";
 
 const files: ts.MapLike<{ version: number }> = {};
 export const runTestEmitter = new EventEmitter();
@@ -85,7 +85,9 @@ export function watch(
       logErrors(fileName);
     }
 
-    output.outputFiles.forEach((o) => {
+    cleanUnitTestsRequireCache();
+
+    const tasks = output.outputFiles.map((o) => {
       const fileName = path.join(
         path.resolve(__dirname, "../"),
         "output/" + o.name.replace(path.resolve(__dirname, "../"), ""),
@@ -97,10 +99,13 @@ export function watch(
 
       const code = processRequire(fileName, o.text, needReplaceFiles);
 
-      fs.writeFileSync(fileName, code);
+      return fs.promises.writeFile(fileName, code);
     });
 
-    runTestEmitter.emit("runTestEvent");
+    // wait the file write
+    Promise.all(tasks).then(() => {
+      runTestEmitter.emit("runTestEvent");
+    });
   }
 
   function logErrors(fileName: string) {

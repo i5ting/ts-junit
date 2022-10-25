@@ -101,3 +101,40 @@ export function processRequire(
 
   return _code.join("\n");
 }
+
+export function registerRequireExtension(
+  target: NodeJS.RequireExtensions,
+  callback: (ext: string, module: NodeJS.Module, context: string) => void,
+) {
+  const extensions = Object.keys(target) as (keyof typeof target)[];
+
+  Object.assign(
+    require.extensions,
+    extensions.reduce((result, ext) => {
+      return {
+        ...result,
+        [ext]: (module: NodeJS.Module, context: string) => {
+          callback(ext as string, module, context);
+          return target[ext]?.(module, context);
+        },
+      };
+    }, {} as NodeJS.RequireExtensions),
+  );
+}
+
+export function unregisterRequireExtension(target: NodeJS.RequireExtensions) {
+  Object.assign(require.extensions, target);
+}
+
+const deps: string[] = [];
+
+export function collectionUnitDep(filename: string) {
+  deps.push(filename);
+}
+
+export function cleanUnitTestsRequireCache() {
+  if (deps.length) {
+    deps.forEach((filename) => Reflect.deleteProperty(require.cache, filename));
+    deps.length = 0;
+  }
+}
