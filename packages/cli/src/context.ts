@@ -49,7 +49,10 @@ export class CliContext extends Context {
         that.buildOutput +
         path.resolve(
           that.buildOutput,
-          file.replace(that.buildRoot, "").replace(".ts", "") + ".js",
+          file
+            .replace(that.buildRoot, "")
+            .replace(process.cwd(), "")
+            .replace(".ts", "") + ".js",
         )
       );
     });
