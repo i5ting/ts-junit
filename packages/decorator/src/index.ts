@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { debug } from "@ts-junit/utils";
 
 let cache: any = {};
@@ -212,5 +213,30 @@ export function Disabled(message: string): ClassDecorator & PropertyDecorator {
       cache[className]["skipClass"] = true;
       cache[className]["skipClassReason"] = message;
     }
+  };
+}
+
+/**
+ * Parameterized tests make it possible to run a test multiple times with different arguments.
+ *
+ * @alpha
+ */
+
+export function ParameterizedTest(params: Array<any>): MethodDecorator {
+  return function (
+    target: object | any,
+    propertyName: string | symbol,
+    descriptor: TypedPropertyDescriptor<any>,
+  ) {
+    debug(target[propertyName] + descriptor);
+
+    const className = target.constructor.name;
+
+    if (!cache[className]) cache[className] = {};
+    if (!cache[className][propertyName]) cache[className][propertyName] = {};
+
+    cache[className][propertyName]["desc"] = "no display name";
+    cache[className][propertyName]["fn"] = target[propertyName];
+    cache[className][propertyName]["params"] = params;
   };
 }

@@ -6,7 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "strict": true,
+    "strict": false, // 等类型解决完再设置为 true
     "useDefineForClassFields": true,
     "useUnknownInCatchVariables": false,
     "esModuleInterop": true,

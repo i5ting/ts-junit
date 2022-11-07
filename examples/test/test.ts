@@ -47,6 +47,11 @@ export default class MyFirstJUnitJupiterTests {
     assert.is(Math.sqrt(4), 2);
   }
 
+  @ParameterizedTest([4, 4, 5])
+  sqrt(num: number) {
+    assert.is(Math.sqrt(num), 2);
+  }
+
   @Test
   addition() {
     assert.is(Math.sqrt(4), 2);

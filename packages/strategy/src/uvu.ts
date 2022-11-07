@@ -48,7 +48,15 @@ export class UvuStrategy implements Strategy {
             debug(`define testcase ${j}`);
             debug(" test.handler = " + obj[j]);
 
-            this.test(j, obj[j].bind(obj));
+            if (Clazz[j]["params"]) {
+              const params = Clazz[j]["params"];
+
+              params.map((param) => {
+                this.test(j, obj[j].bind(obj, param));
+              });
+            } else {
+              this.test(j, obj[j].bind(obj));
+            }
           } else {
             debug(`skipReason ${j}`);
             console.log(
