@@ -267,7 +267,7 @@ $ npm test
                     <em>inherited</em> unless they are <em>overridden</em>.
                 </p>
             </td>
-            <td class="tableblock halign-left valign-top">❌</td>
+            <td class="tableblock halign-left valign-top">✅</td>
         </tr>
         <tr>
             <td class="tableblock halign-left valign-top">
