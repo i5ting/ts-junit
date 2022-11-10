@@ -1,5 +1,18 @@
 # @ts-junit/core
 
+## 1.1.0
+
+### Minor Changes
+
+- add ParameterizedTest
+
+### Patch Changes
+
+- Updated dependencies
+  - @ts-junit/decorator@1.1.0
+  - @ts-junit/strategy@1.1.0
+  - @ts-junit/utils@1.1.0
+
 ## 1.0.11
 
 ### Patch Changes

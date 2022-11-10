@@ -1,6 +1,6 @@
 {
   "name": "@ts-junit/core",
-  "version": "1.0.19",
+  "version": "1.1.0",
   "main": "dist/index.js",
   "types": "./types/index.d.ts",
   "description": "",

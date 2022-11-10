@@ -1,5 +1,11 @@
 # @ts-junit/utils
 
+## 1.1.0
+
+### Minor Changes
+
+- add ParameterizedTest
+
 ## 1.0.11
 
 ### Patch Changes

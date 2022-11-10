@@ -10,6 +10,7 @@ import {
   AfterEach,
   DisplayName,
   Disabled,
+  ParameterizedTest,
 } from "@ts-junit/core";
 
 @DisplayName("Clz test case")
@@ -47,9 +48,13 @@ export default class MyFirstJUnitJupiterTests {
     assert.is(Math.sqrt(4), 2);
   }
 
-  @ParameterizedTest([4, 4, 5])
+  @ParameterizedTest([4, 4, 16])
   sqrt(num: number) {
-    assert.is(Math.sqrt(num), 2);
+    if (num == 16) {
+      assert.is(Math.sqrt(num), 4);
+    } else {
+      assert.is(Math.sqrt(num), 2);
+    }
   }
 
   @Test
